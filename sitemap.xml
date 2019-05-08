@@ -2,7 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2019/05/07/Pattern/</loc>
+    <loc>http://yoursite.com/2019/05/08/DecoratorPattern/</loc>
+    
+    <lastmod>2019-05-08T18:01:26.437Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/05/07/ObserverPattern/</loc>
     
     <lastmod>2019-05-08T02:44:28.021Z</lastmod>
     
