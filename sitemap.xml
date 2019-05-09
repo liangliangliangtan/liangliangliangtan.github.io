@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/05/09/neo4j-1-introducion/</loc>
+    
+    <lastmod>2019-05-09T23:21:42.689Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/05/08/DecoratorPattern/</loc>
     
     <lastmod>2019-05-08T18:15:54.349Z</lastmod>
