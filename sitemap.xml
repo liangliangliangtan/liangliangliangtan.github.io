@@ -2,30 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2019/05/09/neo4j-1-introducion/</loc>
+    <loc>http://yoursite.com/2019/05/04/hello-world/</loc>
     
-    <lastmod>2019-05-09T23:21:42.689Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/05/08/DecoratorPattern/</loc>
-    
-    <lastmod>2019-05-08T18:15:54.349Z</lastmod>
+    <lastmod>2019-05-09T23:36:15.606Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2019/05/07/ObserverPattern/</loc>
     
-    <lastmod>2019-05-08T02:44:28.021Z</lastmod>
+    <lastmod>2019-05-09T23:36:13.922Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/05/04/hello-world/</loc>
+    <loc>http://yoursite.com/2019/05/08/DecoratorPattern/</loc>
     
-    <lastmod>2019-05-04T17:06:34.876Z</lastmod>
+    <lastmod>2019-05-09T23:35:46.741Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/05/09/neo4j-1-introducion/</loc>
+    
+    <lastmod>2019-05-09T23:35:23.769Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2019-05-09T23:31:36.518Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
+    
+    <lastmod>2019-05-09T23:29:51.877Z</lastmod>
     
   </url>
   
