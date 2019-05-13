@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/05/13/CRUD-neo4j/</loc>
+    
+    <lastmod>2019-05-13T22:42:57.052Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/05/04/hello-world/</loc>
     
     <lastmod>2019-05-09T23:36:15.606Z</lastmod>
