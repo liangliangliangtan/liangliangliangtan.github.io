@@ -333,6 +333,886 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/neo4j-java-introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang Tan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Liang Tan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/14/neo4j-java-introduction/" class="post-title-link" itemprop="url">Introduction - how to use neo4j in java</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-14 13:14:38 / Modified: 18:12:37" itemprop="dateCreated datePublished" datetime="2019-05-14T13:14:38-06:00">2019-05-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DB/" itemprop="url" rel="index"><span itemprop="name">DB</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-introduction"><a href="#1-introduction" class="headerlink" title="1. introduction"></a>1. introduction</h1><p>In this post, I will build a small web application in java by learning how to connect to as well as manipulate on neo4j database. Neo4j offers a rich set of integration possibilities for developers using Java or other JVM-languages. Following the instruction on the website, we will build a small web app for the movie database.</p>
+<h1 id="2-Create-a-project-And-add-neo4j-driver-dependencies"><a href="#2-Create-a-project-And-add-neo4j-driver-dependencies" class="headerlink" title="2.Create a project And add neo4j driver dependencies"></a>2.Create a project And add neo4j driver dependencies</h1><p>Here, I use IntelliJ IDEA as dev tool and Maven as project management tool. So, select maven-archetype-webapp.</p>
+<div><br>  <img src="/images/neo4j_java_1.png" alt="Smiley face" width="50%" height="50%"><br></div>
+
+<p>After that, go to the maven repository website(<a href="https://mvnrepository.com/artifact/org.neo4j.app/neo4j-server/3.5.5" target="_blank" rel="noopener">Link</a>) and add dirver dependency to pom.xml.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.neo4j.app<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>neo4j-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.neo4j.driver<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>neo4j-java-driver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="3-Play-with-the-movie-dataSet"><a href="#3-Play-with-the-movie-dataSet" class="headerlink" title="3. Play with the movie dataSet."></a>3. Play with the movie dataSet.</h1><p>Using the data provided by the neo4j guides. Run all CQL commands and get the result.</p>
+<p>Instruction from the guide</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">The Movie Graph is a mini graph application containing actors and directors that are related through the movies they&apos;ve collaborated on.</span><br><span class="line"></span><br><span class="line">This guide will show you how to:</span><br><span class="line"></span><br><span class="line">Create: insert movie data into the graph</span><br><span class="line">Find: retrieve individual movies and actors</span><br><span class="line">Query: discover related actors and directors</span><br><span class="line">Solve: the Bacon Path</span><br></pre></td></tr></table></figure>
+<p>After executing the CQL languages, what we will get the graph database</p>
+<div><br>  <img src="/images/neo4j_java_2.png" alt="Smiley face" width="50%" height="50%"><br></div>
+
+<h2 id="4-Establish-Connection"><a href="#4-Establish-Connection" class="headerlink" title="4. Establish Connection."></a>4. Establish Connection.</h2><p>In order to use the diver, make connection to the neo4j database. we should do the following things.</p>
+<ol>
+<li>Provide a connection URL with username and password. The URL has the format: bolt://username:password@localhost</li>
+<li>Get a driver instance</li>
+<li>From the driver, create a session.</li>
+<li><p>invoke session.run() method by parsing two parameters. 1). Cypher Query Language with parameters 2). Parameters given in the type of java map, with key-value pairs.</p>
+</li>
+<li><p>It will return result of Statement Result(<a href="https://neo4j.com/docs/api/java-driver/current/org/neo4j/driver/v1/StatementResult.html" target="_blank" rel="noopener">see Documantation for detail</a> ).It extends the Iterator class. so, it has hasNext() method and next() method to iterate through the result.</p>
+</li>
+<li><p>Close and session and close the database.</p>
+</li>
+</ol>
+<p><strong>Cypher Query Language with parameters</strong> :</p>
+<p>For Query String reuse and injection prevention. we will passing the parameters by Parameter Binding. In their document, they say:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cypher supports querying with parameters. This means developers don&apos;t have to resort to string building to create a query. Additionally, parameters make caching of execution plans much easier for Cypher, thus leading to faster query execution times.</span><br></pre></td></tr></table></figure>
+<p>Where to use.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Parameters can be used for:</span><br><span class="line"></span><br><span class="line">literals and expressions</span><br><span class="line">node and relationship ids</span><br><span class="line">for explicit indexes only: index values and queries</span><br></pre></td></tr></table></figure>
+<p>Where cannot be used.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Parameters cannot be used for the following constructs, as these form part of the query structure that is compiled into a query plan:</span><br><span class="line">property keys; so, MATCH (n) WHERE n.$param = &apos;something&apos; is invalid</span><br><span class="line">relationship types</span><br><span class="line">labels</span><br></pre></td></tr></table></figure>
+<p>There are multiple excellent Examples to use CQL With parameters in <a href="https://neo4j.com/docs/cypher-manual/3.5/syntax/parameters/" target="_blank" rel="noopener">neo4j documentation</a></p>
+<p>Here, I wrote codes to test connection with Unit Test.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.neo4j.movies;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.neo4j.driver.v1.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnvTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testConnection</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Driver driver = GraphDatabase.driver( <span class="string">"bolt://localhost:7687"</span>, AuthTokens.basic(<span class="string">"neo4j"</span>, <span class="string">"root"</span> ) );</span><br><span class="line">        System.out.println(<span class="string">"Server is up and Running"</span>);</span><br><span class="line">        <span class="comment">// find all the author names for a given  movie name</span></span><br><span class="line">        String query = <span class="string">"MATCH (movie: Movie &#123;title:$title&#125;)&lt;-[:ACTED_IN]-(person:Person) RETURN person.name as actor"</span>;</span><br><span class="line">        Map&lt;String,Object&gt; titleMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        titleMap.put(<span class="string">"title"</span>,<span class="string">"The Matrix"</span>);</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Session session = driver.session();</span><br><span class="line">            StatementResult statementResult = session.run(query,titleMap);</span><br><span class="line">            <span class="keyword">while</span>(statementResult.hasNext())&#123;</span><br><span class="line">                System.out.println(statementResult.next().get(<span class="string">"actor"</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            driver.close();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Result</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">INFO: Direct driver instance 99451533 created for server address localhost:7687</span><br><span class="line">Server is up and Running</span><br><span class="line">&quot;Emil Eifrem&quot;</span><br><span class="line">&quot;Hugo Weaving&quot;</span><br><span class="line">&quot;Laurence Fishburne&quot;</span><br><span class="line">&quot;Carrie-Anne Moss&quot;</span><br><span class="line">&quot;Keanu Reeves&quot;</span><br><span class="line">May 14, 2019 3:45:49 PM org.neo4j.driver.internal.logging.JULogger info</span><br><span class="line">INFO: Closing driver instance 99451533</span><br><span class="line">May 14, 2019 3:45:49 PM org.neo4j.driver.internal.logging.JULogger info</span><br><span class="line">INFO: Closing connection pool towards localhost:7687</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/online-shopping-project-db-design/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang Tan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Liang Tan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/13/online-shopping-project-db-design/" class="post-title-link" itemprop="url">How to Design your Own Online Shopping Website like amazon -- DB design</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-13 19:40:19" itemprop="dateCreated datePublished" datetime="2019-05-13T19:40:19-06:00">2019-05-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-14 11:23:03" itemprop="dateModified" datetime="2019-05-14T11:23:03-06:00">2019-05-14</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MySQL-DB/" itemprop="url" rel="index"><span itemprop="name">MySQL DB</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>Before designing the database for our small online shopping system, let’s review three normalization forms.</p>
+<ol>
+<li><strong>1NF:</strong> remove repeated/ redundant data</li>
+<li><strong>2NF:</strong> make sure that all the fields in the table are dependent <strong>only</strong> on primary key.</li>
+<li><strong>3NF:</strong> remove <strong>calculated(transitive)</strong> fields</li>
+</ol>
+<p>Now let us discuss about the important entities in this system.</p>
+<p>1.In the first place, we must have users.</p>
+<table>
+<thead>
+<tr>
+<th>Field(Attribute)</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>unique primary key for each user</td>
+</tr>
+<tr>
+<td>user_name</td>
+<td>user’s name</td>
+</tr>
+<tr>
+<td>user_password</td>
+<td>password for each user</td>
+</tr>
+</tbody>
+</table>
+<p>2.There must be multiple product categories.</p>
+<table>
+<thead>
+<tr>
+<th>Field(Attribute)</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category_id</td>
+<td>unique primary key for each product category</td>
+</tr>
+<tr>
+<td>category_name</td>
+<td>product category name</td>
+</tr>
+</tbody>
+</table>
+<p>3.Then,there should be <strong>multiple products in one category</strong>, and <strong>each product should be in only one category</strong>.(For some scenario, it could be in multiple category). At the same time, one <strong>one category should have many combinations of properties</strong>.(For example, laptops have properties like, CPU, Memory, Grapics,etc).SO, there is a <strong>many-to-many relationships between properties and products</strong>. therefore, we should create a table to store the relationship between them to satisfy the 3NF forms. Hence, we could design a table called property_value. One property has multiple property values and one product has many property values as well.</p>
+<table>
+<thead>
+<tr>
+<th>Field(Attribute)</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>property_id</td>
+<td>unique primary key for each property</td>
+</tr>
+<tr>
+<td>property_category_id</td>
+<td>foreign key from category table</td>
+</tr>
+<tr>
+<td>property_name</td>
+<td>name of each property</td>
+</tr>
+</tbody>
+</table>
+<p>Product Table</p>
+<table>
+<thead>
+<tr>
+<th>Field(Attribute)</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>product_id</td>
+<td>product_id</td>
+</tr>
+<tr>
+<td>product_subtitle</td>
+<td>subtitle for products</td>
+</tr>
+<tr>
+<td>original_price</td>
+<td></td>
+</tr>
+<tr>
+<td>promote_price</td>
+<td></td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>on sale time</td>
+</tr>
+</tbody>
+</table>
+<p>Property Value Table (Relationships)</p>
+<table>
+<thead>
+<tr>
+<th>Field(Attribute)</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>property Value primary key</td>
+</tr>
+<tr>
+<td>property_id</td>
+<td>foreign key product_id</td>
+</tr>
+<tr>
+<td>product_id</td>
+<td>foreign key product_id</td>
+</tr>
+<tr>
+<td>propertye_value</td>
+<td></td>
+</tr>
+<tr>
+<td>promote_price</td>
+<td></td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>on sale time</td>
+</tr>
+</tbody>
+</table>
+<p>Each product has many product image to be shown, therefore, we could create a table to store product images</p>
+<table>
+<thead>
+<tr>
+<th>Field(Attribute)</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>product_image_id</td>
+<td>product_id</td>
+</tr>
+<tr>
+<td>product_id</td>
+<td>foreign key constraints for product id</td>
+</tr>
+<tr>
+<td>image_type</td>
+<td>indicating whether it is details figure and display image</td>
+</tr>
+</tbody>
+</table>
+<p>For product reviews, one product has many reviews and each user can post many reviews. Therefore, reviews table has two foreign key constraints</p>
+<table>
+<thead>
+<tr>
+<th>Field(Attribute)</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>review_id</td>
+<td>primary key</td>
+</tr>
+<tr>
+<td>review_content</td>
+<td>content for review in varchar type</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>foreign key constraints for user id</td>
+</tr>
+<tr>
+<td>product_id</td>
+<td>foreign key constraints for product id</td>
+</tr>
+<tr>
+<td>create_date</td>
+<td>review generated date</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, the most important thing is the order and the ordered item.</p>
+<table>
+<thead>
+<tr>
+<th>Field(Attribute)</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>order_id</td>
+<td>primary key</td>
+</tr>
+<tr>
+<td>order_code</td>
+<td>unique order code</td>
+</tr>
+<tr>
+<td>order_address</td>
+<td>order_address</td>
+</tr>
+<tr>
+<td>order_receiver</td>
+<td>order_receiver</td>
+</tr>
+<tr>
+<td>order_mobile</td>
+<td>order_mobile number</td>
+</tr>
+<tr>
+<td>order_user_message</td>
+<td>order_user_message</td>
+</tr>
+<tr>
+<td>create_date</td>
+<td>create_date</td>
+</tr>
+<tr>
+<td>pay_date</td>
+<td>pay_date</td>
+</tr>
+<tr>
+<td>delivery_date</td>
+<td>delivery_date</td>
+</tr>
+<tr>
+<td>confirmDate</td>
+<td>confirmDate</td>
+</tr>
+<tr>
+<td>order_status</td>
+<td>order_status</td>
+</tr>
+<tr>
+<td>user_id:</td>
+<td>FOREIGN KEY constraints</td>
+</tr>
+</tbody>
+</table>
+<p>user table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> (</span><br><span class="line">  user_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  user_name <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  user_password <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (user_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+<p>category table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">category</span> (</span><br><span class="line">  category_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  category_name <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (category_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+<p>property table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> property (</span><br><span class="line">  property_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  category_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  property_name <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (property_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_property_category <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (category_id) <span class="keyword">REFERENCES</span> <span class="keyword">category</span> (category_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+<p>product_table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> product (</span><br><span class="line">  product_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  product_name <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  product_subtitle <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  original_price <span class="built_in">float</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  promote_price <span class="built_in">float</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  stock <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  category_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  create_date datetime <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (product_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_product_category <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (category_id) <span class="keyword">REFERENCES</span> <span class="keyword">category</span> (category_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+<p>property value table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> property_value (</span><br><span class="line">  property_value_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  product_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  property_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  property_value <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (property_value_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_propertyvalue_property <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (property_id) <span class="keyword">REFERENCES</span> property (property_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_propertyvalue_product <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (product_id) <span class="keyword">REFERENCES</span> product (product_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+<p>product iamge table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> product_image (</span><br><span class="line">  product_image_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  product_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  product_image_type <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (product_image_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_productimage_product <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (product_id) <span class="keyword">REFERENCES</span> product (product_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+<p>review table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> review (</span><br><span class="line">  review_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  review_content <span class="built_in">varchar</span>(<span class="number">4000</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  user_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  product_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  create_date datetime <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (review_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_review_product <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (product_id) <span class="keyword">REFERENCES</span> product (product_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_review_user <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (user_id) <span class="keyword">REFERENCES</span> <span class="keyword">user</span> (user_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+<p>Order table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> order_ (</span><br><span class="line">  order_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  order_code <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_address <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_post <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_receiver <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_mobile <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_user_message <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  create_date datetime <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  pay_date datetime <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  delivery_date datetime <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  confirm_date datetime <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  user_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_status <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (order_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_order_user <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (user_id) <span class="keyword">REFERENCES</span> <span class="keyword">user</span> (user_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+<p>order_item table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> order_item (</span><br><span class="line">  order_item_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  product_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  user_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_item_number <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (order_item_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_orderitem_user <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (user_id) <span class="keyword">REFERENCES</span> <span class="keyword">user</span> (user_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_orderitem_product <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (product_id) <span class="keyword">REFERENCES</span> product (product_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_orderitem_order <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (order_id) <span class="keyword">REFERENCES</span> order_ (order_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+<p>Generate the E-R diagram by MySQL WORKBENCH.</p>
+<div><br>  <img src="/images/db_er_figure.png" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> ER diagram by MySQL</div><br></div>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/online-shopping-project-software-Requirment-Analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang Tan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Liang Tan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/13/online-shopping-project-software-Requirment-Analysis/" class="post-title-link" itemprop="url">How to Design your Own Online Shopping Website like amazon -- Requirements Analysis</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-13 16:54:45" itemprop="dateCreated datePublished" datetime="2019-05-13T16:54:45-06:00">2019-05-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-14 10:58:58" itemprop="dateModified" datetime="2019-05-14T10:58:58-06:00">2019-05-14</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/MySQL/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Basically, for design an website, we mainly have 4 parts.</p>
+<ol>
+<li><p>Front-End display: This part is mainly about how to display the data in MySQL database, like the index page, detailed products pages, shopping carts pages and shopping categories pages.</p>
+</li>
+<li><p>Interaction Between Front-End and Back-End: When the clients or the admin have a serial of actions like buying a product, add a product to their shopping carts, log in and log out to the web site. This part is how you design controllers and tiny URL BY Using HTTP protocol (e.g GET and POST Method).</p>
+</li>
+<li><p>Back-end Management : This part is to maintain the data used in the website, like the product managements, products picture managements, user managements ,order managements ,so on and so forth.</p>
+</li>
+<li><p>Databases and Entities Design. In this part, we will carefully design the schema of our MySQL database. We will create the schema for each table and establish the relationships between tables. Based on those tables, we will create the classes mapping to tables.</p>
+</li>
+</ol>
+<p>I will go deep into requirements analysis for each part in another blog.</p>
+<p>Here, I will list all the tech stacks used in this project.</p>
+<table>
+<thead>
+<tr>
+<th>Database</th>
+<th>MySQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>server-side template engine</td>
+<td>Java Server Page(JSP)</td>
+</tr>
+<tr>
+<td>Front-End FrameWork</td>
+<td>Bootstrap, JQuery</td>
+</tr>
+<tr>
+<td>Communication between Front-end and Back-end</td>
+<td>AJAX(In JSON data type)</td>
+</tr>
+<tr>
+<td>Project Management Tool</td>
+<td>Maven</td>
+</tr>
+<tr>
+<td>Database Aceess</td>
+<td>Mybatis</td>
+</tr>
+<tr>
+<td>Web Container</td>
+<td>Tomcat</td>
+</tr>
+<tr>
+<td>Web Architecture</td>
+<td>Spring MVC</td>
+</tr>
+<tr>
+<td>Dev tools</td>
+<td>IntelliJ IDEA</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/CRUD-neo4j/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -378,7 +1258,7 @@
                 
               
 
-              <time title="Created: 2019-05-13 10:20:32 / Modified: 16:42:57" itemprop="dateCreated datePublished" datetime="2019-05-13T10:20:32-06:00">2019-05-13</time>
+              <time title="Created: 2019-05-13 10:20:32 / Modified: 16:56:29" itemprop="dateCreated datePublished" datetime="2019-05-13T10:20:32-06:00">2019-05-13</time>
             
 
             
@@ -388,6 +1268,24 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DB/" itemprop="url" rel="index"><span itemprop="name">DB</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1348,7 +2246,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1369,7 +2267,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -1416,7 +2320,41 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

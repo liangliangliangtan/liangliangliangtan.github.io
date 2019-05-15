@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/05/14/neo4j-java-introduction/</loc>
+    
+    <lastmod>2019-05-15T00:12:37.560Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/05/13/online-shopping-project-db-design/</loc>
+    
+    <lastmod>2019-05-14T17:23:03.060Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/05/13/online-shopping-project-software-Requirment-Analysis/</loc>
+    
+    <lastmod>2019-05-14T16:58:58.675Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/05/13/CRUD-neo4j/</loc>
     
-    <lastmod>2019-05-13T22:42:57.052Z</lastmod>
+    <lastmod>2019-05-13T22:56:29.679Z</lastmod>
     
   </url>
   
