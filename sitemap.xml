@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/05/16/IteratorPattern/</loc>
+    
+    <lastmod>2019-05-16T23:17:22.255Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/05/08/DecoratorPattern/</loc>
+    
+    <lastmod>2019-05-16T21:43:44.844Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/05/14/neo4j-java-introduction/</loc>
     
     <lastmod>2019-05-15T23:22:04.144Z</lastmod>
@@ -40,13 +54,6 @@
     <loc>http://yoursite.com/2019/05/07/ObserverPattern/</loc>
     
     <lastmod>2019-05-09T23:36:13.922Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/05/08/DecoratorPattern/</loc>
-    
-    <lastmod>2019-05-09T23:35:46.741Z</lastmod>
     
   </url>
   
