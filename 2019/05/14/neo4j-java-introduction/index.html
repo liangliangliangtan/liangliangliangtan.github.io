@@ -97,7 +97,7 @@
 
 
   <meta name="description" content="1. IntroductionIn this post, I will build a small web application in java by learning how to connect to as well as manipulate on neo4j database. Neo4j offers a rich set of integration possibilities fo">
-<meta name="keywords" content="Graph Database,NoSQL,IntelliJ IDEA,data visualization,Spark,ORM,Maven,XML,CQL">
+<meta name="keywords" content="Graph Database,NoSQL,data visualization,Spark,ORM,Maven,IntelliJ IDEA,XML,CQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Introduction - how to use neo4j in java">
 <meta property="og:url" content="http://yoursite.com/2019/05/14/neo4j-java-introduction/index.html">
@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://yoursite.com/images/neo4j_java_3.png">
 <meta property="og:image" content="http://yoursite.com/images/neo4j_java_4.png">
 <meta property="og:image" content="http://yoursite.com/images/neo4j_java_5.png">
-<meta property="og:updated_time" content="2019-05-15T23:22:04.144Z">
+<meta property="og:updated_time" content="2019-05-21T15:58:45.175Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Introduction - how to use neo4j in java">
 <meta name="twitter:description" content="1. IntroductionIn this post, I will build a small web application in java by learning how to connect to as well as manipulate on neo4j database. Neo4j offers a rich set of integration possibilities fo">
@@ -403,7 +403,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-15 17:22:04" itemprop="dateModified" datetime="2019-05-15T17:22:04-06:00">2019-05-15</time>
+                <time title="Modified: 2019-05-21 09:58:45" itemprop="dateModified" datetime="2019-05-21T09:58:45-06:00">2019-05-21</time>
               
             
           </span>
@@ -532,7 +532,7 @@
 <p>Result</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">*****relationship*******</span><br><span class="line">start from Node Id: 1</span><br><span class="line">end from Node Id: 161</span><br><span class="line">The relation type is:ACTED_IN</span><br><span class="line">RelationShip key value pairs</span><br><span class="line">roles:&quot;Johnny Mnemonic&quot;</span><br><span class="line">*****Node*******</span><br><span class="line">Node Id: 1</span><br><span class="line">Node labels</span><br><span class="line">Person</span><br><span class="line">Node key-value pairs</span><br><span class="line">name:&quot;Keanu Reeves&quot;</span><br><span class="line">born:1964</span><br><span class="line">*****Node*******</span><br><span class="line">Node Id: 161</span><br><span class="line">Node labels</span><br><span class="line">Movie</span><br><span class="line">Node key-value pairs</span><br><span class="line">tagline:&quot;The hottest data on earth. In the coolest head in town&quot;</span><br><span class="line">title:&quot;Johnny Mnemonic&quot;</span><br><span class="line">released:1995</span><br></pre></td></tr></table></figure>
 <p>Notice that: the return type is a path, So, in CQL, We name the path as p. If we want to return all, Using Return *, see CQL manual,<a href="https://neo4j.com/docs/cypher-manual/current/clauses/return" target="_blank" rel="noopener">link</a>.</p>
-<h2 id="6-ORM-Mapping-And-Mapping-to-JSON"><a href="#6-ORM-Mapping-And-Mapping-to-JSON" class="headerlink" title="6. ORM Mapping And Mapping to JSON"></a>6. ORM Mapping And Mapping to JSON</h2><p>To be continued.</p>
+<h2 id="6-OGM-Mapping-And-Mapping-to-JSON"><a href="#6-OGM-Mapping-And-Mapping-to-JSON" class="headerlink" title="6. OGM Mapping And Mapping to JSON"></a>6. OGM Mapping And Mapping to JSON</h2><p>To be continued.</p>
 
       
     </div>
@@ -560,8 +560,6 @@
           
             <a href="/tags/NoSQL/" rel="tag"># NoSQL</a>
           
-            <a href="/tags/IntelliJ-IDEA/" rel="tag"># IntelliJ IDEA</a>
-          
             <a href="/tags/data-visualization/" rel="tag"># data visualization</a>
           
             <a href="/tags/Spark/" rel="tag"># Spark</a>
@@ -569,6 +567,8 @@
             <a href="/tags/ORM/" rel="tag"># ORM</a>
           
             <a href="/tags/Maven/" rel="tag"># Maven</a>
+          
+            <a href="/tags/IntelliJ-IDEA/" rel="tag"># IntelliJ IDEA</a>
           
             <a href="/tags/XML/" rel="tag"># XML</a>
           
@@ -668,7 +668,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -825,7 +825,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Create-a-project-And-add-neo4j-driver-dependencies"><span class="nav-number">2.</span> <span class="nav-text">2.Create a project And add neo4j driver dependencies</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Play-with-the-movie-dataSet"><span class="nav-number">3.</span> <span class="nav-text">3. Play with the movie dataSet.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Establish-Connection"><span class="nav-number">4.</span> <span class="nav-text">4. Establish Connection.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Small-Demo"><span class="nav-number">5.</span> <span class="nav-text">5. Small Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-Retrieve-Node"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 Retrieve Node.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-Retrieve-Path-relationship"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 Retrieve Path(relationship).</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-ORM-Mapping-And-Mapping-to-JSON"><span class="nav-number">5.3.</span> <span class="nav-text">6. ORM Mapping And Mapping to JSON</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Create-a-project-And-add-neo4j-driver-dependencies"><span class="nav-number">2.</span> <span class="nav-text">2.Create a project And add neo4j driver dependencies</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Play-with-the-movie-dataSet"><span class="nav-number">3.</span> <span class="nav-text">3. Play with the movie dataSet.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Establish-Connection"><span class="nav-number">4.</span> <span class="nav-text">4. Establish Connection.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Small-Demo"><span class="nav-number">5.</span> <span class="nav-text">5. Small Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-Retrieve-Node"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 Retrieve Node.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-Retrieve-Path-relationship"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 Retrieve Path(relationship).</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-OGM-Mapping-And-Mapping-to-JSON"><span class="nav-number">5.3.</span> <span class="nav-text">6. OGM Mapping And Mapping to JSON</span></a></li></ol></li></ol></div>
             
 
           </div>
