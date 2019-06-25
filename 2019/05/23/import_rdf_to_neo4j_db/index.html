@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1. IntroductionIn this blog, I will introduce how to import RDF(Resource Description Framework) files to graph database (Neo4j), As we known, RDF is a framework for describing resources on the web in">
+<meta name="keywords" content="NoSQL,XML,RDF,Neo4j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Import RDF files to Neo4j database">
+<meta property="og:url" content="http://yoursite.com/2019/05/23/import_rdf_to_neo4j_db/index.html">
+<meta property="og:site_name" content="Liang Tan&#39;s Blog">
+<meta property="og:description" content="1. IntroductionIn this blog, I will introduce how to import RDF(Resource Description Framework) files to graph database (Neo4j), As we known, RDF is a framework for describing resources on the web in">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_rdf_1.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_rdf_2.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_rdf_3.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_rdf_4.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_rdf_5.png">
+<meta property="og:updated_time" content="2019-06-25T22:11:43.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Import RDF files to Neo4j database">
+<meta name="twitter:description" content="1. IntroductionIn this blog, I will introduce how to import RDF(Resource Description Framework) files to graph database (Neo4j), As we known, RDF is a framework for describing resources on the web in">
+<meta name="twitter:image" content="http://yoursite.com/images/neo4j_rdf_1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Liang Tan's Blog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/23/import_rdf_to_neo4j_db/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Import RDF files to Neo4j database | Liang Tan's Blog</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-139580812-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-139580812-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Liang Tan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/import_rdf_to_neo4j_db/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang Tan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Liang Tan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Import RDF files to Neo4j database
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-23 09:39:15" itemprop="dateCreated datePublished" datetime="2019-05-23T09:39:15-06:00">2019-05-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-25 16:11:43" itemprop="dateModified" datetime="2019-06-25T16:11:43-06:00">2019-06-25</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>In this blog, I will introduce how to import RDF(Resource Description Framework) files to graph database (Neo4j), As we known, RDF is a framework for describing resources on the web in XML format, it is designed to be machine-readable so that computer can understand RDF easily. This means that RDFs are not easily to be read by people. For deeper visualization and analysis data represented by RDF format, we need to transfer those data to Neo4j database.</p>
+<h1 id="2-How-data-is-stored-in-RDF-files"><a href="#2-How-data-is-stored-in-RDF-files" class="headerlink" title="2. How data is stored in RDF files"></a>2. How data is stored in RDF files</h1><p>RDF statement is a triple, a combination of Resource, Property, and property-value, which is also refer to Subject, predicate and objects. Written as</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Subject, Predicate, Object)</span><br></pre></td></tr></table></figure>
+<p>Subject and predicate are resources while Object can be either resources or literals. If the object is literals, this means that itself cannot be appeared in another RDF statement as subject.</p>
+<h2 id="2-1-How-RDF-can-be-related-to-Graph-Database"><a href="#2-1-How-RDF-can-be-related-to-Graph-Database" class="headerlink" title="2.1 How RDF can be related to Graph Database"></a>2.1 How RDF can be related to Graph Database</h2><p>We need to define set of rules so that it is possible for importing XML/RDF.</p>
+<h3 id="2-1-1-Rule-One"><a href="#2-1-1-Rule-One" class="headerlink" title="2.1.1 Rule One"></a>2.1.1 Rule One</h3><p>Since every single subject has its URI(universal resources identifier). Therefore, subjects of triples are mapped into nodes n graph database. A node in neo4j represents an RDF resources will have label Resource and with a property uri with the resources uri.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Subject, Predicate, Object) =&gt; (Resource &#123;uri:Subject&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-2-Rule-Two"><a href="#2-1-2-Rule-Two" class="headerlink" title="2.1.2 Rule Two"></a>2.1.2 Rule Two</h3><p>If the object of a RDF triple is literal, then predicate and object should be mapped into node property and property value.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Subject,Predicate,Object) &amp;&amp; isLiteral(Object) =&gt; (:Resource &#123;uri:Subject, Property:Object&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-3-Rule-Three"><a href="#2-1-3-Rule-Three" class="headerlink" title="2.1.3 Rule Three"></a>2.1.3 Rule Three</h3><p>If the object of a RDF triple is also a resource. Then, it should map to other node with URI as the universal identifier, and predicate will be viewed as the relationship between the subject and object.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Subject,Predicate,Object) &amp;&amp; !isLiteral(Object) =&gt; (:Resource &#123;uri:Sbject&#125;)-[:Predicate]-&gt;(:Resource &#123;uri:Object&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-Some-Exceptions"><a href="#2-2-Some-Exceptions" class="headerlink" title="2.2 Some Exceptions."></a>2.2 Some Exceptions.</h3><p>The previous three rules defines a generic way for mapping rdf nodes into nodes and relationships in neo4j database. However, there are some exceptions</p>
+<h3 id="2-2-1-Exception-One"><a href="#2-2-1-Exception-One" class="headerlink" title="2.2.1 Exception One,"></a>2.2.1 Exception One,</h3><p>In rdf files, we would have triple rdf:type statements, The rdf:type statements are usually mapped into categories in Neo4j. By the 3rd rule, we may have many nodes linked to one specific category. In order to have less relationships and make retrieving easier, we would treate the object as the label of that node.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Subject ,rdf:type, Category) =&gt; (:Category &#123;uri:Subject&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-2-Exception-two"><a href="#2-2-2-Exception-two" class="headerlink" title="2.2.2 Exception two."></a>2.2.2 Exception two.</h3><p>In rdf files, we could only define one-to-one dependency relationships for subjects and objects. If we would have one-to-many dependency relationships, we would have a Blank node as anonymous resources so that many objects would link to anonymous resource in this way. For easily retrieving those virtual node, we would have to create index on them. The neo4j database will give every single blank node an unique id to avoid clash.</p>
+<p>The Cypher Query Statement for creating index is as follows</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> <span class="keyword">ON</span> : BNode(uri)</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-3-Exception-three"><a href="#2-2-3-Exception-three" class="headerlink" title="2.2.3 Exception three."></a>2.2.3 Exception three.</h3><p>Literal object usually have datatypes associate with them. If datatypes are not explicit declared in the RDF triples , by default, they should be loaded as String type.</p>
+<h2 id="3-Existing-tools-for-Importing-RDFs-into-Neo4j-Database"><a href="#3-Existing-tools-for-Importing-RDFs-into-Neo4j-Database" class="headerlink" title="3. Existing tools for Importing RDFs into Neo4j Database."></a>3. Existing tools for Importing RDFs into Neo4j Database.</h2><p>If we already have some parsers as existing tools for importing rdf files to neo4j, then we don’t need to implements the codes for these rules from scratch. As client, what we only need to do is to call their APIs. I would recommend the <a href="https://github.com/jbarrasa/neosemantics" target="_blank" rel="noopener">neosemantics</a>, it said that Graph+Semantics: Import/Export RDF from Neo4j. Model mapping, inferencing and more…</p>
+<h2 id="3-1-installation"><a href="#3-1-installation" class="headerlink" title="3.1 installation:"></a>3.1 installation:</h2><p>Since the latest stable version of Neo4j is 3.5.5, please dowload <a href="https://github.com/jbarrasa/neosemantics/releases" target="_blank" rel="noopener">neosemantics-3.5.0.2.jar</a> jar file from the released area. If wanting to know how it is implements, we could download the source code and build the jar package by our self.</p>
+<ol>
+<li><p>copy the jar file to your</p>
+<p>[neo4j_home]/plugins</p>
+</li>
+<li><p>ADD the following code to [your_neo_home]/conf/neo4j.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dbms.unmanaged_extension_classes=semantics.extension=/rdf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>restart the server and call the following statement, if the reponse is “ok”, then it has been succesfully installed.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:GET /rdf/ping</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="3-2-Learning-how-to-use-neosemantics-to-import-RDF-files-to-the-Neo4j-Database"><a href="#3-2-Learning-how-to-use-neosemantics-to-import-RDF-files-to-the-Neo4j-Database" class="headerlink" title="3.2 Learning how to use neosemantics to import RDF files to the Neo4j Database."></a>3.2 Learning how to use neosemantics to import RDF files to the Neo4j Database.</h2><p>In my project, my goal is to import SenticNet5 [<a href="https://sentic.net/downloads/" target="_blank" rel="noopener">https://sentic.net/downloads/</a>] to the graph database. Let us explore the sentic net by looking the RDF files.</p>
+<p>senticNet is basically a large dictionary consists of hundreds and thousands of words, every single word has some similarity.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">rdf:Description</span> <span class="attr">rdf:about</span>=<span class="string">"http://sentic.net/api/en/concept/a_little"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rdf:type</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/concept"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">text</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span>&gt;</span>a little<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">semantics</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/least"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/little"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/small_amount"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/shortage"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/scarce"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">semantics</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sentics</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pleasantness</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:datatype</span>=<span class="string">"http://www.w3.org/2001/XMLSchema#float"</span>&gt;</span>-0.99<span class="tag">&lt;/<span class="name">pleasantness</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">attention</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:datatype</span>=<span class="string">"http://www.w3.org/2001/XMLSchema#float"</span>&gt;</span>0<span class="tag">&lt;/<span class="name">attention</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">sensitivity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:datatype</span>=<span class="string">"http://www.w3.org/2001/XMLSchema#float"</span>&gt;</span>0<span class="tag">&lt;/<span class="name">sensitivity</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aptitude</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:datatype</span>=<span class="string">"http://www.w3.org/2001/XMLSchema#float"</span>&gt;</span>-0.70<span class="tag">&lt;/<span class="name">aptitude</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sentics</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">moodtags</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/sadness"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/disgust"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">moodtags</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">polarity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span>&gt;</span>negative<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intensity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:datatype</span>=<span class="string">"http://www.w3.org/2001/XMLSchema#float"</span>&gt;</span>-0.84<span class="tag">&lt;/<span class="name">intensity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">polarity</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">rdf:Description</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Every word has many semantics which is also a resources. And Each word has moodtags which is the catogries of each word. In addition, each word has 4-dimentional sentics wich are pleasantness, attention, sensitivity and aptitude with value from -1 to 1. The total score can be computed in some way called polarity.</p>
+<p>Although it is in RDF format, it is actually not a valid RDF. As we said before, it is not allowed to have one-to-many relationships. We need to refactor those code to make it valid in the first place.</p>
+<p>For each concept tag under semantics or mood tags, they need a form that allows the rdf:Description to be omitted. This can be done by putting an rdf:parseType=”Resource” attribute on the containing property element that turns the property element into a property-and-node element, which can itself have both property elements and property attributes. This is the definition of Blank Node.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">rdf:Description</span> <span class="attr">rdf:about</span>=<span class="string">"http://sentic.net/api/en/concept/a_little"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rdf:type</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/concept"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">text</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span>&gt;</span>a little<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">semantics</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/least"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/little"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/small_amount"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/shortage"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/scarce"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">semantics</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sentics</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pleasantness</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:datatype</span>=<span class="string">"http://www.w3.org/2001/XMLSchema#float"</span>&gt;</span>-0.99<span class="tag">&lt;/<span class="name">pleasantness</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">attention</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:datatype</span>=<span class="string">"http://www.w3.org/2001/XMLSchema#float"</span>&gt;</span>0<span class="tag">&lt;/<span class="name">attention</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">sensitivity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:datatype</span>=<span class="string">"http://www.w3.org/2001/XMLSchema#float"</span>&gt;</span>0<span class="tag">&lt;/<span class="name">sensitivity</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aptitude</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:datatype</span>=<span class="string">"http://www.w3.org/2001/XMLSchema#float"</span>&gt;</span>-0.70<span class="tag">&lt;/<span class="name">aptitude</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sentics</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">moodtags</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/sadness"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/disgust"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">moodtags</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">polarity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span>&gt;</span>negative<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intensity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:datatype</span>=<span class="string">"http://www.w3.org/2001/XMLSchema#float"</span>&gt;</span>-0.84<span class="tag">&lt;/<span class="name">intensity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">polarity</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">rdf:Description</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Simply call the API, we will get the triples imported into the graph database.For more details about the usage of API, the author of <a href="https://github.com/jbarrasa/neosemantics" target="_blank" rel="noopener">neosemantics</a> has a very detailed explanation on github page and his blogs.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CALL</span> semantics.importRDF(<span class="string">"file:///C:/Users/OneDrive/Desktop/try.xml"</span>,</span><br><span class="line"><span class="string">"RDF/XML"</span>,</span><br><span class="line">&#123; shortenUrls: <span class="literal">true</span>, typesToLabels: <span class="literal">true</span>, commitSize: <span class="number">9000</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p>Notice: Be careful at the file path . The valid file URI in Windows would be something like ‘file:///C:/Documents%20and%20Settings/davris/FileSchemeURIs.doc’</p>
+<div><br>  <img src="/images/neo4j_rdf_1.png" alt="Smiley face" width="90%" height="90%"><br></div>
+
+<p>We could see that the parser will automatically generate the namespace and labels for both nodes and relationships. These ns0 , ns1… are not suitable to read and query. Hence, let us define the namespace prefix before we importing rdf triples.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> (:NamespacePrefixDefinition &#123;<span class="string">`&lt;http://sentic.net/`</span>&gt;: <span class="string">'sentic_net'</span>, <span class="string">`http://sentic.net/api/`</span>: <span class="string">'keyword'</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>For ‘<a href="http://sentic.net/" target="_blank" rel="noopener">http://sentic.net/</a>‘, the mapping of url would be senticnet, and the ‘/api/‘ would be called keyword by my own definition.</p>
+<div><br>  <img src="/images/neo4j_rdf_2.png" alt="Smiley face" width="90%" height="90%"><br></div>
+
+<p>The result Here looks more reasonable. when we want to find all other similar word. We will follow only two relationships, sentic_net_sementic for finding the blankNode and sentic_net_concept to find all similar word resources.</p>
+<p>For fast retrieve blank Node , resources and other things, do not forget to create Index for those nodes and relationships that are frequently retrieved`</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> <span class="keyword">ON</span>: <span class="keyword">Resource</span>(uri)</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> <span class="keyword">ON</span>: URI(uri)</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> <span class="keyword">ON</span>: BNode(uri)</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> <span class="keyword">ON</span>: <span class="keyword">Class</span>(uri)</span><br></pre></td></tr></table></figure>
+<p>Since we would like to retrieve all the words with pleasantness, attention in some range or with a specific value. Instead importing them to key value pairs as properties. we would treat them as other resources.</p>
+<p>Therefore, slightly change the rdf file.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">sentics</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">pleasantness</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/pleasantness/0.99"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attention</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/attention/0"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sensitivity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/sensitivity/0"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aptitude</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/aptitude/-0.70"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">sentics</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">polarity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span>&gt;</span>negative<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">intensity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net/"</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/intensity/-0.84"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">polarity</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>In addition, design the URL for each attribute as follows,</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> (:NamespacePrefixDefinition &#123; <span class="string">`http://sentic.net/`</span>: <span class="string">'sentic_net'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/api/`</span>: <span class="string">'keyword'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/pleasantness/`</span>: <span class="string">'pleasantness'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/attention/`</span>: <span class="string">'attention'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/sensitivity/`</span>: <span class="string">'sensitivity'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/aptitude/`</span>: <span class="string">'aptitude'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/intensity/`</span>: <span class="string">'intensity'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>ReRun the code, the graph is as follows:</p>
+<div><br>  <img src="/images/neo4j_rdf_3.png" alt="Smiley face" width="90%" height="90%"><br></div>
+
+<div><br>  <img src="/images/neo4j_rdf_4.png" alt="Smiley face" width="90%" height="90%"><br></div>
+
+<p>Those APIs are correct for describing pleasantness, attention and other attributes with correct value.</p>
+<h2 id="4-Automatically-refactor-the-code-By-dom4j"><a href="#4-Automatically-refactor-the-code-By-dom4j" class="headerlink" title="4. Automatically refactor the code By dom4j"></a>4. Automatically refactor the code By dom4j</h2><p>We have successfully import the manually edited rdf file to the neo4j database. Key problems here we need to write codes for automatically modify rdf description to the format that we want.</p>
+<p>Here, I use dom4j framework for manipulating the xml/rdf file. Dom4j is an open source framework for processing XML which is integrated with XPath and fully supports DOM, SAX, JAXP and the Java platform such as Java 2 Collections.(More about dom4j, visit the github page(<a href="https://github.com/dom4j/dom4j" target="_blank" rel="noopener">https://github.com/dom4j/dom4j</a>)). And I use maven as the project management tool.</p>
+<p>In pom.xml, we add the dependencies</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.dom4j/dom4j --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.dom4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- https://mvnrepository.com/artifact/jaxen/jaxen --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>jaxen<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxen<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Notice that jaxen, the XPath Engine for Java, would not compatible to the version of dom4j here. If you want to jaxen for finding Nodes in DOM tree fast, I think using previous version of dom4j would be a choice. Here since the rdf file is not that complicated, I use iterator to iterate and find tags.</p>
+<p>First, write the factory utility class for read and xml files</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.dom4j.Document;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.DocumentException;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.io.SAXReader;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RdfUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Document <span class="title">readDoc</span><span class="params">(String fileName )</span> <span class="keyword">throws</span> DocumentException </span>&#123;</span><br><span class="line">        SAXReader reader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">        Document document  = reader.read(<span class="keyword">new</span> File(fileName));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> document;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">writeDoc</span><span class="params">(String outputFileName, Document document)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        FileWriter out = <span class="keyword">new</span> FileWriter(outputFileName);</span><br><span class="line">        document.write(out);</span><br><span class="line">        out.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The enum class for the designed URI for conversion of float values</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span>  URIEnum &#123;</span><br><span class="line">    Pleasantness_URI(<span class="string">"http://sentic.net/pleasantness/"</span>),</span><br><span class="line">    Attention_URI(<span class="string">"http://sentic.net/attention/"</span>),</span><br><span class="line">    Sensitivity_URI(<span class="string">"http://sentic.net/sensitivity/"</span>),</span><br><span class="line">    Aptitude_URI(<span class="string">"http://sentic.net/aptitude/"</span>),</span><br><span class="line">    Intensity_URI(<span class="string">"http://sentic.net/intensity/"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String uri;</span><br><span class="line">    URIEnum(String uri) &#123;</span><br><span class="line">        <span class="keyword">this</span>.uri = uri;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUri</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> uri;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Traverse the tree data structure and modify the document. Here if you want to remove the text of a tag, you should use the setText() to set the text to be null</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.dom4j.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">traverseRdf</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Document <span class="title">traverseAndModify</span><span class="params">(Document document)</span></span>&#123;</span><br><span class="line">        Element root = document.getRootElement();</span><br><span class="line">        Element description  = root.elementIterator().next();</span><br><span class="line">        <span class="comment">// iterate through one rdf:description</span></span><br><span class="line">        <span class="keyword">for</span> (Iterator&lt;Element&gt; it = description.elementIterator(); it.hasNext();) &#123;</span><br><span class="line">            Element element = it.next();</span><br><span class="line">            String elementTag = element.getName();</span><br><span class="line">            <span class="comment">// add rdf:parseType = "Resource" to create blankNode</span></span><br><span class="line">            <span class="keyword">if</span> (elementTag.equals(<span class="string">"semantics"</span>) || elementTag.equals(<span class="string">"sentics"</span>) || elementTag.equals(<span class="string">"moodtags"</span>) ||</span><br><span class="line">                    elementTag.equals(<span class="string">"polarity"</span>)) &#123;</span><br><span class="line">                addParseType(element);</span><br><span class="line">                <span class="comment">// if it is sentics tag, add resource and remove data type</span></span><br><span class="line">                <span class="keyword">if</span>(elementTag.equals(<span class="string">"sentics"</span>))&#123;</span><br><span class="line">                    addResourcesAndRemoveDataType(element);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(elementTag.equals(<span class="string">"polarity"</span>))&#123;</span><br><span class="line">                    modifyIntensity(element);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> document;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addParseType</span><span class="params">(Element element)</span></span>&#123;</span><br><span class="line">        element.addAttribute(<span class="string">"rdf:parseType"</span>,<span class="string">"Resource"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addResourcesAndRemoveDataType</span><span class="params">(Element sentics)</span></span>&#123;</span><br><span class="line">        Iterator&lt;Element&gt; senticsIterator = sentics.elementIterator();</span><br><span class="line">        <span class="keyword">while</span>(senticsIterator.hasNext())&#123;</span><br><span class="line">            Element element = senticsIterator.next();</span><br><span class="line">            <span class="keyword">if</span>(element.getName().equals(<span class="string">"pleasantness"</span>))&#123;</span><br><span class="line">                element.addAttribute(<span class="string">"rdf:resource"</span>, URIEnum.Pleasantness_URI.getUri()+element.getText());</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(element.getName().equals(<span class="string">"attention"</span>))&#123;</span><br><span class="line">                element.addAttribute(<span class="string">"rdf:resource"</span>, URIEnum.Attention_URI.getUri()+element.getText());</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(element.getName().equals(<span class="string">"sensitivity"</span>))&#123;</span><br><span class="line">                element.addAttribute(<span class="string">"rdf:resource"</span>, URIEnum.Sensitivity_URI.getUri()+element.getText());</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (element.getName().equals(<span class="string">"aptitude"</span>))&#123;</span><br><span class="line">                element.addAttribute(<span class="string">"rdf:resource"</span>, URIEnum.Aptitude_URI.getUri()+element.getText());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// remove first atttribute: rdf:datatype</span></span><br><span class="line">            Attribute attribute = element.attributes().get(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span>(attribute != <span class="keyword">null</span> ) element.remove(attribute);</span><br><span class="line">            <span class="comment">// and remove the text</span></span><br><span class="line">            element.setText(<span class="string">""</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">modifyIntensity</span><span class="params">(Element polarity)</span></span>&#123;</span><br><span class="line">        Iterator&lt;Element&gt; polarityIterator = polarity.elementIterator();</span><br><span class="line">        <span class="keyword">while</span>(polarityIterator.hasNext())&#123;</span><br><span class="line">            Element element = polarityIterator.next();</span><br><span class="line">            <span class="keyword">if</span>(element.getName() == <span class="string">"intensity"</span>)&#123;</span><br><span class="line">                element.addAttribute(<span class="string">"rdf:resource"</span>, URIEnum.Intensity_URI.getUri()+element.getText());</span><br><span class="line">                element.setText(<span class="string">""</span>);</span><br><span class="line">                Attribute attribute = element.attributes().get(<span class="number">0</span>);</span><br><span class="line">                <span class="keyword">if</span>(attribute != <span class="keyword">null</span> ) element.remove(attribute);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Main function</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> DocumentException, IOException </span>&#123;</span><br><span class="line">    Document document = RdfUtil.readDoc(</span><br><span class="line">            <span class="string">"file_name.xml"</span>);</span><br><span class="line"></span><br><span class="line">    Document editDocument = traverseRdf.traverseAndModify(document);</span><br><span class="line">    RdfUtil.writeDoc(<span class="string">"output_file_name.xml"</span>,editDocument);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The automatically generated xml would be as follows, which is the same as the “a little” one.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">rdf:RDF</span> <span class="attr">xmlns:rdf</span>=<span class="string">"http://www.w3.org/1999/02/22-rdf-syntax-ns#"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">rdf:Description</span> <span class="attr">rdf:about</span>=<span class="string">"http://sentic.net/api/en/concept/a_little_hungry"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rdf:type</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/concept"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">text</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span>&gt;</span>a little hungry<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">semantics</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/get_full"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/hunger_go_away"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/feel_full"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/hunger"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/full"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">semantics</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sentics</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pleasantness</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/pleasantness/0.757"</span>&gt;</span><span class="tag">&lt;/<span class="name">pleasantness</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">attention</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/attention/0"</span>&gt;</span><span class="tag">&lt;/<span class="name">attention</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">sensitivity</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/sensitivity/0"</span>&gt;</span><span class="tag">&lt;/<span class="name">sensitivity</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aptitude</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/aptitude/0"</span>&gt;</span><span class="tag">&lt;/<span class="name">aptitude</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sentics</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">moodtags</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/joy"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/joy"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">moodtags</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">polarity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>positive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intensity</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/intensity/0.757"</span>&gt;</span><span class="tag">&lt;/<span class="name">intensity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">polarity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">rdf:Description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">rdf:RDF</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>By all this new word rdf to the neo4j data base, we could see that those two have the same sensitivity and attention value equals to zero. Therefore, they are actually connect to the same resources with uri <a href="http://sentic.net//attention/0" target="_blank" rel="noopener">http://sentic.net//attention/0</a>“ and <a href="http://sentic.net//sensitivity/0" target="_blank" rel="noopener">http://sentic.net//sensitivity/0</a>“</p>
+<div><br>  <img src="/images/neo4j_rdf_5.png" alt="Smiley face" width="100%" height="100%"><br></div>
+
+<p>The rest of work would be how to import the whole large-scale rdf to the neo4j Database.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NoSQL/" rel="tag"># NoSQL</a>
+          
+            <a href="/tags/XML/" rel="tag"># XML</a>
+          
+            <a href="/tags/RDF/" rel="tag"># RDF</a>
+          
+            <a href="/tags/Neo4j/" rel="tag"># Neo4j</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/21/OGM-in-Neo4j/" rel="next" title="OGM in Neo4j">
+                <i class="fa fa-chevron-left"></i> OGM in Neo4j
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/19/design-pattern-factory-pattern/" rel="prev" title="Design Pattern factory_pattern">
+                Design Pattern factory_pattern <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/profile_photo.jpg" alt="Liang Tan">
+            
+              <p class="site-author-name" itemprop="name">Liang Tan</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-How-data-is-stored-in-RDF-files"><span class="nav-number">2.</span> <span class="nav-text">2. How data is stored in RDF files</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-How-RDF-can-be-related-to-Graph-Database"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 How RDF can be related to Graph Database</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-Rule-One"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 Rule One</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-Rule-Two"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 Rule Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-Rule-Three"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 Rule Three</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Some-Exceptions"><span class="nav-number">2.1.4.</span> <span class="nav-text">2.2 Some Exceptions.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Exception-One"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.2.1 Exception One,</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Exception-two"><span class="nav-number">2.1.6.</span> <span class="nav-text">2.2.2 Exception two.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-Exception-three"><span class="nav-number">2.1.7.</span> <span class="nav-text">2.2.3 Exception three.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Existing-tools-for-Importing-RDFs-into-Neo4j-Database"><span class="nav-number">2.2.</span> <span class="nav-text">3. Existing tools for Importing RDFs into Neo4j Database.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-installation"><span class="nav-number">2.3.</span> <span class="nav-text">3.1 installation:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Learning-how-to-use-neosemantics-to-import-RDF-files-to-the-Neo4j-Database"><span class="nav-number">2.4.</span> <span class="nav-text">3.2 Learning how to use neosemantics to import RDF files to the Neo4j Database.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Automatically-refactor-the-code-By-dom4j"><span class="nav-number">2.5.</span> <span class="nav-text">4. Automatically refactor the code By dom4j</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liang Tan</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+      <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":null,"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

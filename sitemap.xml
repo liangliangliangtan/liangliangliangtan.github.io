@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2019/05/08/DecoratorPattern/</loc>
+    <loc>http://yoursite.com/2019/05/23/import_rdf_to_neo4j_db/</loc>
     
-    <lastmod>2019-05-22T17:28:31.668Z</lastmod>
+    <lastmod>2019-06-25T22:11:43.375Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/06/19/design-pattern-factory-pattern/</loc>
+    
+    <lastmod>2019-06-20T16:59:21.163Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2019/05/21/OGM-in-Neo4j/</loc>
     
-    <lastmod>2019-05-22T17:24:58.048Z</lastmod>
+    <lastmod>2019-05-23T15:40:41.008Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/05/08/DecoratorPattern/</loc>
+    
+    <lastmod>2019-05-22T17:28:31.668Z</lastmod>
     
   </url>
   
