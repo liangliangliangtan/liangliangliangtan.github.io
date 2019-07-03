@@ -378,12 +378,24 @@
                 
               
 
-              <time title="Created: 2019-07-02 19:26:51 / Modified: 20:02:23" itemprop="dateCreated datePublished" datetime="2019-07-02T19:26:51-06:00">2019-07-02</time>
+              <time title="Created: 2019-07-02 19:26:51" itemprop="dateCreated datePublished" datetime="2019-07-02T19:26:51-06:00">2019-07-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-03 09:16:53" itemprop="dateModified" datetime="2019-07-03T09:16:53-06:00">2019-07-03</time>
               
             
           </span>
@@ -421,7 +433,9 @@
           
             <h1 id="1-Problem-Description"><a href="#1-Problem-Description" class="headerlink" title="1. Problem Description"></a>1. Problem Description</h1><p>In an infinite <strong>binary tree</strong> where <strong>every node has two children</strong>, the nodes are labelled in row order.</p>
 <p>In the <strong>odd</strong> numbered rows (ie., the first, third, fifth,…), the labelling is <strong>left to right</strong>, while in the <strong>even</strong> numbered rows (second, fourth, sixth,…), the labelling is <strong>right to left</strong>.</p>
-<p><div><br>  <img src="../images/tree.png" alt="Smiley face" width="50%" height="50%"><br></div><br><br></p>
+<p><div>
+  <img src="../images/tree.png" alt="Smiley face" width="50%" height="50%">
+</div><br><br></p>
 <p><strong>Challenge:</strong> </p>
 <p>Given the label of a node in this tree, return the labels in the path from the root of the tree to the node with that label.</p>
 <p><strong>Example 1:</strong></p>
@@ -438,7 +452,7 @@
 </li>
 </ol>
 <p>3.If we could know the difference between  the smallest element in the previous  and its parent, then we can derive its parent label ! </p>
-<ol start="4">
+<ol>
 <li>Now we only have one condition haven’t applied, which is the tree is <strong>complete</strong>. Recall that, <strong>Heap</strong> itseulf is a complete binary tree but it can be stored in an array. The parent of a node with index <em>i</em> in heap is array[i/2]. The offset of current node divides two is the difference we want.</li>
 </ol>
 <p>By previous analysis, the code is relatively easy to write.</p>
@@ -591,7 +605,9 @@
 <p>Note again that at each step of the above process, <strong><strong>the order of the books we place is the same order as the given sequence of books</strong></strong>. For example, if we have an ordered list of 5 books, we might place the first and second book onto the first shelf, the third book on the second shelf, and the fourth and fifth book on the last shelf.</p>
 <p>Return the minimum possible height that the total bookshelf can be after placing shelves in this manner.</p>
 <p>Example: </p>
-<p><div><br>  <img src="../images/shelves.png" alt="Smiley face" width="30%" height="30%"><br></div><br><br></p>
+<p><div>
+  <img src="../images/shelves.png" alt="Smiley face" width="30%" height="30%">
+</div><br><br></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: books = [[1,1],[2,3],[2,3],[1,1],[1,1],[1,1],[1,2]], shelf_width = 4</span><br><span class="line">Output: 6</span><br><span class="line">Explanation:</span><br><span class="line">The sum of the heights of the 3 shelves are 1 + 3 + 2 = 6.</span><br><span class="line">Notice that book number 2 does not have to be on the first shelf.</span><br></pre></td></tr></table></figure>
 <p>The full description of this problem can be viewed on Leetcode platform <a href="https://leetcode.com/problems/filling-bookcase-shelves/" target="_blank" rel="noopener">filling book case shelves</a></p>
 <h1 id="How-to-solve-this-problem"><a href="#How-to-solve-this-problem" class="headerlink" title="How to solve this problem ?"></a>How to solve this problem ?</h1><p>The trival way to think this problem is explore all the combination of books and find the optimal solution(brute-fore way). That is going to be exponential time complexity which is not desirable.</p>
@@ -945,7 +961,7 @@
 <p>It has very detailed illustration, connect() method is to create a database connection. It is the create method that every abstract factory interface must have. It return A <strong>Connection</strong>. Connection is abstract product which is created by Driver. As long as clients pass the correct parameters to the Dirver.connect() method, it will give us a object of type connection</p>
 <p>How about the connection ? Let us look at the source code of Connection.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> java.sql;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;P&gt;A connection (session) with a specific</span></span><br><span class="line"><span class="comment"> * database. SQL statements are executed and results are returned</span></span><br><span class="line"><span class="comment"> * within the context of a connection.</span></span><br><span class="line"><span class="comment"> * &lt;P&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Connection</span>  <span class="keyword">extends</span> <span class="title">Wrapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">Statement <span class="title">createStatement</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">PreparedStatement <span class="title">prepareStatement</span><span class="params">(String sql)</span> <span class="keyword">throws</span> SQLException</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Connection itself is also a abstract factory, it could create prepared statement which can be executed later. That is really convenient for users. they <strong>don’t need to consider</strong> <strong><em>concrete</em></strong> drivers and <strong><em>concrete</em></strong> connections. As user, we only depends on abstract factories and abstract products. Since we don’t need to consider the concrete products and factories. so that our codes may apply to all subclasses of our abstract products. This can make the client written code reusable. Platform independence is a good example, here, operation system is the abstract class or interface while Linux, Windows, Mac are concrete products.</p>
+<p>Connection itself is also a abstract factory, it could create prepared statement which can be executed later. That is really convenient for users. they <strong>don’t need to consider</strong> <strong>_concrete_</strong> drivers and <strong>_concrete_</strong> connections. As user, we only depends on abstract factories and abstract products. Since we don’t need to consider the concrete products and factories. so that our codes may apply to all subclasses of our abstract products. This can make the client written code reusable. Platform independence is a good example, here, operation system is the abstract class or interface while Linux, Windows, Mac are concrete products.</p>
 <p>Java also have many other classes or interfaces use the factory design pattern. (i.e. Thread Pools).</p>
 <p>Let’s try to write some small demos to have a deeper understanding of factory method and abstract method.</p>
 <h1 id="Understanding-factory-method-and-abstract-factory-by-small-demos"><a href="#Understanding-factory-method-and-abstract-factory-by-small-demos" class="headerlink" title="Understanding factory method and abstract factory by small demos."></a>Understanding factory method and abstract factory by small demos.</h1><p>If you want to design a UI Container, it has two components, let’s say, alert messages and button. Different component has different event. We want to create both. How can we do that ? what if we want to add a new component to the container ?</p>
@@ -997,7 +1013,7 @@
 <div style="background-color: lightcyan">It is a <b>creational pattern</b> that uses <b>factory methods</b> to deal with the problem of creating objects without having to specify the exact class of the object that will be created. This is done by creaing objects by callying a factory method - either specified in an in interface and implemented by child classes, or implemented in a base class and optionally overridden by derived classes - rather than by calling a constructor.</div>
 
 <p>Abstract Factory</p>
-<div style="background-color: lightcyan">The abstract factory pattern provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes.[1] In normal usage, the client software creates a concrete implementation of the abstract factory and then uses the generic interface of the factory to create the concrete objects that are part of the theme. The client doesn’t know (or care) which concrete objects it gets from each of these internal factories, since it uses only the generic interfaces of their products. This pattern separates the details of implementation of a set of objects from their general usage and relies on object composition, as object creation is implemented in methods exposed in the factory interface.</div>
+<div style="background-color: lightcyan">The abstract factory pattern provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes.[1] In normal usage, the client software creates a concrete implementation of the abstract factory and then uses the generic interface of the factory to create the concrete objects that are part of the theme. The client doesn't know (or care) which concrete objects it gets from each of these internal factories, since it uses only the generic interfaces of their products. This pattern separates the details of implementation of a set of objects from their general usage and relies on object composition, as object creation is implemented in methods exposed in the factory interface.</div>
 
 <p>Reference:</p>
 <ol>
@@ -1201,14 +1217,18 @@
 <p>Simply call the API, we will get the triples imported into the graph database.For more details about the usage of API, the author of <a href="https://github.com/jbarrasa/neosemantics" target="_blank" rel="noopener">neosemantics</a> has a very detailed explanation on github page and his blogs.</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CALL</span> semantics.importRDF(<span class="string">"file:///C:/Users/OneDrive/Desktop/try.xml"</span>,</span><br><span class="line"><span class="string">"RDF/XML"</span>,</span><br><span class="line">&#123; shortenUrls: <span class="literal">true</span>, typesToLabels: <span class="literal">true</span>, commitSize: <span class="number">9000</span> &#125;)</span><br></pre></td></tr></table></figure>
 <p>Notice: Be careful at the file path . The valid file URI in Windows would be something like ‘file:///C:/Documents%20and%20Settings/davris/FileSchemeURIs.doc’</p>
-<div><br>  <img src="../images/neo4j_rdf_1.png" alt="Smiley face" width="90%" height="90%"><br></div>
+<div>
+  <img src="../images/neo4j_rdf_1.png" alt="Smiley face" width="90%" height="90%">
+</div>
 
 
 
 <p>We could see that the parser will automatically generate the namespace and labels for both nodes and relationships. These ns0 , ns1… are not suitable to read and query. Hence, let us define the namespace prefix before we importing rdf triples.</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> (:NamespacePrefixDefinition &#123;<span class="string">`&lt;http://sentic.net/`</span>&gt;: <span class="string">'sentic_net'</span>, <span class="string">`http://sentic.net/api/`</span>: <span class="string">'keyword'</span>&#125;);</span><br></pre></td></tr></table></figure>
 <p>For ‘<a href="http://sentic.net/" target="_blank" rel="noopener">http://sentic.net/</a>‘, the mapping of url would be senticnet, and the ‘/api/‘ would be called keyword by my own definition.</p>
-<div><br>  <img src="../images/neo4j_rdf_2.png" alt="Smiley face" width="90%" height="90%"><br></div>
+<div>
+  <img src="../images/neo4j_rdf_2.png" alt="Smiley face" width="90%" height="90%">
+</div>
 
 <p>The result Here looks more reasonable. when we want to find all other similar word. We will follow only two relationships, sentic_net_sementic for finding the blankNode and sentic_net_concept to find all similar word resources.</p>
 <p>For fast retrieve blank Node , resources and other things, do not forget to create Index for those nodes and relationships that are frequently retrieved`</p>
@@ -1219,9 +1239,13 @@
 <p>In addition, design the URL for each attribute as follows,</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> (:NamespacePrefixDefinition &#123; <span class="string">`http://sentic.net/`</span>: <span class="string">'sentic_net'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/api/`</span>: <span class="string">'keyword'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/pleasantness/`</span>: <span class="string">'pleasantness'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/attention/`</span>: <span class="string">'attention'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/sensitivity/`</span>: <span class="string">'sensitivity'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/aptitude/`</span>: <span class="string">'aptitude'</span>,</span><br><span class="line"><span class="string">`http://sentic.net/intensity/`</span>: <span class="string">'intensity'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>ReRun the code, the graph is as follows:</p>
-<div><br>  <img src="/images/neo4j_rdf_3.png" alt="Smiley face" width="90%" height="90%"><br></div>
+<div>
+  <img src="/images/neo4j_rdf_3.png" alt="Smiley face" width="90%" height="90%">
+</div>
 
-<div><br>  <img src="/images/neo4j_rdf_4.png" alt="Smiley face" width="90%" height="90%"><br></div>
+<div>
+  <img src="/images/neo4j_rdf_4.png" alt="Smiley face" width="90%" height="90%">
+</div>
 
 <p>Those APIs are correct for describing pleasantness, attention and other attributes with correct value.</p>
 <h1 id="4-Automatically-refactor-the-code-By-dom4j"><a href="#4-Automatically-refactor-the-code-By-dom4j" class="headerlink" title="4. Automatically refactor the code By dom4j"></a>4. Automatically refactor the code By dom4j</h1><p>We have successfully import the manually edited rdf file to the neo4j database. Key problems here we need to write codes for automatically modify rdf description to the format that we want.</p>
@@ -1240,7 +1264,9 @@
 <p>The automatically generated xml would be as follows, which is the same as the “a little” one.</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">rdf:RDF</span> <span class="attr">xmlns:rdf</span>=<span class="string">"http://www.w3.org/1999/02/22-rdf-syntax-ns#"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">rdf:Description</span> <span class="attr">rdf:about</span>=<span class="string">"http://sentic.net/api/en/concept/a_little_hungry"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rdf:type</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/concept"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">text</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span>&gt;</span>a little hungry<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">semantics</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/get_full"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/hunger_go_away"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/feel_full"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/hunger"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/full"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">semantics</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sentics</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pleasantness</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/pleasantness/0.757"</span>&gt;</span><span class="tag">&lt;/<span class="name">pleasantness</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">attention</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/attention/0"</span>&gt;</span><span class="tag">&lt;/<span class="name">attention</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">sensitivity</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/sensitivity/0"</span>&gt;</span><span class="tag">&lt;/<span class="name">sensitivity</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aptitude</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/aptitude/0"</span>&gt;</span><span class="tag">&lt;/<span class="name">aptitude</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sentics</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">moodtags</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/joy"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">concept</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/api/en/concept/joy"</span>&gt;</span><span class="tag">&lt;/<span class="name">concept</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">moodtags</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">polarity</span> <span class="attr">xmlns</span>=<span class="string">"http://sentic.net"</span> <span class="attr">rdf:parseType</span>=<span class="string">"Resource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>positive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intensity</span> <span class="attr">rdf:resource</span>=<span class="string">"http://sentic.net/intensity/0.757"</span>&gt;</span><span class="tag">&lt;/<span class="name">intensity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">polarity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">rdf:Description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">rdf:RDF</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>By all this new word rdf to the neo4j data base, we could see that those two have the same sensitivity and attention value equals to zero. Therefore, they are actually connect to the same resources with uri <a href="http://sentic.net//attention/0" target="_blank" rel="noopener">http://sentic.net//attention/0</a>“ and <a href="http://sentic.net//sensitivity/0" target="_blank" rel="noopener">http://sentic.net//sensitivity/0</a>“</p>
-<div><br>  <img src="/images/neo4j_rdf_5.png" alt="Smiley face" width="100%" height="100%"><br></div>
+<div>
+  <img src="/images/neo4j_rdf_5.png" alt="Smiley face" width="100%" height="100%">
+</div>
 
 <p>The rest of work would be how to import the whole large-scale rdf to the neo4j Database.</p>
 
@@ -1402,7 +1428,9 @@
 </blockquote>
 <p>In previous post, we query by using lower level driver, it is really time-consuming, and we should manually map those statement result to Objects as well.Neo4j-OGM library provides a pure java library. The Neo4j library can persist (annotated) domain objects using Neo4j. It uses Cypher statements to handle those operations in Neo4j.</p>
 <h1 id="2-Get-start-configuration"><a href="#2-Get-start-configuration" class="headerlink" title="2. Get start: configuration"></a>2. Get start: configuration</h1><p>Create a Spring Boot project by using spring boot starter <a href="https://start.spring.io/" target="_blank" rel="noopener">Link</a>. Configuration is as follows:</p>
-<div><br>  <img src="/images/neo4j_ogm_1.png" alt="Smiley face" width="85%" height="85%"><br></div>
+<div>
+  <img src="/images/neo4j_ogm_1.png" alt="Smiley face" width="85%" height="85%">
+</div>
 
 <blockquote>
 <p>For building an application, your build automation tool needs to be configured to include the Neo4j-OGM dependencies. Neo4j-OGM dependencies consist of neo4j-ogm-core, together with the relevant dependency declarations on the driver you want to use.</p>
@@ -1600,7 +1628,10 @@
 <li>Since it is a kind of <strong>lazy evaluation</strong>, i.e. we ask one and it gives us one at a time, therefore our collection can also be <strong>infinite</strong>, and at the same time we can <strong>pause at any where</strong> we want.</li>
 </ol>
 <h1 id="2-General-UML-of-Iterator-Pattern"><a href="#2-General-UML-of-Iterator-Pattern" class="headerlink" title="2. General UML of Iterator Pattern"></a>2. General UML of Iterator Pattern</h1><p>Then, let us look the General UML of Iterator Pattern.</p>
-<div><br>  <img src="/images/iterator_1.jpg" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> UML for iterator pattern</div><br></div>
+<div>
+  <img src="/images/iterator_1.jpg" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> UML for iterator pattern</div>
+</div>
 
 <p>We have two interfaces, Iterable and iterator. Once a concreate class implements Iterable interface, it must override the iterator() method. It create a concreate Iterator by passing itself to the constructor of concreate Iterator. This means that given a concrete iterable ,it produces a concreate iterator. The concreate iterator may also have the private access to its related iterable reference so that it can access the field or methods defined in iterable. Iterator Pattern allows designer to decouple the enumerate functionality with others and unify by the interface.</p>
 <h1 id="3-Example"><a href="#3-Example" class="headerlink" title="3. Example"></a>3. Example</h1><p>Suppose We have a collection of labels (of Type String) on one Node and we want to enumerate them. The codes are as follows:</p>
@@ -1624,7 +1655,9 @@
 <li>Client can only have the access to the iterable interface and iterator interface.</li>
 </ol>
 <p>UML diagram</p>
-<div><br>  <img src="/images/iterator_2.jpg" alt="Smiley face" width="30%" height="20%"><br></div>
+<div>
+  <img src="/images/iterator_2.jpg" alt="Smiley face" width="30%" height="20%">
+</div>
 
           
         
@@ -1799,7 +1832,9 @@
           
             <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>In this post, I will build a small web application in java by learning how to connect to as well as manipulate on neo4j database. Neo4j offers a rich set of integration possibilities for developers using Java or other JVM-languages. Following the instruction on the website, we will build a small web app for the movie database.</p>
 <h1 id="2-Create-a-project-And-add-neo4j-driver-dependencies"><a href="#2-Create-a-project-And-add-neo4j-driver-dependencies" class="headerlink" title="2.Create a project And add neo4j driver dependencies"></a>2.Create a project And add neo4j driver dependencies</h1><p>Here, I use IntelliJ IDEA as dev tool and Maven as project management tool. So, select maven-archetype-webapp.</p>
-<div><br>  <img src="/images/neo4j_java_1.png" alt="Smiley face" width="50%" height="50%"><br></div>
+<div>
+  <img src="/images/neo4j_java_1.png" alt="Smiley face" width="50%" height="50%">
+</div>
 
 <p>After that, go to the maven repository website(<a href="https://mvnrepository.com/artifact/org.neo4j.app/neo4j-server/3.5.5" target="_blank" rel="noopener">Link</a>) and add dirver dependency to pom.xml.</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.neo4j.app<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>neo4j-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.neo4j.driver<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>neo4j-java-driver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -1807,7 +1842,9 @@
 <p>Instruction from the guide</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">The Movie Graph is a mini graph application containing actors and directors that are related through the movies they&apos;ve collaborated on.</span><br><span class="line"></span><br><span class="line">This guide will show you how to:</span><br><span class="line"></span><br><span class="line">Create: insert movie data into the graph</span><br><span class="line">Find: retrieve individual movies and actors</span><br><span class="line">Query: discover related actors and directors</span><br><span class="line">Solve: the Bacon Path</span><br></pre></td></tr></table></figure>
 <p>After executing the CQL languages, what we will get the graph database</p>
-<div><br>  <img src="/images/neo4j_java_2.png" alt="Smiley face" width="50%" height="50%"><br></div>
+<div>
+  <img src="/images/neo4j_java_2.png" alt="Smiley face" width="50%" height="50%">
+</div>
 
 <h1 id="4-Establish-Connection"><a href="#4-Establish-Connection" class="headerlink" title="4. Establish Connection."></a>4. Establish Connection.</h1><p>In order to use the diver, make connection to the neo4j database. we should do the following things.</p>
 <ol>
@@ -1833,7 +1870,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.neo4j.movies;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.neo4j.driver.v1.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnvTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testConnection</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Driver driver = GraphDatabase.driver( <span class="string">"bolt://localhost:7687"</span>, AuthTokens.basic(<span class="string">"neo4j"</span>, <span class="string">"root"</span> ) );</span><br><span class="line">        System.out.println(<span class="string">"Server is up and Running"</span>);</span><br><span class="line">        <span class="comment">// find all the author names for a given  movie name</span></span><br><span class="line">        String query = <span class="string">"MATCH (movie: Movie &#123;title:$title&#125;)&lt;-[:ACTED_IN]-(person:Person) RETURN person.name as actor"</span>;</span><br><span class="line">        Map&lt;String,Object&gt; titleMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        titleMap.put(<span class="string">"title"</span>,<span class="string">"The Matrix"</span>);</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Session session = driver.session();</span><br><span class="line">            StatementResult statementResult = session.run(query,titleMap);</span><br><span class="line">            <span class="keyword">while</span>(statementResult.hasNext())&#123;</span><br><span class="line">                System.out.println(statementResult.next().get(<span class="string">"actor"</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            driver.close();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Result</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">INFO: Direct driver instance 99451533 created for server address localhost:7687</span><br><span class="line">Server is up and Running</span><br><span class="line">&quot;Emil Eifrem&quot;</span><br><span class="line">&quot;Hugo Weaving&quot;</span><br><span class="line">&quot;Laurence Fishburne&quot;</span><br><span class="line">&quot;Carrie-Anne Moss&quot;</span><br><span class="line">&quot;Keanu Reeves&quot;</span><br><span class="line">May 14, 2019 3:45:49 PM org.neo4j.driver.internal.logging.JULogger info</span><br><span class="line">INFO: Closing driver instance 99451533</span><br><span class="line">May 14, 2019 3:45:49 PM org.neo4j.driver.internal.logging.JULogger info</span><br><span class="line">INFO: Closing connection pool towards localhost:7687</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure>
-<p>Each Result is in the type of <strong><em>org.neo4j.driver.v1.Record</em></strong>, Record is a form of ordered map and, as such, contained values can be accessed by either positional index or textual key.<a href="https://neo4j.com/docs/api/java-driver/current/org/neo4j/driver/v1/Record.html" target="_blank" rel="noopener">doc</a>.</p>
+<p>Each Result is in the type of <strong>_org.neo4j.driver.v1.Record_</strong>, Record is a form of ordered map and, as such, contained values can be accessed by either positional index or textual key.<a href="https://neo4j.com/docs/api/java-driver/current/org/neo4j/driver/v1/Record.html" target="_blank" rel="noopener">doc</a>.</p>
 <p>Record can either be node or relationships. When we retrieve data from the graph database, we either want to retrieve nodes(with properties and values) or a path contains nodes and relationships. Here are two small demos for retrieving nodes and paths.</p>
 <h1 id="5-Small-Demo"><a href="#5-Small-Demo" class="headerlink" title="5. Small Demo"></a>5. Small Demo</h1><p>Preparation: Let us create a DriverUtil class to wrap the manipulations on the driver</p>
 <h2 id="5-1-Retrieve-Node"><a href="#5-1-Retrieve-Node" class="headerlink" title="5.1 Retrieve Node."></a>5.1 Retrieve Node.</h2><p>Here is the sample code for querying a person by giving its name.</p>
@@ -1841,7 +1878,9 @@
 <p>Result</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">INFO: Direct driver instance 530653666 created for server address localhost:7687</span><br><span class="line">Node labels</span><br><span class="line">Person</span><br><span class="line"></span><br><span class="line">Node key-value pairs</span><br><span class="line">property: name</span><br><span class="line">propertyValue: &quot;Emil Eifrem&quot;</span><br><span class="line">property: born</span><br><span class="line">propertyValue: 1978</span><br><span class="line"></span><br><span class="line">INFO: Closing connection pool towards localhost:7687</span><br><span class="line">Disconnected from the target VM, address: &apos;127.0.0.1:57996&apos;, transport: &apos;socket&apos;</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure>
 <p>We can see the Result Object by debugging mode.</p>
-<div><br>  <img src="/images/neo4j_java_3.png" alt="Smiley face" width="50%" height="50%"><br></div>
+<div>
+  <img src="/images/neo4j_java_3.png" alt="Smiley face" width="50%" height="50%">
+</div>
 
 <p>We can see that Record itself is an unordered Hash Map, and keys are the Strings of the Return Statement in SQL. And the Value object itself is also a HashMap.</p>
 <p>If value itself is a node. it contains</p>
@@ -1852,7 +1891,9 @@
 <p>For all their usages ,see <a href="https://neo4j.com/docs/api/java-driver/current/org/neo4j/driver/v1/types/MapAccessor.html" target="_blank" rel="noopener">document</a>.</p>
 <h2 id="5-2-Retrieve-Path-relationship"><a href="#5-2-Retrieve-Path-relationship" class="headerlink" title="5.2 Retrieve Path(relationship)."></a>5.2 Retrieve Path(relationship).</h2><p>Suppose we want to see if a person ACTED_IN a movie and what is his/her role in the movie. If that particular people does not ACTED_IN that movie, return false.</p>
 <p>e.g “Keanu Reeves” ACTED_IN “Johnny Mnemonic” as “Johnny Mnemonic”</p>
-<div><br>  <img src="/images/neo4j_java_4.png" alt="Smiley face" width="50%" height="50%"><br></div>
+<div>
+  <img src="/images/neo4j_java_4.png" alt="Smiley face" width="50%" height="50%">
+</div>
 
 <p>Lets see the path Object.</p>
 <p>It contains:</p>
@@ -1861,7 +1902,9 @@
 <li>An ArrayList of relationships</li>
 <li>An ArrayList of segments which contains the start node, relation and the end node.</li>
 </ol>
-<div><br>  <img src="/images/neo4j_java_5.png" alt="Smiley face" width="50%" height="50%"><br></div>
+<div>
+  <img src="/images/neo4j_java_5.png" alt="Smiley face" width="50%" height="50%">
+</div>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.neo4j.movies;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Util.DriverUtil;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.neo4j.driver.v1.*;</span><br><span class="line"><span class="keyword">import</span> org.neo4j.driver.v1.types.Node;</span><br><span class="line"><span class="keyword">import</span> org.neo4j.driver.v1.types.Path;</span><br><span class="line"><span class="keyword">import</span> org.neo4j.driver.v1.types.Relationship;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindRolesByPersonNameAndMovieName</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findRolesByPersonNameAndMovieName</span><span class="params">(String actorName, String movieName)</span></span>&#123;</span><br><span class="line">        Driver driver = DriverUtil.getDriver();</span><br><span class="line">        String queryRoles = <span class="string">"MATCH p =(person:Person)-[ACTED_IN]-&gt;(movie:Movie) WHERE person.name = $actorName "</span> +</span><br><span class="line">                                    <span class="string">"AND movie.title = $movieName RETURN p "</span>;</span><br><span class="line">        Map&lt;String,Object&gt; parameters = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        parameters.put(<span class="string">"actorName"</span>,actorName);</span><br><span class="line">        parameters.put(<span class="string">"movieName"</span>,movieName);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>(Session session = driver.session())&#123;</span><br><span class="line">            StatementResult statementResult  = session.run(queryRoles,parameters);</span><br><span class="line">            System.out.println(<span class="string">"*****relationship*******"</span>);</span><br><span class="line">            <span class="keyword">while</span>(statementResult.hasNext())&#123;</span><br><span class="line">                Record record = statementResult.next();</span><br><span class="line">                List&lt;Value&gt; valuesList = record.values();</span><br><span class="line">                <span class="comment">// if the movie and actor do not match each other, no searching result.</span></span><br><span class="line">                <span class="keyword">if</span>(valuesList == <span class="keyword">null</span> || valuesList.size() == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">                <span class="comment">// find the relationship between the movie node and person node</span></span><br><span class="line">                Path path = valuesList.get(<span class="number">0</span>).asPath();</span><br><span class="line">                <span class="comment">// find all the relationships(edges) along the path</span></span><br><span class="line">                Iterator&lt;Relationship&gt; relationships = path.relationships().iterator();</span><br><span class="line">                <span class="comment">// find all the nodes along the path</span></span><br><span class="line">                Iterator&lt;Node&gt; nodes = path.nodes().iterator();</span><br><span class="line">                <span class="comment">// iterate edges along the path</span></span><br><span class="line">                <span class="keyword">while</span>(relationships.hasNext())&#123;</span><br><span class="line">                    Relationship relationship = relationships.next();</span><br><span class="line">                    relationship.startNodeId();</span><br><span class="line">                    relationship.endNodeId();</span><br><span class="line">                    String relationType = relationship.type();</span><br><span class="line">                    System.out.println(<span class="string">"start from Node Id: "</span>+ relationship.startNodeId());</span><br><span class="line">                    System.out.println(<span class="string">"end from Node Id: "</span>+ relationship.endNodeId());</span><br><span class="line">                    System.out.println(<span class="string">"The relation type is:"</span> +relationType);</span><br><span class="line">                    System.out.println(<span class="string">"RelationShip key value pairs"</span>);</span><br><span class="line">                    Iterator&lt;String&gt; relationKeys = relationship.keys().iterator();</span><br><span class="line">                    <span class="keyword">while</span>(relationKeys.hasNext())&#123;</span><br><span class="line">                        String relationKey = relationKeys.next();</span><br><span class="line">                        Object relationValue = relationship.get(relationKey).get(<span class="number">0</span>);</span><br><span class="line">                        System.out.println(relationKey +<span class="string">":"</span> +relationValue);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// iterate all nodes along the path</span></span><br><span class="line">                <span class="keyword">while</span>(nodes.hasNext())&#123;</span><br><span class="line">                    System.out.println(<span class="string">"*****Node*******"</span>);</span><br><span class="line">                    Node node = nodes.next();</span><br><span class="line">                    System.out.println(<span class="string">"Node Id: "</span> + node.id());</span><br><span class="line">                    Iterator&lt;String&gt; labels = node.labels().iterator();</span><br><span class="line">                    System.out.println(<span class="string">"Node labels"</span>);</span><br><span class="line">                    <span class="keyword">while</span>(labels.hasNext())&#123;</span><br><span class="line">                        System.out.println(labels.next());</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// iterate through node property-value pairs</span></span><br><span class="line">                    System.out.println(<span class="string">"Node key-value pairs "</span>);</span><br><span class="line">                    Iterator&lt;String&gt; keys = node.keys().iterator();</span><br><span class="line">                    <span class="keyword">while</span>(keys.hasNext())&#123;</span><br><span class="line">                        String property = keys.next();</span><br><span class="line">                        Object propertyValue = node.get(property);</span><br><span class="line">                        System.out.println(property+<span class="string">":"</span>+propertyValue);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            DriverUtil.closeDriver();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        FindRolesByPersonNameAndMovieName findRole = <span class="keyword">new</span> FindRolesByPersonNameAndMovieName();</span><br><span class="line">        findRole.findRolesByPersonNameAndMovieName(<span class="string">"Keanu Reeves"</span>,<span class="string">"Johnny Mnemonic"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Result</p>
@@ -2048,6 +2091,7 @@
 </ol>
 <p>Now let us discuss about the important entities in this system.</p>
 <p>1.In the first place, we must have users.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2070,7 +2114,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>2.There must be multiple product categories.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2089,7 +2135,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>3.Then,there should be <strong>multiple products in one category</strong>, and <strong>each product should be in only one category</strong>.(For some scenario, it could be in multiple category). At the same time, one <strong>one category should have many combinations of properties</strong>.(For example, laptops have properties like, CPU, Memory, Grapics,etc).SO, there is a <strong>many-to-many relationships between properties and products</strong>. therefore, we should create a table to store the relationship between them to satisfy the 3NF forms. Hence, we could design a table called property_value. One property has multiple property values and one product has many property values as well.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2112,7 +2160,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>Product Table</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2143,7 +2193,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>Property Value Table (Relationships)</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2178,7 +2230,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>Each product has many product image to be shown, therefore, we could create a table to store product images</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2201,7 +2255,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>For product reviews, one product has many reviews and each user can post many reviews. Therefore, reviews table has two foreign key constraints</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2232,7 +2288,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>Finally, the most important thing is the order and the ordered item.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2291,6 +2349,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>user table</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> (</span><br><span class="line">  user_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  user_name <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  user_password <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (user_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
 <p>category table</p>
@@ -2310,7 +2369,10 @@
 <p>order_item table</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> order_item (</span><br><span class="line">  order_item_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  product_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  user_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_item_number <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (order_item_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_orderitem_user <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (user_id) <span class="keyword">REFERENCES</span> <span class="keyword">user</span> (user_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_orderitem_product <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (product_id) <span class="keyword">REFERENCES</span> product (product_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_orderitem_order <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (order_id) <span class="keyword">REFERENCES</span> order_ (order_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
 <p>Generate the E-R diagram by MySQL WORKBENCH.</p>
-<div><br>  <img src="/images/db_er_figure.png" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> ER diagram by MySQL</div><br></div>
+<div>
+  <img src="/images/db_er_figure.png" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> ER diagram by MySQL</div>
+</div>
 
           
         
@@ -2510,6 +2572,7 @@
 </ol>
 <p>I will go deep into requirements analysis for each part in another blog.</p>
 <p>Here, I will list all the tech stacks used in this project.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2552,6 +2615,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 
           
         
@@ -3024,6 +3088,77 @@
   
 
   
+  
+
+  
+  
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
 

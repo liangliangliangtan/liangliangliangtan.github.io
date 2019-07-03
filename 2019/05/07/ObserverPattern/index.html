@@ -96,13 +96,13 @@
 
 
 
-  <meta name="description" content="1. Definition:&amp;emsp; Let us first look at the strict definition of Observer Pattern,   &amp;emsp;Observer Pattern defines a One-to-many dependencies between objects. Once the Object change state, all of t">
+  <meta name="description" content="1. Definition:&amp;emsp; Let us first look at the strict definition of Observer Pattern,   &amp;emsp;**Observer Pattern defines a One-to-many dependencies between objects. Once the Object change state, all of">
 <meta name="keywords" content="OOD,Design Pattern,Java,Observer Pattern,IntelliJ IDEA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Design-Pattern -- Observer Pattern">
 <meta property="og:url" content="http://yoursite.com/2019/05/07/ObserverPattern/index.html">
 <meta property="og:site_name" content="Liang Tan&#39;s Blog">
-<meta property="og:description" content="1. Definition:&amp;emsp; Let us first look at the strict definition of Observer Pattern,   &amp;emsp;Observer Pattern defines a One-to-many dependencies between objects. Once the Object change state, all of t">
+<meta property="og:description" content="1. Definition:&amp;emsp; Let us first look at the strict definition of Observer Pattern,   &amp;emsp;**Observer Pattern defines a One-to-many dependencies between objects. Once the Object change state, all of">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/observer_1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/observer_2.jpg">
@@ -110,7 +110,7 @@
 <meta property="og:updated_time" content="2019-05-09T23:36:13.922Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Design-Pattern -- Observer Pattern">
-<meta name="twitter:description" content="1. Definition:&amp;emsp; Let us first look at the strict definition of Observer Pattern,   &amp;emsp;Observer Pattern defines a One-to-many dependencies between objects. Once the Object change state, all of t">
+<meta name="twitter:description" content="1. Definition:&amp;emsp; Let us first look at the strict definition of Observer Pattern,   &amp;emsp;**Observer Pattern defines a One-to-many dependencies between objects. Once the Object change state, all of">
 <meta name="twitter:image" content="http://yoursite.com/images/observer_1.jpg">
 
 
@@ -461,7 +461,7 @@
 
       
         <h2 id="1-Definition"><a href="#1-Definition" class="headerlink" title="1. Definition:"></a>1. Definition:</h2><p>&emsp; Let us first look at the strict definition of Observer Pattern,  </p>
-<p><blockquote style="text-align:justify;background-color: #ccfff5">&emsp;<strong>Observer Pattern defines a One-to-many dependencies between objects. Once the Object change state, all of their dependencies are notified and changed automatically.</strong></blockquote> <br></p>
+<p><blockquote style="text-align:justify;background-color: #ccfff5">&emsp;**Observer Pattern defines a One-to-many dependencies between objects. Once the Object change state, all of their dependencies are notified and changed automatically.**</blockquote> <br></p>
 <p>&emsp; There are several terminology used in the Observer Pattern , which are as follows:</p>
 <ul>
 <li><p><strong>Observable</strong> : This object has some attributes which may change frequently. It is also known as Subject.</p>
@@ -472,11 +472,17 @@
 </li>
 </ul>
 <p>The following figure shows their relationship.</p>
-<div><br>  <img src="/images/observer_1.jpg" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px">1 - n relationship </div><br></div>
+<div>
+  <img src="/images/observer_1.jpg" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px">1 - n relationship </div>
+</div>
 
 <p>Observer Pattern usually used in the scenario that one object are active to have some properties changed quite often while at the same time, some objects wants to know some information from that object as soon as possible. For example, one temperature sensor versus some distributed diplays who show the temperature in differnt way, one writer who post articles versus several readers who subscribe him or her.</p>
 <h2 id="2-UML"><a href="#2-UML" class="headerlink" title="2. UML:"></a>2. UML:</h2><p>&emsp;Now, let us see the general UML diagram for Observer pattern.</p>
-<div><br>  <img src="/images/observer_2.jpg" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> UML diagram</div><br></div>
+<div>
+  <img src="/images/observer_2.jpg" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> UML diagram</div>
+</div>
 
 <p>For observable interface it defines three behaviours of observable object.</p>
 <ol>
@@ -505,7 +511,10 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObserverPatternTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        Publisher  publisher = <span class="keyword">new</span> Publisher(<span class="string">"BOOK STORE 1"</span>);</span><br><span class="line">        Reader tom = <span class="keyword">new</span> Reader(<span class="string">"Tom"</span>,publisher);</span><br><span class="line">        Reader ben = <span class="keyword">new</span> Reader(<span class="string">"Ben"</span>,publisher);</span><br><span class="line">        Reader alice = <span class="keyword">new</span> Reader(<span class="string">"Alice"</span>,publisher);</span><br><span class="line"></span><br><span class="line">        publisher.addObserver(tom);</span><br><span class="line">        publisher.addObserver(ben);</span><br><span class="line">        publisher.addObserver(alice);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        publisher.publishNewBook(<span class="string">"Introduction to Design Pattern "</span>);</span><br><span class="line">        System.out.println(<span class="string">"A few months later"</span>);</span><br><span class="line"></span><br><span class="line">        Thread.currentThread().sleep(<span class="number">1000</span>);</span><br><span class="line">        Reader mike = <span class="keyword">new</span> Reader(<span class="string">"Mike"</span>,publisher);</span><br><span class="line">        publisher.addObserver(mike); <span class="comment">// new subscriber</span></span><br><span class="line">        publisher.removeObserver(tom);</span><br><span class="line">        Thread.currentThread().sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">        publisher.publishNewBook(<span class="string">"Algorithms and Data Structure"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Tom has subscribed BOOK STORE 1</span><br><span class="line">Ben has subscribed BOOK STORE 1</span><br><span class="line">Alice has subscribed BOOK STORE 1</span><br><span class="line"></span><br><span class="line">Ben Knows that the publisher published a new book, called Introduction to Design Pattern</span><br><span class="line">Tom Knows that the publisher published a new book, called Introduction to Design Pattern</span><br><span class="line">Alice Knows that the publisher published a new book, called Introduction to Design Pattern</span><br><span class="line"></span><br><span class="line">A few months later</span><br><span class="line">Mike has subscribed BOOK STORE 1</span><br><span class="line">Tom has unfollowed BOOK STORE 1</span><br><span class="line"></span><br><span class="line">Ben Knows that the publisher published a new book, called Algorithms and Data Structure</span><br><span class="line">Mike Knows that the publisher published a new book, called Algorithms and Data Structure</span><br><span class="line">Alice Knows that the publisher published a new book, called Algorithms and Data Structure</span><br></pre></td></tr></table></figure></p>
 <p>We can view the automatically generated UML diagram by IntelliJ IDEA.</p>
-<div><br>  <img src="/images/observer_3.jpg" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> UML diagram by IntelliJ</div><br></div>
+<div>
+  <img src="/images/observer_3.jpg" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> UML diagram by IntelliJ</div>
+</div>
 
       
     </div>
@@ -1039,6 +1048,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
 

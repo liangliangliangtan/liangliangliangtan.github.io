@@ -441,7 +441,10 @@
 <li>Since it is a kind of <strong>lazy evaluation</strong>, i.e. we ask one and it gives us one at a time, therefore our collection can also be <strong>infinite</strong>, and at the same time we can <strong>pause at any where</strong> we want.</li>
 </ol>
 <h1 id="2-General-UML-of-Iterator-Pattern"><a href="#2-General-UML-of-Iterator-Pattern" class="headerlink" title="2. General UML of Iterator Pattern"></a>2. General UML of Iterator Pattern</h1><p>Then, let us look the General UML of Iterator Pattern.</p>
-<div><br>  <img src="/images/iterator_1.jpg" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> UML for iterator pattern</div><br></div>
+<div>
+  <img src="/images/iterator_1.jpg" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> UML for iterator pattern</div>
+</div>
 
 <p>We have two interfaces, Iterable and iterator. Once a concreate class implements Iterable interface, it must override the iterator() method. It create a concreate Iterator by passing itself to the constructor of concreate Iterator. This means that given a concrete iterable ,it produces a concreate iterator. The concreate iterator may also have the private access to its related iterable reference so that it can access the field or methods defined in iterable. Iterator Pattern allows designer to decouple the enumerate functionality with others and unify by the interface.</p>
 <h1 id="3-Example"><a href="#3-Example" class="headerlink" title="3. Example"></a>3. Example</h1><p>Suppose We have a collection of labels (of Type String) on one Node and we want to enumerate them. The codes are as follows:</p>
@@ -465,7 +468,9 @@
 <li>Client can only have the access to the iterable interface and iterator interface.</li>
 </ol>
 <p>UML diagram</p>
-<div><br>  <img src="/images/iterator_2.jpg" alt="Smiley face" width="30%" height="20%"><br></div>
+<div>
+  <img src="/images/iterator_2.jpg" alt="Smiley face" width="30%" height="20%">
+</div>
 
       
     </div>
@@ -999,6 +1004,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
 

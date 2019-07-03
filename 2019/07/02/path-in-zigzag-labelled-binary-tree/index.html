@@ -105,7 +105,7 @@
 <meta property="og:description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/07/02/images/tree.png">
-<meta property="og:updated_time" content="2019-07-03T02:02:23.204Z">
+<meta property="og:updated_time" content="2019-07-03T15:16:53.852Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 1104 Path in Zigzag Labelled Binary Tree">
 <meta name="twitter:description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
@@ -382,12 +382,24 @@
                 
               
 
-              <time title="Created: 2019-07-02 19:26:51 / Modified: 20:02:23" itemprop="dateCreated datePublished" datetime="2019-07-02T19:26:51-06:00">2019-07-02</time>
+              <time title="Created: 2019-07-02 19:26:51" itemprop="dateCreated datePublished" datetime="2019-07-02T19:26:51-06:00">2019-07-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-03 09:16:53" itemprop="dateModified" datetime="2019-07-03T09:16:53-06:00">2019-07-03</time>
               
             
           </span>
@@ -430,7 +442,9 @@
       
         <h1 id="1-Problem-Description"><a href="#1-Problem-Description" class="headerlink" title="1. Problem Description"></a>1. Problem Description</h1><p>In an infinite <strong>binary tree</strong> where <strong>every node has two children</strong>, the nodes are labelled in row order.</p>
 <p>In the <strong>odd</strong> numbered rows (ie., the first, third, fifth,…), the labelling is <strong>left to right</strong>, while in the <strong>even</strong> numbered rows (second, fourth, sixth,…), the labelling is <strong>right to left</strong>.</p>
-<p><div><br>  <img src="../images/tree.png" alt="Smiley face" width="50%" height="50%"><br></div><br><br></p>
+<p><div>
+  <img src="../images/tree.png" alt="Smiley face" width="50%" height="50%">
+</div><br><br></p>
 <p><strong>Challenge:</strong> </p>
 <p>Given the label of a node in this tree, return the labels in the path from the root of the tree to the node with that label.</p>
 <p><strong>Example 1:</strong></p>
@@ -447,7 +461,7 @@
 </li>
 </ol>
 <p>3.If we could know the difference between  the smallest element in the previous  and its parent, then we can derive its parent label ! </p>
-<ol start="4">
+<ol>
 <li>Now we only have one condition haven’t applied, which is the tree is <strong>complete</strong>. Recall that, <strong>Heap</strong> itseulf is a complete binary tree but it can be stored in an array. The parent of a node with index <em>i</em> in heap is array[i/2]. The offset of current node divides two is the difference we want.</li>
 </ol>
 <p>By previous analysis, the code is relatively easy to write.</p>
@@ -981,6 +995,53 @@
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
 

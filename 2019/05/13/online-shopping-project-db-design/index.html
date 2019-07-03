@@ -466,6 +466,7 @@
 </ol>
 <p>Now let us discuss about the important entities in this system.</p>
 <p>1.In the first place, we must have users.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -488,7 +489,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>2.There must be multiple product categories.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -507,7 +510,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>3.Then,there should be <strong>multiple products in one category</strong>, and <strong>each product should be in only one category</strong>.(For some scenario, it could be in multiple category). At the same time, one <strong>one category should have many combinations of properties</strong>.(For example, laptops have properties like, CPU, Memory, Grapics,etc).SO, there is a <strong>many-to-many relationships between properties and products</strong>. therefore, we should create a table to store the relationship between them to satisfy the 3NF forms. Hence, we could design a table called property_value. One property has multiple property values and one product has many property values as well.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -530,7 +535,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>Product Table</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -561,7 +568,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>Property Value Table (Relationships)</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -596,7 +605,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>Each product has many product image to be shown, therefore, we could create a table to store product images</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -619,7 +630,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>For product reviews, one product has many reviews and each user can post many reviews. Therefore, reviews table has two foreign key constraints</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -650,7 +663,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>Finally, the most important thing is the order and the ordered item.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -709,6 +724,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>user table</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> (</span><br><span class="line">  user_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  user_name <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  user_password <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (user_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
 <p>category table</p>
@@ -728,7 +744,10 @@
 <p>order_item table</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> order_item (</span><br><span class="line">  order_item_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  product_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  user_id <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  order_item_number <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (order_item_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_orderitem_user <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (user_id) <span class="keyword">REFERENCES</span> <span class="keyword">user</span> (user_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_orderitem_product <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (product_id) <span class="keyword">REFERENCES</span> product (product_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_orderitem_order <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (order_id) <span class="keyword">REFERENCES</span> order_ (order_id)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
 <p>Generate the E-R diagram by MySQL WORKBENCH.</p>
-<div><br>  <img src="/images/db_er_figure.png" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> ER diagram by MySQL</div><br></div>
+<div>
+  <img src="/images/db_er_figure.png" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> ER diagram by MySQL</div>
+</div>
 
       
     </div>
@@ -1258,6 +1277,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
 
