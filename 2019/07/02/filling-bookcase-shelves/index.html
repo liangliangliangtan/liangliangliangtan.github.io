@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Problem DescriptionWe have a sequence of books: the i-th book has thickness books[i][0] and height books[i][1]. We want to place these books in order onto bookcase shelves that have total width shelf_">
+<meta name="keywords" content="Dynamic programming,Data Structure and Algorithm,backtracking,Depth-first Search (DFS),memorization">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode problem 1105 filling-bookcase-shelves">
+<meta property="og:url" content="http://yoursite.com/2019/07/02/filling-bookcase-shelves/index.html">
+<meta property="og:site_name" content="Liang Tan&#39;s Blog">
+<meta property="og:description" content="Problem DescriptionWe have a sequence of books: the i-th book has thickness books[i][0] and height books[i][1]. We want to place these books in order onto bookcase shelves that have total width shelf_">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/images/shelves.png">
+<meta property="og:updated_time" content="2019-07-02T22:59:18.130Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Leetcode problem 1105 filling-bookcase-shelves">
+<meta name="twitter:description" content="Problem DescriptionWe have a sequence of books: the i-th book has thickness books[i][0] and height books[i][1]. We want to place these books in order onto bookcase shelves that have total width shelf_">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/02/images/shelves.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Liang Tan's Blog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/02/filling-bookcase-shelves/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Leetcode problem 1105 filling-bookcase-shelves | Liang Tan's Blog</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-139580812-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-139580812-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Liang Tan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/filling-bookcase-shelves/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang Tan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Liang Tan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Leetcode problem 1105 filling-bookcase-shelves
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-02 15:22:26 / Modified: 16:59:18" itemprop="dateCreated datePublished" datetime="2019-07-02T15:22:26-06:00">2019-07-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h1><p>We have a sequence of books: the i-th book has thickness books[i][0] and height books[i][1].</p>
+<p>We want to place these books <strong>in order</strong> onto bookcase shelves that have total width shelf_width.</p>
+<p>We choose some of the books to place on this shelf (such that the sum of their thickness is &lt;= shelf_width), then build another level of shelf of the bookcase so that the total height of the bookcase has increased by the maximum height of the books we just put down.  We repeat this process until there are no more books to place.</p>
+<p>Note again that at each step of the above process, <strong><strong>the order of the books we place is the same order as the given sequence of books</strong></strong>. For example, if we have an ordered list of 5 books, we might place the first and second book onto the first shelf, the third book on the second shelf, and the fourth and fifth book on the last shelf.</p>
+<p>Return the minimum possible height that the total bookshelf can be after placing shelves in this manner.</p>
+<p>Example: </p>
+<p><div><br>  <img src="../images/shelves.png" alt="Smiley face" width="30%" height="30%"><br></div><br><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: books = [[1,1],[2,3],[2,3],[1,1],[1,1],[1,1],[1,2]], shelf_width = 4</span><br><span class="line">Output: 6</span><br><span class="line">Explanation:</span><br><span class="line">The sum of the heights of the 3 shelves are 1 + 3 + 2 = 6.</span><br><span class="line">Notice that book number 2 does not have to be on the first shelf.</span><br></pre></td></tr></table></figure>
+<p>The full description of this problem can be viewed on Leetcode platform <a href="https://leetcode.com/problems/filling-bookcase-shelves/" target="_blank" rel="noopener">filling book case shelves</a></p>
+<h1 id="How-to-solve-this-problem"><a href="#How-to-solve-this-problem" class="headerlink" title="How to solve this problem ?"></a>How to solve this problem ?</h1><p>The trival way to think this problem is explore all the combination of books and find the optimal solution(brute-fore way). That is going to be exponential time complexity which is not desirable.</p>
+<p>Notice there is one important constraint which is <strong><strong>the order of the books we place is the same order as the given sequence of books</strong></strong>. This means that what we can do is only to place books <strong>in order</strong>. Then, another solution may occur,we could use backtracking algorithm with branch and bound. To be specific,  we could treat all the combinations of placement of books as a recursion tree. We could memorize some previous states for later traverse. Traversing the recursion tree is going to be in the manner of depth-first search. </p>
+<p>The  codeo of backtracking way for solving this problem is as follows:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//using cache to memorize intermediate states</span></span><br><span class="line">    <span class="comment">//1st-dim : number of books + 1;</span></span><br><span class="line">    <span class="comment">//2ed-dim : number of shelf_width+1</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[][] cache;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minHeightShelves</span><span class="params">(<span class="keyword">int</span>[][] books, <span class="keyword">int</span> shelf_width)</span> </span>&#123;</span><br><span class="line">        cache = <span class="keyword">new</span> <span class="keyword">int</span>[books.length+<span class="number">1</span>][shelf_width+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> dfs(books, <span class="number">0</span>, shelf_width, <span class="number">0</span>, shelf_width);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * @parameters:</span></span><br><span class="line"><span class="comment">     * cur: cur bookIdx</span></span><br><span class="line"><span class="comment">     * widthLeft: left width for the level where cur book is </span></span><br><span class="line"><span class="comment">     * curHeight: current  height at the layer of cur book </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] books, <span class="keyword">int</span> cur, <span class="keyword">int</span> widthLeft, <span class="keyword">int</span> curHeight, <span class="keyword">int</span> shelf_width)</span></span>&#123;</span><br><span class="line">        <span class="comment">// if we have explore all books.</span></span><br><span class="line">        <span class="keyword">if</span>(cur==books.length)&#123;</span><br><span class="line">            <span class="keyword">return</span> curHeight;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if we have traversd the state before , just return. </span></span><br><span class="line">        <span class="keyword">if</span>(cache[cur][widthLeft]!=<span class="number">0</span>) <span class="keyword">return</span> cache[cur][widthLeft];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//Option one: </span></span><br><span class="line">        <span class="comment">// No matter whether the curretn layer if full,  we could place the current  book in the next layer , and explore </span></span><br><span class="line">        cache[cur][widthLeft] = curHeight + dfs(books,cur+<span class="number">1</span>,shelf_width-books[cur][<span class="number">0</span>],books[cur][<span class="number">1</span>],shelf_width); </span><br><span class="line"></span><br><span class="line">        <span class="comment">// Option two:</span></span><br><span class="line">        <span class="comment">// if the current layer can afford that book. explore with new widthLeft, and </span></span><br><span class="line">        <span class="comment">// update current height.</span></span><br><span class="line">        <span class="keyword">if</span>(widthLeft&gt;=books[cur][<span class="number">0</span>])&#123;</span><br><span class="line">            cache[cur][widthLeft] = Math.min(dfs(books,cur+<span class="number">1</span>,widthLeft-books[cur][<span class="number">0</span>],Math.max(curHeight,books[cur][<span class="number">1</span>]),shelf_width),cache[cur][widthLeft]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cache[cur][widthLeft];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>To make the code more simple, we could try to optimize the solution by dynamic programming ? How can we think about that? Using an array with length equals to the size of books plus one for storage of the current optimal(minimal) height of the first i-th books. The state function is going to be either it can be put in the new level or, it can <strong>merge with previous books One by One as a unit</strong> until no extra space left.These two options are the same as the DFS solution. </p>
+<p>Here is the code with full comments</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minHeightShelves</span><span class="params">(<span class="keyword">int</span>[][] books, <span class="keyword">int</span> shelf_width)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//for storage of the current optimal(minimal) height of the first i-th books</span></span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[books.length+<span class="number">1</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// init value: with no book, the optimal height is 0; </span></span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//iterate through all books</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> idx = <span class="number">1</span>; idx &lt; dp.length; idx++)&#123;</span><br><span class="line">            <span class="comment">// current book height and width</span></span><br><span class="line">            <span class="keyword">int</span> height = books[idx-<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> width = books[idx-<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Option 1: place book idx-th on a new shelve </span></span><br><span class="line">            dp[idx] = dp[idx-<span class="number">1</span>] + height;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//Option 2: try to place on the previous shelf with the constraint of width</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = idx-<span class="number">1</span>; j &gt;<span class="number">0</span> &amp;&amp;  width + books[j-<span class="number">1</span>][<span class="number">0</span>] &lt;= shelf_width; j--)&#123;</span><br><span class="line">                height = Math.max(height, books[j-<span class="number">1</span>][<span class="number">1</span>]);<span class="comment">// merge with previous book, height might change</span></span><br><span class="line">                width += books[j-<span class="number">1</span>][<span class="number">0</span>];<span class="comment">// update width</span></span><br><span class="line">                dp[idx] = Math.min(dp[idx],dp[j-<span class="number">1</span>] + height); <span class="comment">// update optimal solution if it is the optimal</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[books.length];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Dynamic-programming/" rel="tag"># Dynamic programming</a>
+          
+            <a href="/tags/Data-Structure-and-Algorithm/" rel="tag"># Data Structure and Algorithm</a>
+          
+            <a href="/tags/backtracking/" rel="tag"># backtracking</a>
+          
+            <a href="/tags/Depth-first-Search-DFS/" rel="tag"># Depth-first Search (DFS)</a>
+          
+            <a href="/tags/memorization/" rel="tag"># memorization</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/26/mini-spring-mvc/" rel="next" title="Implements a mini Spring Framework">
+                <i class="fa fa-chevron-left"></i> Implements a mini Spring Framework
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/02/path-in-zigzag-labelled-binary-tree/" rel="prev" title="Leetcode 1104 Path in Zigzag Labelled Binary Tree">
+                Leetcode 1104 Path in Zigzag Labelled Binary Tree <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/profile_photo.jpg" alt="Liang Tan">
+            
+              <p class="site-author-name" itemprop="name">Liang Tan</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem-Description"><span class="nav-number">1.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-solve-this-problem"><span class="nav-number">2.</span> <span class="nav-text">How to solve this problem ?</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liang Tan</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+      <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":null,"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

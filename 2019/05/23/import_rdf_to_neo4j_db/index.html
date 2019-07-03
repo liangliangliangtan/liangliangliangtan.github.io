@@ -97,23 +97,23 @@
 
 
   <meta name="description" content="1. IntroductionIn this blog, I will introduce how to import RDF(Resource Description Framework) files to graph database (Neo4j), As we known, RDF is a framework for describing resources on the web in">
-<meta name="keywords" content="NoSQL,XML,RDF,Neo4j">
+<meta name="keywords" content="NoSQL,XML,RDF,Neo4j,dom4j,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Import RDF files to Neo4j database">
 <meta property="og:url" content="http://yoursite.com/2019/05/23/import_rdf_to_neo4j_db/index.html">
 <meta property="og:site_name" content="Liang Tan&#39;s Blog">
 <meta property="og:description" content="1. IntroductionIn this blog, I will introduce how to import RDF(Resource Description Framework) files to graph database (Neo4j), As we known, RDF is a framework for describing resources on the web in">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/images/neo4j_rdf_1.png">
-<meta property="og:image" content="http://yoursite.com/images/neo4j_rdf_2.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/23/images/neo4j_rdf_1.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/23/images/neo4j_rdf_2.png">
 <meta property="og:image" content="http://yoursite.com/images/neo4j_rdf_3.png">
 <meta property="og:image" content="http://yoursite.com/images/neo4j_rdf_4.png">
 <meta property="og:image" content="http://yoursite.com/images/neo4j_rdf_5.png">
-<meta property="og:updated_time" content="2019-06-25T22:11:43.375Z">
+<meta property="og:updated_time" content="2019-07-02T15:57:57.741Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Import RDF files to Neo4j database">
 <meta name="twitter:description" content="1. IntroductionIn this blog, I will introduce how to import RDF(Resource Description Framework) files to graph database (Neo4j), As we known, RDF is a framework for describing resources on the web in">
-<meta name="twitter:image" content="http://yoursite.com/images/neo4j_rdf_1.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/23/images/neo4j_rdf_1.png">
 
 
 
@@ -403,7 +403,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-25 16:11:43" itemprop="dateModified" datetime="2019-06-25T16:11:43-06:00">2019-06-25</time>
+                <time title="Modified: 2019-07-02 09:57:57" itemprop="dateModified" datetime="2019-07-02T09:57:57-06:00">2019-07-02</time>
               
             
           </span>
@@ -485,12 +485,14 @@
 <p>Simply call the API, we will get the triples imported into the graph database.For more details about the usage of API, the author of <a href="https://github.com/jbarrasa/neosemantics" target="_blank" rel="noopener">neosemantics</a> has a very detailed explanation on github page and his blogs.</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CALL</span> semantics.importRDF(<span class="string">"file:///C:/Users/OneDrive/Desktop/try.xml"</span>,</span><br><span class="line"><span class="string">"RDF/XML"</span>,</span><br><span class="line">&#123; shortenUrls: <span class="literal">true</span>, typesToLabels: <span class="literal">true</span>, commitSize: <span class="number">9000</span> &#125;)</span><br></pre></td></tr></table></figure>
 <p>Notice: Be careful at the file path . The valid file URI in Windows would be something like ‘file:///C:/Documents%20and%20Settings/davris/FileSchemeURIs.doc’</p>
-<div><br>  <img src="/images/neo4j_rdf_1.png" alt="Smiley face" width="90%" height="90%"><br></div>
+<div><br>  <img src="../images/neo4j_rdf_1.png" alt="Smiley face" width="90%" height="90%"><br></div>
+
+
 
 <p>We could see that the parser will automatically generate the namespace and labels for both nodes and relationships. These ns0 , ns1… are not suitable to read and query. Hence, let us define the namespace prefix before we importing rdf triples.</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> (:NamespacePrefixDefinition &#123;<span class="string">`&lt;http://sentic.net/`</span>&gt;: <span class="string">'sentic_net'</span>, <span class="string">`http://sentic.net/api/`</span>: <span class="string">'keyword'</span>&#125;);</span><br></pre></td></tr></table></figure>
 <p>For ‘<a href="http://sentic.net/" target="_blank" rel="noopener">http://sentic.net/</a>‘, the mapping of url would be senticnet, and the ‘/api/‘ would be called keyword by my own definition.</p>
-<div><br>  <img src="/images/neo4j_rdf_2.png" alt="Smiley face" width="90%" height="90%"><br></div>
+<div><br>  <img src="../images/neo4j_rdf_2.png" alt="Smiley face" width="90%" height="90%"><br></div>
 
 <p>The result Here looks more reasonable. when we want to find all other similar word. We will follow only two relationships, sentic_net_sementic for finding the blankNode and sentic_net_concept to find all similar word resources.</p>
 <p>For fast retrieve blank Node , resources and other things, do not forget to create Index for those nodes and relationships that are frequently retrieved`</p>
@@ -506,7 +508,7 @@
 <div><br>  <img src="/images/neo4j_rdf_4.png" alt="Smiley face" width="90%" height="90%"><br></div>
 
 <p>Those APIs are correct for describing pleasantness, attention and other attributes with correct value.</p>
-<h2 id="4-Automatically-refactor-the-code-By-dom4j"><a href="#4-Automatically-refactor-the-code-By-dom4j" class="headerlink" title="4. Automatically refactor the code By dom4j"></a>4. Automatically refactor the code By dom4j</h2><p>We have successfully import the manually edited rdf file to the neo4j database. Key problems here we need to write codes for automatically modify rdf description to the format that we want.</p>
+<h1 id="4-Automatically-refactor-the-code-By-dom4j"><a href="#4-Automatically-refactor-the-code-By-dom4j" class="headerlink" title="4. Automatically refactor the code By dom4j"></a>4. Automatically refactor the code By dom4j</h1><p>We have successfully import the manually edited rdf file to the neo4j database. Key problems here we need to write codes for automatically modify rdf description to the format that we want.</p>
 <p>Here, I use dom4j framework for manipulating the xml/rdf file. Dom4j is an open source framework for processing XML which is integrated with XPath and fully supports DOM, SAX, JAXP and the Java platform such as Java 2 Collections.(More about dom4j, visit the github page(<a href="https://github.com/dom4j/dom4j" target="_blank" rel="noopener">https://github.com/dom4j/dom4j</a>)). And I use maven as the project management tool.</p>
 <p>In pom.xml, we add the dependencies</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.dom4j/dom4j --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.dom4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- https://mvnrepository.com/artifact/jaxen/jaxen --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>jaxen<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxen<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -555,6 +557,10 @@
             <a href="/tags/RDF/" rel="tag"># RDF</a>
           
             <a href="/tags/Neo4j/" rel="tag"># Neo4j</a>
+          
+            <a href="/tags/dom4j/" rel="tag"># dom4j</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -650,7 +656,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -780,7 +786,43 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -825,7 +867,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-How-data-is-stored-in-RDF-files"><span class="nav-number">2.</span> <span class="nav-text">2. How data is stored in RDF files</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-How-RDF-can-be-related-to-Graph-Database"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 How RDF can be related to Graph Database</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-Rule-One"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 Rule One</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-Rule-Two"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 Rule Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-Rule-Three"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 Rule Three</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Some-Exceptions"><span class="nav-number">2.1.4.</span> <span class="nav-text">2.2 Some Exceptions.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Exception-One"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.2.1 Exception One,</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Exception-two"><span class="nav-number">2.1.6.</span> <span class="nav-text">2.2.2 Exception two.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-Exception-three"><span class="nav-number">2.1.7.</span> <span class="nav-text">2.2.3 Exception three.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Existing-tools-for-Importing-RDFs-into-Neo4j-Database"><span class="nav-number">2.2.</span> <span class="nav-text">3. Existing tools for Importing RDFs into Neo4j Database.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-installation"><span class="nav-number">2.3.</span> <span class="nav-text">3.1 installation:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Learning-how-to-use-neosemantics-to-import-RDF-files-to-the-Neo4j-Database"><span class="nav-number">2.4.</span> <span class="nav-text">3.2 Learning how to use neosemantics to import RDF files to the Neo4j Database.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Automatically-refactor-the-code-By-dom4j"><span class="nav-number">2.5.</span> <span class="nav-text">4. Automatically refactor the code By dom4j</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-How-data-is-stored-in-RDF-files"><span class="nav-number">2.</span> <span class="nav-text">2. How data is stored in RDF files</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-How-RDF-can-be-related-to-Graph-Database"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 How RDF can be related to Graph Database</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-Rule-One"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 Rule One</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-Rule-Two"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 Rule Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-Rule-Three"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 Rule Three</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Some-Exceptions"><span class="nav-number">2.1.4.</span> <span class="nav-text">2.2 Some Exceptions.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Exception-One"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.2.1 Exception One,</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Exception-two"><span class="nav-number">2.1.6.</span> <span class="nav-text">2.2.2 Exception two.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-Exception-three"><span class="nav-number">2.1.7.</span> <span class="nav-text">2.2.3 Exception three.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Existing-tools-for-Importing-RDFs-into-Neo4j-Database"><span class="nav-number">2.2.</span> <span class="nav-text">3. Existing tools for Importing RDFs into Neo4j Database.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-installation"><span class="nav-number">2.3.</span> <span class="nav-text">3.1 installation:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Learning-how-to-use-neosemantics-to-import-RDF-files-to-the-Neo4j-Database"><span class="nav-number">2.4.</span> <span class="nav-text">3.2 Learning how to use neosemantics to import RDF files to the Neo4j Database.</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Automatically-refactor-the-code-By-dom4j"><span class="nav-number">3.</span> <span class="nav-text">4. Automatically refactor the code By dom4j</span></a></li></ol></div>
             
 
           </div>

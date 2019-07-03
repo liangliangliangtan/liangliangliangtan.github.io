@@ -333,6 +333,514 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/path-in-zigzag-labelled-binary-tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang Tan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Liang Tan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/02/path-in-zigzag-labelled-binary-tree/" class="post-title-link" itemprop="url">Leetcode 1104 Path in Zigzag Labelled Binary Tree</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-02 19:26:51 / Modified: 20:02:23" itemprop="dateCreated datePublished" datetime="2019-07-02T19:26:51-06:00">2019-07-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-Problem-Description"><a href="#1-Problem-Description" class="headerlink" title="1. Problem Description"></a>1. Problem Description</h1><p>In an infinite <strong>binary tree</strong> where <strong>every node has two children</strong>, the nodes are labelled in row order.</p>
+<p>In the <strong>odd</strong> numbered rows (ie., the first, third, fifth,…), the labelling is <strong>left to right</strong>, while in the <strong>even</strong> numbered rows (second, fourth, sixth,…), the labelling is <strong>right to left</strong>.</p>
+<p><div><br>  <img src="../images/tree.png" alt="Smiley face" width="50%" height="50%"><br></div><br><br></p>
+<p><strong>Challenge:</strong> </p>
+<p>Given the label of a node in this tree, return the labels in the path from the root of the tree to the node with that label.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: label = 14</span><br><span class="line">Output: [1,3,4,14]</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: label = 26</span><br><span class="line">Output: [1,2,6,10,26]</span><br></pre></td></tr></table></figure>
+<h1 id="2-My-Thought-About-This-Problem"><a href="#2-My-Thought-About-This-Problem" class="headerlink" title="2. My Thought About This Problem:"></a>2. My Thought About This Problem:</h1><p>Tree data structure itself is recursive, Hence, Many problems regarding to tree can be solved recursively. In this problem, we could think that in order to find the path of the label of a node, how about <strong>finding the label of its parent node in the first place</strong>.  If we can do that, the problem can be solved recursively, until the root node which has label of 1. </p>
+<h1 id="3-Difficulty-find-the-label-of-its-parent-node"><a href="#3-Difficulty-find-the-label-of-its-parent-node" class="headerlink" title="3. Difficulty: find the label of its parent node"></a>3. Difficulty: find the label of its parent node</h1><p>The tough thing here is to find the label of its parent node. What conditions we have not used yet? Well, the binary tree is complete, and the trees label is in ZigZag Order. </p>
+<p>The tree is binary and complete:</p>
+<ol>
+<li><p>Given the label, we could compute the depth of the tree by taking the logrithm of two. Let us say the result is k. Then, we also know the range of that level, which is<br>[$2^k$, $2^k+1$-1].</p>
+</li>
+<li><p>According to ZigZag property, we know that <strong>the largest element in the previous layer follows by the smallest element of the current layer</strong>.Therefore, we know that the smallest element in the previous layer is $2^k$ - 1. </p>
+</li>
+</ol>
+<p>3.If we could know the difference between  the smallest element in the previous  and its parent, then we can derive its parent label ! </p>
+<ol start="4">
+<li>Now we only have one condition haven’t applied, which is the tree is <strong>complete</strong>. Recall that, <strong>Heap</strong> itseulf is a complete binary tree but it can be stored in an array. The parent of a node with index <em>i</em> in heap is array[i/2]. The offset of current node divides two is the difference we want.</li>
+</ol>
+<p>By previous analysis, the code is relatively easy to write.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  List&lt;Integer&gt; <span class="title">pathInZigZagTree</span><span class="params">(<span class="keyword">int</span> label)</span></span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        bottom2upTraverse(list, label);</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bottom2upTraverse</span><span class="params">(List&lt;Integer&gt; list, <span class="keyword">int</span> label)</span></span>&#123;</span><br><span class="line">        list.add(<span class="number">0</span>,label);</span><br><span class="line">        <span class="keyword">if</span>(label == <span class="number">1</span>) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="comment">// get the level of the label in the tree;</span></span><br><span class="line">        <span class="keyword">int</span> level = log2(label);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// get the index of the label on its level</span></span><br><span class="line">        <span class="keyword">int</span> idx = label - (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>,level);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// according to ZigZag Tree property, find the previous label to traverse;</span></span><br><span class="line">        <span class="keyword">int</span> nextLabel = (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>,level) - <span class="number">1</span> - idx/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// traverse recursively.</span></span><br><span class="line">        bottom2upTraverse(list,nextLabel);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">log2</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)(Math.log(n) / Math.log(<span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/filling-bookcase-shelves/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang Tan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Liang Tan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/02/filling-bookcase-shelves/" class="post-title-link" itemprop="url">Leetcode problem 1105 filling-bookcase-shelves</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-02 15:22:26 / Modified: 16:59:18" itemprop="dateCreated datePublished" datetime="2019-07-02T15:22:26-06:00">2019-07-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h1><p>We have a sequence of books: the i-th book has thickness books[i][0] and height books[i][1].</p>
+<p>We want to place these books <strong>in order</strong> onto bookcase shelves that have total width shelf_width.</p>
+<p>We choose some of the books to place on this shelf (such that the sum of their thickness is &lt;= shelf_width), then build another level of shelf of the bookcase so that the total height of the bookcase has increased by the maximum height of the books we just put down.  We repeat this process until there are no more books to place.</p>
+<p>Note again that at each step of the above process, <strong><strong>the order of the books we place is the same order as the given sequence of books</strong></strong>. For example, if we have an ordered list of 5 books, we might place the first and second book onto the first shelf, the third book on the second shelf, and the fourth and fifth book on the last shelf.</p>
+<p>Return the minimum possible height that the total bookshelf can be after placing shelves in this manner.</p>
+<p>Example: </p>
+<p><div><br>  <img src="../images/shelves.png" alt="Smiley face" width="30%" height="30%"><br></div><br><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: books = [[1,1],[2,3],[2,3],[1,1],[1,1],[1,1],[1,2]], shelf_width = 4</span><br><span class="line">Output: 6</span><br><span class="line">Explanation:</span><br><span class="line">The sum of the heights of the 3 shelves are 1 + 3 + 2 = 6.</span><br><span class="line">Notice that book number 2 does not have to be on the first shelf.</span><br></pre></td></tr></table></figure>
+<p>The full description of this problem can be viewed on Leetcode platform <a href="https://leetcode.com/problems/filling-bookcase-shelves/" target="_blank" rel="noopener">filling book case shelves</a></p>
+<h1 id="How-to-solve-this-problem"><a href="#How-to-solve-this-problem" class="headerlink" title="How to solve this problem ?"></a>How to solve this problem ?</h1><p>The trival way to think this problem is explore all the combination of books and find the optimal solution(brute-fore way). That is going to be exponential time complexity which is not desirable.</p>
+<p>Notice there is one important constraint which is <strong><strong>the order of the books we place is the same order as the given sequence of books</strong></strong>. This means that what we can do is only to place books <strong>in order</strong>. Then, another solution may occur,we could use backtracking algorithm with branch and bound. To be specific,  we could treat all the combinations of placement of books as a recursion tree. We could memorize some previous states for later traverse. Traversing the recursion tree is going to be in the manner of depth-first search. </p>
+<p>The  codeo of backtracking way for solving this problem is as follows:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//using cache to memorize intermediate states</span></span><br><span class="line">    <span class="comment">//1st-dim : number of books + 1;</span></span><br><span class="line">    <span class="comment">//2ed-dim : number of shelf_width+1</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[][] cache;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minHeightShelves</span><span class="params">(<span class="keyword">int</span>[][] books, <span class="keyword">int</span> shelf_width)</span> </span>&#123;</span><br><span class="line">        cache = <span class="keyword">new</span> <span class="keyword">int</span>[books.length+<span class="number">1</span>][shelf_width+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> dfs(books, <span class="number">0</span>, shelf_width, <span class="number">0</span>, shelf_width);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * @parameters:</span></span><br><span class="line"><span class="comment">     * cur: cur bookIdx</span></span><br><span class="line"><span class="comment">     * widthLeft: left width for the level where cur book is </span></span><br><span class="line"><span class="comment">     * curHeight: current  height at the layer of cur book </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] books, <span class="keyword">int</span> cur, <span class="keyword">int</span> widthLeft, <span class="keyword">int</span> curHeight, <span class="keyword">int</span> shelf_width)</span></span>&#123;</span><br><span class="line">        <span class="comment">// if we have explore all books.</span></span><br><span class="line">        <span class="keyword">if</span>(cur==books.length)&#123;</span><br><span class="line">            <span class="keyword">return</span> curHeight;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if we have traversd the state before , just return. </span></span><br><span class="line">        <span class="keyword">if</span>(cache[cur][widthLeft]!=<span class="number">0</span>) <span class="keyword">return</span> cache[cur][widthLeft];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//Option one: </span></span><br><span class="line">        <span class="comment">// No matter whether the curretn layer if full,  we could place the current  book in the next layer , and explore </span></span><br><span class="line">        cache[cur][widthLeft] = curHeight + dfs(books,cur+<span class="number">1</span>,shelf_width-books[cur][<span class="number">0</span>],books[cur][<span class="number">1</span>],shelf_width); </span><br><span class="line"></span><br><span class="line">        <span class="comment">// Option two:</span></span><br><span class="line">        <span class="comment">// if the current layer can afford that book. explore with new widthLeft, and </span></span><br><span class="line">        <span class="comment">// update current height.</span></span><br><span class="line">        <span class="keyword">if</span>(widthLeft&gt;=books[cur][<span class="number">0</span>])&#123;</span><br><span class="line">            cache[cur][widthLeft] = Math.min(dfs(books,cur+<span class="number">1</span>,widthLeft-books[cur][<span class="number">0</span>],Math.max(curHeight,books[cur][<span class="number">1</span>]),shelf_width),cache[cur][widthLeft]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cache[cur][widthLeft];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>To make the code more simple, we could try to optimize the solution by dynamic programming ? How can we think about that? Using an array with length equals to the size of books plus one for storage of the current optimal(minimal) height of the first i-th books. The state function is going to be either it can be put in the new level or, it can <strong>merge with previous books One by One as a unit</strong> until no extra space left.These two options are the same as the DFS solution. </p>
+<p>Here is the code with full comments</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minHeightShelves</span><span class="params">(<span class="keyword">int</span>[][] books, <span class="keyword">int</span> shelf_width)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//for storage of the current optimal(minimal) height of the first i-th books</span></span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[books.length+<span class="number">1</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// init value: with no book, the optimal height is 0; </span></span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//iterate through all books</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> idx = <span class="number">1</span>; idx &lt; dp.length; idx++)&#123;</span><br><span class="line">            <span class="comment">// current book height and width</span></span><br><span class="line">            <span class="keyword">int</span> height = books[idx-<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> width = books[idx-<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Option 1: place book idx-th on a new shelve </span></span><br><span class="line">            dp[idx] = dp[idx-<span class="number">1</span>] + height;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//Option 2: try to place on the previous shelf with the constraint of width</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = idx-<span class="number">1</span>; j &gt;<span class="number">0</span> &amp;&amp;  width + books[j-<span class="number">1</span>][<span class="number">0</span>] &lt;= shelf_width; j--)&#123;</span><br><span class="line">                height = Math.max(height, books[j-<span class="number">1</span>][<span class="number">1</span>]);<span class="comment">// merge with previous book, height might change</span></span><br><span class="line">                width += books[j-<span class="number">1</span>][<span class="number">0</span>];<span class="comment">// update width</span></span><br><span class="line">                dp[idx] = Math.min(dp[idx],dp[j-<span class="number">1</span>] + height); <span class="comment">// update optimal solution if it is the optimal</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[books.length];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/26/mini-spring-mvc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang Tan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Liang Tan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/26/mini-spring-mvc/" class="post-title-link" itemprop="url">Implements a mini Spring Framework</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-26 09:44:00 / Modified: 17:16:42" itemprop="dateCreated datePublished" datetime="2019-06-26T09:44:00-06:00">2019-06-26</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>I have been using Spring framework to build my own projects for several time. In order to have a deeper understanding of how Spring framework works and the core concepts of Spring framework ( i.e Inversion of Control , dependency injection…) I decide to implements a mini-spring framework. So that, it can works with basic requirement such as response to the HTTP request.</p>
+<h1 id="1-Prepared-Work"><a href="#1-Prepared-Work" class="headerlink" title="1. Prepared Work"></a>1. Prepared Work</h1><h2 id="1-1-Requirement-analysis-To-achieve-basic-of-Spring-Framework-we-need-to-analysis-which-parts-should-we-implements"><a href="#1-1-Requirement-analysis-To-achieve-basic-of-Spring-Framework-we-need-to-analysis-which-parts-should-we-implements" class="headerlink" title="1.1 Requirement analysis, To achieve basic of Spring Framework, we need to analysis which parts should we implements."></a>1.1 Requirement analysis, To achieve basic of Spring Framework, we need to analysis which parts should we implements.</h2><ol>
+<li><p>Spring Core Module, includes core(core is the utility package to support spring framework ), beans(bean factory for managing the life cycle of Spring project) and context(context is the interfaces package to interact with clients).</p>
+</li>
+<li><p>Spring Web Module ( Integrate Application Server(Tomcat) as the container for Servlet ) And Spring MVC</p>
+</li>
+<li><p>Spring-starter, Starter the application like Spring-boot-starter.</p>
+</li>
+</ol>
+<h2 id="1-2-Build-our-project"><a href="#1-2-Build-our-project" class="headerlink" title="1.2 Build our project"></a>1.2 Build our project</h2><p>Here ,I use gradle instead of maven as the project management tool because of the high performance of gradle. It is also more convenient than maven.</p>
+<p>This is the project structure of our Spring project. By the way, I use IntelligentJ IDEA as the dev tool.</p>
+<p>We will have two modules in our project. One is the framework module and the other one is test module. Framework module is to implements our Spring Framework Project. Test Module is how the client could use our mini spring framework.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">├───.gradle</span><br><span class="line">│   ├───4.10.3</span><br><span class="line">│   │   ├───fileChanges</span><br><span class="line">│   │   ├───fileHashes</span><br><span class="line">│   │   ├───taskHistory</span><br><span class="line">│   │   └───vcsMetadata-1</span><br><span class="line">│   ├───buildOutputCleanup</span><br><span class="line">│   └───vcs-1</span><br><span class="line">├───.idea</span><br><span class="line">│   └───modules</span><br><span class="line">├───framework</span><br><span class="line">│   └───src</span><br><span class="line">│       ├───main</span><br><span class="line">│       │   ├───java</span><br><span class="line">│       │   │   └───com</span><br><span class="line">│       │   │       └───example</span><br><span class="line">│       │   │           └───tan</span><br><span class="line">│       │   │               ├───beans</span><br><span class="line">│       │   │               ├───context</span><br><span class="line">│       │   │               ├───core</span><br><span class="line">│       │   │               ├───starter</span><br><span class="line">│       │   │               └───web</span><br><span class="line">│       │   └───resources</span><br><span class="line">│       └───test</span><br><span class="line">│           ├───java</span><br><span class="line">│           └───resources</span><br><span class="line">├───gradle</span><br><span class="line">│   └───wrapper</span><br><span class="line">└───test</span><br><span class="line">    └───src</span><br><span class="line">        ├───main</span><br><span class="line">        │   ├───java</span><br><span class="line">        │   └───resources</span><br><span class="line">        └───test</span><br><span class="line">            ├───java</span><br><span class="line">            └───resources</span><br></pre></td></tr></table></figure>
+<p>In the text file ,we will have the starter class which is the entry point of our project. run the following command to see if our project works</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grandle build</span><br><span class="line">java -jar test/build/libs/test-1.0-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+<p>An error occurs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">no main manifest attribute, in test/build/libs/test-1.0-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+<p>What we need to do is to add manifest attribute regarding to the jar pacakge.</p>
+<p>In the build.grandle file in the text module , we should point out the Main-Class of our application and as the same time compile all the jars related to it recursively.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">jar&#123;</span><br><span class="line">    manifest&#123;</span><br><span class="line">        attributes &quot;Main-Class&quot;:&quot;com.example.tan.Application&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    from&#123;</span><br><span class="line">        configurations.compile.collect&#123;</span><br><span class="line">            it.isDirectory() ? it: zipTree(it)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>How to connect framework module to our test module.</p>
+<p>First thing is when compiling the text module, it should compile the framework as well.</p>
+<p>Add framework module to dependencies of text module</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    testCompile group: &apos;junit&apos;, name: &apos;junit&apos;, version: &apos;4.12&apos;</span><br><span class="line">    compile(project(&apos;:framework&apos;))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Create a Starter class for the framework.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.tan.starter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This is the starter of our Mini Spring Framework.</span></span><br><span class="line"><span class="comment"> * It has run method takes two argument. The first one is the</span></span><br><span class="line"><span class="comment"> * Class Object of the client, so the framework can get the Application class information</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MiniApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(Class&lt;?&gt; cls, String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello, Mini Spring Framework"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In test client, we could invoke that method</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello world"</span>);</span><br><span class="line">        MiniApplication.run(Application.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Package and run the jar file</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ gradle build</span><br><span class="line">$ java -jar test/build/libs/test-1.0-SNAPSHOT.jar</span><br><span class="line"></span><br><span class="line">hello world</span><br><span class="line">Hello, Mini Spring Framework</span><br></pre></td></tr></table></figure>
+<p>Until Now, our project could start and run. In the next section, we will integrate the web Server.</p>
+<h1 id="2-Integrate-Web-Container"><a href="#2-Integrate-Web-Container" class="headerlink" title="2. Integrate Web Container."></a>2. Integrate Web Container.</h1><p>Web Server usually listen to a TCP port, dispatch request to php, python scripts (for Ngnix Server) Or Java code (for Tomcat Server) and collect response. Web Server has no responsibility to deal with the business logic. It provides connection for operating system and application codes to improve performance.</p>
+<p>Having knowing the mechanism of Web Server, now let us integrate the most popular web server in java, which is tomcat. From Tomcat 7, it could be embedded to our program.</p>
+<p>Here, I choose Tomcat [8.5.34] (<a href="https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core/8.5.34" target="_blank" rel="noopener">https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core/8.5.34</a>)</p>
+<p>First, add dependency to the framework module</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    testCompile group: 'junit', name: 'junit', version: '4.12'</span><br><span class="line">    // https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core</span><br><span class="line">    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-core', version: '8.5.34'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Second, implements the class for starting the Tomcat Server.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.tan.web.server;</span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.LifecycleException;</span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.startup.Tomcat;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This class is for starting the embed Tomcat Server</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TomcatServer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Tomcat tomcat;</span><br><span class="line">    <span class="keyword">private</span> String[] args; <span class="comment">// <span class="doctag">TODO:</span> arguments for start the tomcat server</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TomcatServer</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.args = args;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startServer</span><span class="params">()</span> <span class="keyword">throws</span> LifecycleException </span>&#123;</span><br><span class="line"></span><br><span class="line">        tomcat = <span class="keyword">new</span> Tomcat();</span><br><span class="line">        tomcat.setPort(<span class="number">8080</span>); <span class="comment">// set listening port</span></span><br><span class="line">        tomcat.start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create await thread by anomoynous inner class</span></span><br><span class="line">        Thread awaitThread = <span class="keyword">new</span> Thread(<span class="string">"tomcat_await_thread"</span>)&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">                TomcatServer.<span class="keyword">this</span>.tomcat.getServer().await();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        awaitThread.setDaemon(<span class="keyword">false</span>);</span><br><span class="line">        awaitThread.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>I should mention a key concept here, which is called <strong>daemon thread.</strong> The official defination of daemon thread is that A daemon thread is a thread that does not prevent the JVM from exiting when the program finishes but the thread is still running. An example for a daemon thread is the garbage collection. from Stack Overflow problem. <a href="https://stackoverflow.com/questions/2213340/what-is-a-daemon-thread-in-java" target="_blank" rel="noopener">What is a daemon thread in Java?</a> In other word, the JVM can only halts if and only if all all non-daemon threads finish, and any remaining daemon threads are abandoned at the same time.</p>
+<p>The setDaemon(boolean) method is to change the Thread daemon properties before the thread starts. Here, I set the Daemon of awaitThread to be false, means that Although the client terminates, the Tomcat Server continues to run in awaiting state.</p>
+<p>Now, we can start the server In MINI Application class.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This is the starter of our Mini Spring Framework.</span></span><br><span class="line"><span class="comment"> * It has run method takes two argument. The first one is the</span></span><br><span class="line"><span class="comment"> * Class Object of the client, so the framework can get the Application class information</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MiniApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(Class&lt;?&gt; cls, String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello, Mini Spring Framework"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Start the server when call the method</span></span><br><span class="line">        TomcatServer tomcatServer = <span class="keyword">new</span> TomcatServer(args);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            tomcatServer.startServer();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (LifecycleException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/design-pattern-factory-pattern/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -616,7 +1124,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-25 16:11:43" itemprop="dateModified" datetime="2019-06-25T16:11:43-06:00">2019-06-25</time>
+                <time title="Modified: 2019-07-02 09:57:57" itemprop="dateModified" datetime="2019-07-02T09:57:57-06:00">2019-07-02</time>
               
             
           </span>
@@ -693,12 +1201,14 @@
 <p>Simply call the API, we will get the triples imported into the graph database.For more details about the usage of API, the author of <a href="https://github.com/jbarrasa/neosemantics" target="_blank" rel="noopener">neosemantics</a> has a very detailed explanation on github page and his blogs.</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CALL</span> semantics.importRDF(<span class="string">"file:///C:/Users/OneDrive/Desktop/try.xml"</span>,</span><br><span class="line"><span class="string">"RDF/XML"</span>,</span><br><span class="line">&#123; shortenUrls: <span class="literal">true</span>, typesToLabels: <span class="literal">true</span>, commitSize: <span class="number">9000</span> &#125;)</span><br></pre></td></tr></table></figure>
 <p>Notice: Be careful at the file path . The valid file URI in Windows would be something like ‘file:///C:/Documents%20and%20Settings/davris/FileSchemeURIs.doc’</p>
-<div><br>  <img src="/images/neo4j_rdf_1.png" alt="Smiley face" width="90%" height="90%"><br></div>
+<div><br>  <img src="../images/neo4j_rdf_1.png" alt="Smiley face" width="90%" height="90%"><br></div>
+
+
 
 <p>We could see that the parser will automatically generate the namespace and labels for both nodes and relationships. These ns0 , ns1… are not suitable to read and query. Hence, let us define the namespace prefix before we importing rdf triples.</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> (:NamespacePrefixDefinition &#123;<span class="string">`&lt;http://sentic.net/`</span>&gt;: <span class="string">'sentic_net'</span>, <span class="string">`http://sentic.net/api/`</span>: <span class="string">'keyword'</span>&#125;);</span><br></pre></td></tr></table></figure>
 <p>For ‘<a href="http://sentic.net/" target="_blank" rel="noopener">http://sentic.net/</a>‘, the mapping of url would be senticnet, and the ‘/api/‘ would be called keyword by my own definition.</p>
-<div><br>  <img src="/images/neo4j_rdf_2.png" alt="Smiley face" width="90%" height="90%"><br></div>
+<div><br>  <img src="../images/neo4j_rdf_2.png" alt="Smiley face" width="90%" height="90%"><br></div>
 
 <p>The result Here looks more reasonable. when we want to find all other similar word. We will follow only two relationships, sentic_net_sementic for finding the blankNode and sentic_net_concept to find all similar word resources.</p>
 <p>For fast retrieve blank Node , resources and other things, do not forget to create Index for those nodes and relationships that are frequently retrieved`</p>
@@ -714,7 +1224,7 @@
 <div><br>  <img src="/images/neo4j_rdf_4.png" alt="Smiley face" width="90%" height="90%"><br></div>
 
 <p>Those APIs are correct for describing pleasantness, attention and other attributes with correct value.</p>
-<h2 id="4-Automatically-refactor-the-code-By-dom4j"><a href="#4-Automatically-refactor-the-code-By-dom4j" class="headerlink" title="4. Automatically refactor the code By dom4j"></a>4. Automatically refactor the code By dom4j</h2><p>We have successfully import the manually edited rdf file to the neo4j database. Key problems here we need to write codes for automatically modify rdf description to the format that we want.</p>
+<h1 id="4-Automatically-refactor-the-code-By-dom4j"><a href="#4-Automatically-refactor-the-code-By-dom4j" class="headerlink" title="4. Automatically refactor the code By dom4j"></a>4. Automatically refactor the code By dom4j</h1><p>We have successfully import the manually edited rdf file to the neo4j database. Key problems here we need to write codes for automatically modify rdf description to the format that we want.</p>
 <p>Here, I use dom4j framework for manipulating the xml/rdf file. Dom4j is an open source framework for processing XML which is integrated with XPath and fully supports DOM, SAX, JAXP and the Java platform such as Java 2 Collections.(More about dom4j, visit the github page(<a href="https://github.com/dom4j/dom4j" target="_blank" rel="noopener">https://github.com/dom4j/dom4j</a>)). And I use maven as the project management tool.</p>
 <p>In pom.xml, we add the dependencies</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.dom4j/dom4j --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.dom4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- https://mvnrepository.com/artifact/jaxen/jaxen --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>jaxen<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jaxen<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -2083,640 +2593,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/CRUD-neo4j/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liang Tan">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile_photo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Liang Tan's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/13/CRUD-neo4j/" class="post-title-link" itemprop="url">Introduction to CRUD operations in Neo4j</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-13 10:20:32 / Modified: 16:56:29" itemprop="dateCreated datePublished" datetime="2019-05-13T10:20:32-06:00">2019-05-13</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DB/" itemprop="url" rel="index"><span itemprop="name">DB</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction:"></a>1. Introduction:</h2><p>In this section, we are going to learn and summarize the most recent used CRUD operations in Neo4j.We are going to use SET, Remove, Delete and Merge(Create and MATCH) clause.</p>
-<h2 id="2-Merge-Command"><a href="#2-Merge-Command" class="headerlink" title="2 Merge Command"></a>2 Merge Command</h2><p>Merge commend is used to either create a node with labels or properties if the node does not exist in the database or select the nodes with particular conditions if the nodes are already presents in the database.</p>
-<h3 id="2-1-Using-Merge-command-with-labels-and-properties"><a href="#2-1-Using-Merge-command-with-labels-and-properties" class="headerlink" title="2.1 Using Merge command with labels and properties."></a>2.1 Using Merge command with labels and properties.</h3><p>Example<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Merge(Jeson:Man) <span class="built_in">return</span> Jeson, labels(Jeson)</span><br></pre></td></tr></table></figure></p>
-<p>Since it does not exists in the database, it will create a new node and a new label Man and return the node and labels of that specific node.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Merge(Jack:Man&#123;Name:<span class="string">"Jack"</span>,Gender:<span class="string">"male"</span>&#125;) <span class="built_in">return</span> Jack</span><br></pre></td></tr></table></figure>
-<p>When running this merge command, it will firstly look at if there exists a node jack with corresponding key-value pairs, if it does not exits, it will create a new node and return the node.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Merge(Jack:Man&#123;Name:<span class="string">"Jack"</span>,Age:<span class="string">"30"</span>&#125;) <span class="built_in">return</span> Jack</span><br></pre></td></tr></table></figure>
-<p>It will seperately create a node with the same name as before but differnt properties.<br>Then, if we run the following comand<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Merge(Man&#123;Name:<span class="string">"Jack"</span>&#125;) <span class="built_in">return</span> Man.Name, Man.Gender, Man.Age</span><br></pre></td></tr></table></figure></p>
-<p>It will find all the nodes with name Jack and label Man, and the properties related to jack</p>
-<div><br>  <img src="/images/neo4j_intro_crud1.png" alt="Smiley face" width="50%" height="50%"><br></div>
-
-<h3 id="2-2-Using-Merge-command-to-create-Node-with-existing-node-properties"><a href="#2-2-Using-Merge-command-to-create-Node-with-existing-node-properties" class="headerlink" title="2.2 Using Merge command to create Node with existing node properties."></a>2.2 Using Merge command to create Node with existing node properties.</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MATCH (n) WHERE EXISTS(n.Gender)</span><br><span class="line">Merge (gender:Gender&#123;Gender:n.Gender&#125;)</span><br><span class="line"><span class="built_in">return</span> gender</span><br></pre></td></tr></table></figure>
-<div><br>  <img src="/images/neo4j_intro_crud2.png" alt="Smiley face" width="50%" height="50%"><br></div>
-
-<p>We could see that we have created all gender with matching all the nodes with Gender properties.  </p>
-<h3 id="2-3-Merge-command-with-on-create-clause"><a href="#2-3-Merge-command-with-on-create-clause" class="headerlink" title="2.3 Merge command with on create clause."></a>2.3 Merge command with on create clause.</h3><p>When creating a new node, we would like to set the properties for this node at the same time, ON CREATE clause will allows the user to set properties at creation time.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Merge (Yuki:Person&#123;Name:<span class="string">"Yuki"</span>&#125;)</span><br><span class="line">ON CREATE SET Yuki.Gender = <span class="string">"Female"</span></span><br><span class="line">RETURN Yuki.Name,Yuki.Gender</span><br></pre></td></tr></table></figure>
-<div><br>  <img src="/images/neo4j_intro_crud3.png" alt="Smiley face" width="50%" height="50%"><br></div>
-
-<h3 id="2-4-Merge-command-with-on-match-clause"><a href="#2-4-Merge-command-with-on-match-clause" class="headerlink" title="2.4 Merge command with on match clause."></a>2.4 Merge command with on match clause.</h3><p>When traversing from the graph database to find some nodes with some conditions, we need to set some properties to those node at the same time for updating the information regarding to this node.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Merge (person:Person)</span><br><span class="line">ON MATCH SET person.Is_Person = TRUE</span><br><span class="line">RETURN person.Name, person.Is_Person</span><br></pre></td></tr></table></figure>
-<p>Using merge command we could find all the node with label Person and add a new property Is_Person to be true</p>
-<div><br>  <img src="/images/neo4j_intro_crud4.png" alt="Smiley face" width="50%" height="50%"><br></div>
-
-<h3 id="2-4-Merge-command-for-relationships"><a href="#2-4-Merge-command-for-relationships" class="headerlink" title="2.4 Merge command for relationships"></a>2.4 Merge command for relationships</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Merge (mika:Person&#123;Name:<span class="string">"mika"</span>&#125;)</span><br><span class="line">ON CREATE SET mika.Gender = <span class="string">"Male"</span></span><br><span class="line">RETURN mika.Name,mika.Gender</span><br></pre></td></tr></table></figure>
-<p>Suppose Yuki has a boyfriend mika. we want to create relationships between them.We could run the following commands<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MATCH (girl:Person),(boy:Person)</span><br><span class="line">WHERE girl.Name = <span class="string">"Yuki"</span> AND boy.Name = <span class="string">"mika"</span></span><br><span class="line">MERGE (girl)-[relationship:Has_A_Boy_Friend]-&gt;(boy)</span><br><span class="line">RETURN girl,boy</span><br></pre></td></tr></table></figure></p>
-<div><br>  <img src="/images/neo4j_intro_crud5.png" alt="Smiley face" width="50%" height="50%"><br></div>
-
-
-<h2 id="3-SET-Command"><a href="#3-SET-Command" class="headerlink" title="3 SET Command"></a>3 SET Command</h2><p>SET Clause is to set and remove properties of nodes. If Yuki goes to Tokyo University, we could run the following command. We could use set clause to add school properties to Yuki, and remove the Is_Person property we have set before.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MATCH (Yuki:Person)</span><br><span class="line">WHERE Yuki.Name = <span class="string">"Yuki"</span></span><br><span class="line">SET Yuki.School = <span class="string">"Tokyo University"</span></span><br><span class="line">SET Yuki.Is_Person = NULL</span><br><span class="line">RETURN Yuki</span><br></pre></td></tr></table></figure></p>
-<div><br>  <img src="/images/neo4j_intro_crud6.png" alt="Smiley face" width="50%" height="50%"><br></div>
-
-<p>We could also use SET Clause to set multiple labels for some nodes,e.g,add two labels to Yuki which are Student and Gril.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MATCH (Yuki:Person)</span><br><span class="line">WHERE Yuki.Name = <span class="string">"Yuki"</span></span><br><span class="line">SET Yuki:Student:Gril</span><br><span class="line">RETURN Yuki</span><br></pre></td></tr></table></figure></p>
-<div><br>  <img src="/images/neo4j_intro_crud7.png" alt="Smiley face" width="50%" height="50%"><br></div>
-
-
-<h2 id="4-DELETE-Command"><a href="#4-DELETE-Command" class="headerlink" title="4 DELETE Command"></a>4 DELETE Command</h2><p>DELETE command is to delete specific nodes or relationships between nodes. Here we will learn some of the basic usage of delete clause in CQL.</p>
-<h3 id="4-1-DELETE-ALL-NODES"><a href="#4-1-DELETE-ALL-NODES" class="headerlink" title="4.1 DELETE ALL NODES"></a>4.1 DELETE ALL NODES</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MATCH (node)</span><br><span class="line">DETACH DELETE node</span><br></pre></td></tr></table></figure>
-<p>DETACH is to firstly delete the relationships between the nodes that we are going to delete.</p>
-<h3 id="4-2-DELETE-GROUPS-OF-NODES-WITH-CONDITIONS"><a href="#4-2-DELETE-GROUPS-OF-NODES-WITH-CONDITIONS" class="headerlink" title="4.2 DELETE GROUPS OF NODES WITH CONDITIONS"></a>4.2 DELETE GROUPS OF NODES WITH CONDITIONS</h3><p>It is quite similar but still notice that when deleting a node, we should delete the relationships first.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MATCH (mika:Person)</span><br><span class="line">WHERE mika.Name = <span class="string">"mika"</span></span><br><span class="line">DETACH DELETE mika</span><br></pre></td></tr></table></figure></p>
-<p>Next,  I will go through an example to have a overall understanding of CRUD By SQL.</p>
-<p>TO BE CONTINUED</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/09/neo4j-1-introducion/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liang Tan">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile_photo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Liang Tan's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/09/neo4j-1-introducion/" class="post-title-link" itemprop="url">neo4j_1_introducion</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-09 09:43:20 / Modified: 17:35:23" itemprop="dateCreated datePublished" datetime="2019-05-09T09:43:20-06:00">2019-05-09</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DB/" itemprop="url" rel="index"><span itemprop="name">DB</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-Download-and-installation"><a href="#1-Download-and-installation" class="headerlink" title="1. Download and installation"></a>1. Download and installation</h2><p>Neo4j is a very popular, widely-used No-SQL graph database. Let us first try to download and install neo4j on our own laptop. Go to their official webpages, and try to download it on your own system.<a href="https://neo4j.com/download-center/" target="_blank" rel="noopener">Download Center</a> .(I am using Win10 and for learning usage, download Neo4j Community Edition 3.5.5). After download the starting file, let us try to start the server next.</p>
-<h3 id="1-1-start-the-server"><a href="#1-1-start-the-server" class="headerlink" title="1.1 start the server"></a>1.1 start the server</h3><p>open an console and cd to your the install directory of neo4j. run the following command<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$  <span class="built_in">cd</span> &lt;your the install directory of neo4j&gt;</span><br><span class="line">$  bin\neo4j console</span><br></pre></td></tr></table></figure></p>
-<p>you will get<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INFO  ======== Neo4j 3.5.5 ========</span><br><span class="line">INFO  Starting...</span><br><span class="line">INFO  Bolt enabled on 127.0.0.1:7687.</span><br><span class="line">INFO  Started.</span><br><span class="line">Remote interface available at http://localhost:7474/</span><br></pre></td></tr></table></figure></p>
-<p>then, goes to your browser and enter <a href="http://localhost:7474/" target="_blank" rel="noopener">http://localhost:7474/</a>. you will see the following web interface.</p>
-<div><br>  <img src="/images/neo4j_intro_1.png" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> Figure 1.1</div><br></div>
-
-
-<h3 id="1-2-Authenticated-connection-to-the-database"><a href="#1-2-Authenticated-connection-to-the-database" class="headerlink" title="1.2 Authenticated connection to the database."></a>1.2 Authenticated connection to the database.</h3><p>Connect using the default username ‘neo4j’ with default password ‘neo4j’. It will leading to a instruction for you to set your own password for conection.</p>
-<p>Now we are done.</p>
-<div><br>  <img src="/images/neo4j_intro_2.png" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> Figure 1.2</div><br></div>
-
-
-<h2 id="2-Neo4j-Data-Model-amp-Architecture"><a href="#2-Neo4j-Data-Model-amp-Architecture" class="headerlink" title="2. Neo4j: Data Model &amp; Architecture"></a>2. Neo4j: Data Model &amp; Architecture</h2><p>Neo4j uses Native Graph Processing Engineer(GPE) to store the graph. To be specific, data are stored in the form of <strong><em>Nodes</em></strong> and properties related to that data are stored as <strong><em>key-value pairs</em></strong>, where Key is the property name and value is property value. For example, if I have one worker named Kitty and has some properties like, Id, gender ,department etc. So the node looks like the following:</p>
-<div><br>  <img src="/images/neo4j_intro_3.png" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> Data in Neo4j</div><br></div>
-
-<p>Here, the node has a <strong><em>label</em></strong> called worker. As we known, each work is employee of one company. So, an edge  describes the relationship between labels.</p>
-<div><br>  <img src="/images/neo4j_intro_4.png" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px">relationship between labels</div><br></div>
-
-<p>In order to do some manipulations on the database, let us first know about the data type supported in  Cypher Query Language (CQL).</p>
-<h2 id="2-Cypher-Query-Language-CQL"><a href="#2-Cypher-Query-Language-CQL" class="headerlink" title="2. Cypher Query Language (CQL)."></a>2. Cypher Query Language (CQL).</h2><h3 id="2-1-Creating-Single-and-Multiple-Nodes-with-label"><a href="#2-1-Creating-Single-and-Multiple-Nodes-with-label" class="headerlink" title="2.1 Creating Single and Multiple Nodes with label"></a>2.1 Creating Single and Multiple Nodes with label</h3><p>Syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Node_Name_1),(Node_Name_2),...</span><br></pre></td></tr></table></figure></p>
-<p>Example<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Student),(School),(Subject)</span><br></pre></td></tr></table></figure></p>
-<p>When we creating a node, we could add labels to that node, the syntax is :<br>Syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Node_Name:Node_label)</span><br></pre></td></tr></table></figure></p>
-<p>Example<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Kitty:Worker)</span><br></pre></td></tr></table></figure></p>
-<p>To view all the nodes we have created before, using match clause without any conditions to get all results<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ MATCH (n) <span class="built_in">return</span> n</span><br></pre></td></tr></table></figure></p>
-<p>We can see all the nodes created before, notice that, each node in the graph has its own id, and neo4j automatically generated id for each node.</p>
-<div><br>  <img src="/images/neo4j_intro_5.png" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> Data in Neo4j</div><br></div>
-
-<p>Each node can have not only one labels, but also have  multiple labels.</p>
-<p>Syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Node_Name:Node_label_1:Node_label_2:Node_label_3:...)</span><br></pre></td></tr></table></figure></p>
-<p>Example<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (John:Teacher:Student:Professor)</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-2-Creating-Nodes-with-properties"><a href="#2-2-Creating-Nodes-with-properties" class="headerlink" title="2.2 Creating Nodes with properties"></a>2.2 Creating Nodes with properties</h3><p>As above discussion, nodes are actually key-value pairs,<br>Syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Node_Name:Node_label&#123;&lt;key&gt;:&lt;value&gt;, &lt;key&gt;:&lt;value&gt;, ...&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>Example<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Kitty:Worker&#123;Gender:<span class="string">"Female"</span>, Department:<span class="string">"IT service"</span>&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>After run the MATCH CLAUSE, we could see the result.</p>
-<div><br>  <img src="/images/neo4j_intro_6.png" alt="Smiley face" width="50%" height="50%"><br></div>
-
-<h3 id="2-3-Creating-Nodes-with-properties"><a href="#2-3-Creating-Nodes-with-properties" class="headerlink" title="2.3 Creating Nodes with properties"></a>2.3 Creating Nodes with properties</h3><p>Before we establishing relationship between different nodes, let’s look at how to use where clause.<br>Syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ MATCH(node:Node_label) WHERE node.property=<span class="string">"some_value"</span> RETURN node;</span><br></pre></td></tr></table></figure></p>
-<p>Example : find all the female employees.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ MATCH (worker:Worker) WHERE worker.Gender = <span class="string">"Female"</span> RETURN worker;</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-4-Create-Relations-between-nodes"><a href="#2-4-Create-Relations-between-nodes" class="headerlink" title="2.4 Create Relations between nodes."></a>2.4 Create Relations between nodes.</h3><p>Syntax: Create nodes and creating relationships between them<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE (node1),(node2),(node3),(node1)-[r:Relation1]-&gt; (node2),(node2) -[r:Relation1]-&gt; (node3)</span><br></pre></td></tr></table></figure></p>
-<p>Syntax : Select existing nodes and creating relationships between them.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MATCH(a:Node_label),(b:Node_label) WHERE a.ID = ??? AND b.ID=??? CREATE (b)-[r:R] -&gt; (a)</span><br></pre></td></tr></table></figure></p>
-<p>Example:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE(Tony:Software_Engineer&#123;name: <span class="string">"Tony"</span>, Gender: <span class="string">"Male"</span>, Department: <span class="string">"IT Dev"</span>, Age: 35&#125;),</span><br><span class="line">(IBM:Company&#123;name:<span class="string">"IBM"</span>&#125;), (Tony)-[r:Is_Employee_Of]-&gt;(IBM)  RETURN Tony, IBM</span><br></pre></td></tr></table></figure></p>
-<div><br>  <img src="/images/neo4j_intro_7.png" alt="Smiley face" width="50%" height="50%"><br></div>
-
-<p>Example: Create relationships between existing nodes.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MATCH(software_eigneer:Software_Engineer),(company:Company) WHERE software_eigneer.name = <span class="string">"Tony"</span> AND company.name=<span class="string">"IBM"</span> CREATE (company)-[relation:Hires] -&gt; (software_eigneer) RETURN software_eigneer, company</span><br></pre></td></tr></table></figure></p>
-<p>Results:Java</p>
-<div><br>  <img src="/images/neo4j_intro_8.png" alt="Smiley face" width="50%" height="50%"><br></div>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/08/DecoratorPattern/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liang Tan">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile_photo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Liang Tan's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/08/DecoratorPattern/" class="post-title-link" itemprop="url">Design-Pattern -- Decorator Pattern</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-08 07:40:07" itemprop="dateCreated datePublished" datetime="2019-05-08T07:40:07-06:00">2019-05-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-22 11:28:31" itemprop="dateModified" datetime="2019-05-22T11:28:31-06:00">2019-05-22</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-Definition"><a href="#1-Definition" class="headerlink" title="1. Definition:"></a>1. Definition:</h1><p>Let us first look at the strict definition of Decorator Pattern,</p>
-<blockquote>
-<p><strong>Decorator Pattern attaches additional responsibilities to one Object dynamically, without affecting the behaviour of other objects from the same class. Decorator provides a flexible alternative to sub-classes for extending functionalities. (<a href="https://en.wikipedia.org/wiki/Decorator_pattern" target="_blank" rel="noopener">Wiki_Link_For_More_Info</a>)</strong></p>
-</blockquote>
-<p><br></p>
-<p>Detail of the definition:</p>
-<ul>
-<li><strong>dynamically</strong> : The meaning at dynamically means that those attached responsibilities are not <strong>*hard-coded</strong> in to the object class <strong><em>at compile time</em></strong>. Instead, these responsibilities are added <strong><em>at runtime time</em></strong> by different Decorator. At the same time, one type of object could have multiple types of decorators, so a client can choose any one or any combination of them to decorate the object at runtime.</li>
-<li><strong>flexible alternative</strong>: decorator pattern using <strong><em>Composition</em></strong> rather than <strong><em>Inheritance</em></strong>. Since inheritance is not used, the original class functionalities will not be changed.</li>
-</ul>
-<p>Before going to the UML of decorator pattern, let us look at the design principles it bases on.</p>
-<ol>
-<li><p><strong>Open Close Principle</strong>: Software entities like classes, modules and functions should be <strong><em>open for extension</em></strong> but <strong><em>closed for modifications</em></strong>. When the requirements have been changed for one class, it is not recommended to go into that class and change the code, instead, using abstract class and concrete classes for implementing their behaviour. In different scenario, using different concrete classes. In decorator pattern, Component are usually interface or abstract class.</p>
-</li>
-<li><p><strong>Single responsibilities Principle</strong>: A class should have <strong><em>only one reason</em></strong> to change. This means that if we have 2 reasons to change for a class, we have to split the functionality in two classes. In decorator pattern, each concrete decorator has only changed one responsibility of the original class. In order to get multiple responsibilities changed, using composition of decorators.</p>
-</li>
-</ol>
-<p>Now, let us draw a picture to see what a decorator and component relation actually is.</p>
-<div><br>  <img src="/images/decorator_1.png" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> decorator and Component relation</div><br></div>
-
-<p>Notice</p>
-<ol>
-<li>Decorator <strong><em>has-a</em></strong> component of that type. Decorator is a wrapper of component. It has a reference or pointer to the component object so that it can invoke the method defines in that component.</li>
-<li>Meanwhile, Decorator <strong><em>is-a</em></strong> component. Decorator itself must also be a component of that type. So, a decorator can be viewed as a component and wrapped by another Decorator. (Very similar to recursion.)</li>
-</ol>
-<h1 id="2-General-UML"><a href="#2-General-UML" class="headerlink" title="2. General UML:"></a>2. General UML:</h1><div><br>  <img src="/images/decorator_2.jpg" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> UML for decorator pattern</div><br></div>
-
-<p>Here, I implement the UML as an example with slightly differences interface Component:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Component</span> <span class="keyword">implements</span> <span class="title">IComponent</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I am a base method in concrete Component"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Abstract Class decorator:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Decorator</span> <span class="keyword">implements</span> <span class="title">IComponent</span></span>&#123;<span class="comment">// it is a component</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> IComponent component;<span class="comment">// it has-a component</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Decorator</span><span class="params">(IComponent component)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        component.operation();<span class="comment">// invoke base method</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Concrete decorator A:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DecoratorA</span> <span class="keyword">extends</span> <span class="title">Decorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DecoratorA</span><span class="params">(IComponent component)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(component);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">preOperation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this is a pre-operation defined in decoratorA"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Add a pre-operation before base Operation</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.preOperation();</span><br><span class="line">        <span class="keyword">super</span>.operation();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Concrete decorator B:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DecoratorB</span> <span class="keyword">extends</span> <span class="title">Decorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//decorator can have new properties and method.</span></span><br><span class="line">    <span class="keyword">private</span> String newSate = <span class="string">"I am a new State"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DecoratorB</span><span class="params">(IComponent component)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(component);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">postOperation</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this is a post-operation defined in decoratorB"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.operation();</span><br><span class="line">        <span class="keyword">this</span>.postOperation();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNewSate</span><span class="params">(String newSate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.newSate = newSate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getNewSate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> newSate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Test Main_function:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        IComponent component = <span class="keyword">new</span> Component();</span><br><span class="line">        component.operation();</span><br><span class="line">        System.out.println(<span class="string">"------------------------------"</span>);</span><br><span class="line"></span><br><span class="line">        IComponent concreteDecortorA = <span class="keyword">new</span> DecoratorA(component);</span><br><span class="line">        concreteDecortorA.operation();<span class="comment">// operation after decorating by A</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"------------------------------"</span>);</span><br><span class="line">        IComponent concrteDecortorB = <span class="keyword">new</span> DecoratorB(component);</span><br><span class="line">        concrteDecortorB.operation();<span class="comment">// operation after decorating by B</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"------------------------------"</span>);</span><br><span class="line">        <span class="comment">// decorator of decorator, by passing concreteDecortorA as parameter of decoratorB</span></span><br><span class="line">        IComponent compositeDecortor = <span class="keyword">new</span> DecoratorB(concreteDecortorA);</span><br><span class="line">        <span class="comment">// first invoke operation defined by concreteDecortorA, concreteDecortorA will invoke the operation defined by the</span></span><br><span class="line">        <span class="comment">// base component</span></span><br><span class="line">        compositeDecortor.operation();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">I am a base method in concrete Component</span><br><span class="line">------------------------------</span><br><span class="line">this is a pre-operation defined in decoratorA</span><br><span class="line">I am a base method in concrete Component</span><br><span class="line">------------------------------</span><br><span class="line">I am a base method in concrete Component</span><br><span class="line">this is a post-operation defined in decoratorB</span><br><span class="line">------------------------------</span><br><span class="line">this is a pre-operation defined in decoratorA</span><br><span class="line">I am a base method in concrete Component</span><br><span class="line">this is a post-operation defined in decoratorB</span><br></pre></td></tr></table></figure>
-<p>Comments: For composite decorator, it takes another decorator as a component, and when it invoke the operation() method, it will invoke the operation defined by the component(which is also a decorator) , and that component recursively invoke the base component(which is actually a real component), it invokes the base method ,and returns the result to its decorator, and that decorator returns the result to the composite decorator.</p>
-<h1 id="3-Java-IO-InputStream"><a href="#3-Java-IO-InputStream" class="headerlink" title="3. Java IO - InputStream:"></a>3. Java IO - InputStream:</h1><p>java.io.inputStream uses the decorator Pattern. From the book <a href="https://www.amazon.com/dp/0596007124/?tag=stackoverfl08-20" target="_blank" rel="noopener">Head First Design Patterns</a>,we can see how they use decorator Pattern in java to add functionalities for reading data from files.</p>
-<div><br>  <img src="/images/decorator_3.jpg" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> how decorator pattern used in java.io</div><br></div>
-
-<div><br>  <img src="/images/decorator_4.jpg" alt="Smiley face" width="50%" height="50%"><br>  <div class="text" style="text-align:center;font-size:10px"> java.io.inputStream hierarchy </div><br></div>
-
-<p>The usage of decorator pattern in java.io also points to the <em>drawback</em> of decorator pattern. There are <em>so many decorators implementation classes</em>. It can be confusing for clients who call those decorator-API. It is somehow hard when those clients can not tell the difference between each decorators. However, once they know, they can combine different decorators for their own applications.</p>
-<p>Now, let us create a own type of Input Stream and test it.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UpperCaseInputStream</span> <span class="keyword">extends</span> <span class="title">FileInputStream</span> </span>&#123;<span class="comment">// is-a</span></span><br><span class="line">    <span class="comment">// Constructors which matches the super class FileInputStream</span></span><br><span class="line">    <span class="keyword">private</span> FileInputStream fileInputStream; <span class="comment">//has-a</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UpperCaseInputStream</span><span class="params">(String name,FileInputStream fileInputStream)</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">        <span class="keyword">this</span>.fileInputStream = fileInputStream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UpperCaseInputStream</span><span class="params">(File file,FileInputStream fileInputStream)</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(file);</span><br><span class="line">        <span class="keyword">this</span>.fileInputStream = fileInputStream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UpperCaseInputStream</span><span class="params">(FileDescriptor fdObj,FileInputStream fileInputStream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(fdObj);</span><br><span class="line">        <span class="keyword">this</span>.fileInputStream = fileInputStream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> nextByte = <span class="keyword">super</span>.read();</span><br><span class="line">        <span class="keyword">if</span> (nextByte == -<span class="number">1</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> Character.toUpperCase((<span class="keyword">char</span>) (nextByte));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span>[] b)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> totalBytes = <span class="keyword">super</span>.read(b);</span><br><span class="line">        <span class="keyword">if</span> (totalBytes == -<span class="number">1</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        convertToUppercase(b, <span class="number">0</span>, totalBytes);</span><br><span class="line">        <span class="keyword">return</span> totalBytes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> totalBytes = <span class="keyword">super</span>.read(b, off, len);</span><br><span class="line">        <span class="keyword">if</span> (totalBytes == -<span class="number">1</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// convert all the character in byte array to uppercase letter</span></span><br><span class="line">        convertToUppercase(b, off, off + totalBytes);</span><br><span class="line">        <span class="keyword">return</span> totalBytes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">convertToUppercase</span><span class="params">(<span class="keyword">byte</span>[] b, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> idx = start; idx &lt; end; idx++) &#123;</span><br><span class="line">            b[idx] = (<span class="keyword">byte</span>) Character.toUpperCase((<span class="keyword">char</span>) (b[idx]));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Test our UpperCaseInputStream:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UpperCaseInputStreamTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String filePath = <span class="string">"data/text_file.txt"</span>;</span><br><span class="line">        FileInputStream fileinputStream = <span class="keyword">null</span>;</span><br><span class="line">        UpperCaseInputStream upperCaseInputStream = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 1\. Create a component with one base class: FileInputStream</span></span><br><span class="line">            fileinputStream = <span class="keyword">new</span> FileInputStream(filePath);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//2\. Create our customized decorator with the base component</span></span><br><span class="line">            upperCaseInputStream = <span class="keyword">new</span> UpperCaseInputStream(filePath, fileinputStream);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.1Test read once at a time</span></span><br><span class="line">        <span class="comment">/*try &#123;</span></span><br><span class="line"><span class="comment">            do&#123;</span></span><br><span class="line"><span class="comment">                System.out.print((char) upperCaseInputStream.read());</span></span><br><span class="line"><span class="comment">            &#125;while (upperCaseInputStream.read() != -1);</span></span><br><span class="line"><span class="comment">        &#125; catch (IOException e) &#123;</span></span><br><span class="line"><span class="comment">            e.printStackTrace();</span></span><br><span class="line"><span class="comment">        &#125;*/</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.2 Test read into byte array buffer</span></span><br><span class="line">        <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">int</span> length;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> ((length = upperCaseInputStream.read(buf)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                System.out.println(<span class="keyword">new</span> String(buf, <span class="number">0</span>, length));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//4\. release the resources</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            upperCaseInputStream.close();</span><br><span class="line">            fileinputStream.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>OutPut:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BCDEFGHIJKLMN</span><br><span class="line">GKIERERU</span><br></pre></td></tr></table></figure>
-<p>text_file.txt :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bcdefghijklmn</span><br><span class="line">GKiereru</span><br></pre></td></tr></table></figure>
-<p>Hence, our UpperCaseInputStream meets the expectation.</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2765,7 +2641,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2895,7 +2771,43 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
