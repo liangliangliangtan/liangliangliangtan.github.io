@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/mini-spring-mvc/</loc>
+    
+    <lastmod>2019-07-11T16:39:12.799Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/path-in-zigzag-labelled-binary-tree/</loc>
     
-    <lastmod>2019-07-03T15:19:48.284Z</lastmod>
+    <lastmod>2019-07-03T15:38:19.267Z</lastmod>
     
   </url>
   
@@ -19,13 +26,6 @@
     <loc>http://yoursite.com/import_rdf_to_neo4j_db/</loc>
     
     <lastmod>2019-07-02T15:57:57.741Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/mini-spring-mvc/</loc>
-    
-    <lastmod>2019-06-26T23:16:42.840Z</lastmod>
     
   </url>
   

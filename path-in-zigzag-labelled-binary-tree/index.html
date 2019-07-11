@@ -105,7 +105,7 @@
 <meta property="og:description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/tree.png">
-<meta property="og:updated_time" content="2019-07-03T15:19:48.284Z">
+<meta property="og:updated_time" content="2019-07-03T15:38:19.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 1104 Path in Zigzag Labelled Binary Tree">
 <meta name="twitter:description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
@@ -399,7 +399,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-03 09:19:48" itemprop="dateModified" datetime="2019-07-03T09:19:48-06:00">2019-07-03</time>
+                <time title="Modified: 2019-07-03 09:38:19" itemprop="dateModified" datetime="2019-07-03T09:38:19-06:00">2019-07-03</time>
               
             
           </span>
@@ -455,7 +455,7 @@
 <h1 id="3-Difficulty-find-the-label-of-its-parent-node"><a href="#3-Difficulty-find-the-label-of-its-parent-node" class="headerlink" title="3. Difficulty: find the label of its parent node"></a>3. Difficulty: find the label of its parent node</h1><p>The tough thing here is to find the label of its parent node. What conditions we have not used yet? Well, the binary tree is complete, and the trees label is in ZigZag Order. </p>
 <p>The tree is binary and complete:</p>
 <ol>
-<li><p>Given the label, we could compute the depth of the tree by taking the logrithm of two. Let us say the result is k. Then, we also know the range of that level, which is<br>[$2^k$, $2^(k+1)$-1].</p>
+<li><p>Given the label, we could compute the depth of the tree by taking the logrithm of two. Let us say the result is k. Then, we also know the range of that level, which is<br>[$2^k$, $2^{k+1}$-1].</p>
 </li>
 <li><p>According to ZigZag property, we know that <strong>the largest element in the previous layer follows by the smallest element of the current layer</strong>.Therefore, we know that the smallest element in the previous layer is $2^k$ - 1. </p>
 </li>
@@ -755,7 +755,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">61</span>
+                      
+                    
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
