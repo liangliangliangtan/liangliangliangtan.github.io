@@ -682,24 +682,24 @@
         }
       }
 
-      function showGitment() {
-        $("#gitment_title").attr("style", "display:none");
-        $("#container").attr("style", "").addClass("gitment_container");
-        var gitment = new Gitment({
-          id: '1561563840000',
-          theme: myTheme,
-          owner: 'detectiveHLH',
-          repo: 'detectiveHLH.github.io',
-          oauth: {
-            client_id: 'xxx',
-            client_secret: 'xxx'
-          }
-        });
-        gitment.render('container');
-      }
+    function showGitment() {
+      $("#gitment_title").attr("style", "display:none");
+      $("#container").attr("style", "").addClass("gitment_container");
+      var gitment = new Gitment({
+        id: '1561563840000',
+        theme: myTheme,
+        owner: 'liangliangliangtan',
+        repo: 'liangliangliangtan.github.io',
+        oauth: {
+          client_id: '42d0b83b57fd95e785f4',
+          client_secret: 'f4c0e51fdb6b1409eb2e59e9d284e5b92f0dfd41'
+        }
+      });
+      gitment.render('container');
+    }
 
-      showGitment();
-    </script>
+    showGitment();
+  </script>
 
   
 
