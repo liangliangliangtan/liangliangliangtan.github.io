@@ -341,8 +341,6 @@
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="Software Requirements Analysis" scheme="http://yoursite.com/tags/Software-Requirements-Analysis/"/>
-    
       <category term="Javascript" scheme="http://yoursite.com/tags/Javascript/"/>
     
       <category term="JSP" scheme="http://yoursite.com/tags/JSP/"/>
@@ -350,6 +348,8 @@
       <category term="Bootstrap" scheme="http://yoursite.com/tags/Bootstrap/"/>
     
       <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
+    
+      <category term="Software Requirements Analysis" scheme="http://yoursite.com/tags/Software-Requirements-Analysis/"/>
     
       <category term="Front-end" scheme="http://yoursite.com/tags/Front-end/"/>
     
