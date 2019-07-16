@@ -96,21 +96,20 @@
 
 
 
-  <meta name="description" content="1. Definition:Let us first look at the strict definition of Decorator Pattern,  Iterator Pattern provides a way to access the elements of an aggregate object sequentially without knowing its underlyin">
-<meta name="keywords" content="OOD,Design Pattern,Iterator Pattern,Java,Java Generic">
+  <meta name="description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
+<meta name="keywords" content="Data Structure and Algorithm,Recursion,Complete Binary Tree,ZigZag,Math">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DesignPattern -  Iterator Pattern">
-<meta property="og:url" content="http://yoursite.com/IteratorPattern">
+<meta property="og:title" content="Leetcode 1104 Path in Zigzag Labelled Binary Tree">
+<meta property="og:url" content="http://yoursite.com/pathInZigZagLabelledBinaryTree/index.html">
 <meta property="og:site_name" content="Liang Tan&#39;s Blog">
-<meta property="og:description" content="1. Definition:Let us first look at the strict definition of Decorator Pattern,  Iterator Pattern provides a way to access the elements of an aggregate object sequentially without knowing its underlyin">
+<meta property="og:description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/images/iterator_1.jpg">
-<meta property="og:image" content="http://yoursite.com/images/iterator_2.jpg">
-<meta property="og:updated_time" content="2019-05-16T23:17:22.255Z">
+<meta property="og:image" content="http://yoursite.com/images/tree.png">
+<meta property="og:updated_time" content="2019-07-15T21:18:47.407Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DesignPattern -  Iterator Pattern">
-<meta name="twitter:description" content="1. Definition:Let us first look at the strict definition of Decorator Pattern,  Iterator Pattern provides a way to access the elements of an aggregate object sequentially without knowing its underlyin">
-<meta name="twitter:image" content="http://yoursite.com/images/iterator_1.jpg">
+<meta name="twitter:title" content="Leetcode 1104 Path in Zigzag Labelled Binary Tree">
+<meta name="twitter:description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
+<meta name="twitter:image" content="http://yoursite.com/images/tree.png">
 
 
 
@@ -120,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/IteratorPattern">
+  <link rel="canonical" href="http://yoursite.com/pathInZigZagLabelledBinaryTree/">
 
 
 
@@ -130,7 +129,7 @@
   };
 </script>
 
-  <title>DesignPattern -  Iterator Pattern | Liang Tan's Blog</title>
+  <title>Leetcode 1104 Path in Zigzag Labelled Binary Tree | Liang Tan's Blog</title>
   
 
 
@@ -340,7 +339,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/IteratorPattern">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pathInZigZagLabelledBinaryTree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang Tan">
@@ -357,7 +356,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DesignPattern -  Iterator Pattern
+          <h1 class="post-title" itemprop="name headline">Leetcode 1104 Path in Zigzag Labelled Binary Tree
 
               
             
@@ -383,12 +382,24 @@
                 
               
 
-              <time title="Created: 2019-05-16 15:42:15 / Modified: 17:17:22" itemprop="dateCreated datePublished" datetime="2019-05-16T15:42:15-06:00">2019-05-16</time>
+              <time title="Created: 2019-07-02 19:26:51" itemprop="dateCreated datePublished" datetime="2019-07-02T19:26:51-06:00">2019-07-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-15 15:18:47" itemprop="dateModified" datetime="2019-07-15T15:18:47-06:00">2019-07-15</time>
               
             
           </span>
@@ -429,48 +440,32 @@
       
 
       
-        <h1 id="1-Definition"><a href="#1-Definition" class="headerlink" title="1. Definition:"></a>1. Definition:</h1><p>Let us first look at the strict definition of Decorator Pattern,</p>
-<blockquote>
-<p><strong>Iterator Pattern provides a way to access the elements of an aggregate object sequentially without knowing its underlying representation. (<a href="https://en.wikipedia.org/wiki/Iterator_pattern" target="_blank" rel="noopener">Wiki_Link_For_More_Info</a>)</strong></p>
-</blockquote>
-<p><br></p>
-<p>Iterator Patterns has multiple advantages.</p>
+        <h1 id="1-Problem-Description"><a href="#1-Problem-Description" class="headerlink" title="1. Problem Description"></a>1. Problem Description</h1><p>In an infinite <strong>binary tree</strong> where <strong>every node has two children</strong>, the nodes are labelled in row order.</p>
+<p>In the <strong>odd</strong> numbered rows (ie., the first, third, fifth,…), the labelling is <strong>left to right</strong>, while in the <strong>even</strong> numbered rows (second, fourth, sixth,…), the labelling is <strong>right to left</strong>.</p>
+<p><div>
+  <img src="../images/tree.png" alt="Smiley face" width="50%" height="50%">
+</div><br><br></p>
+<p><strong>Challenge:</strong> </p>
+<p>Given the label of a node in this tree, return the labels in the path from the root of the tree to the node with that label.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: label = 14</span><br><span class="line">Output: [1,3,4,14]</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: label = 26</span><br><span class="line">Output: [1,2,6,10,26]</span><br></pre></td></tr></table></figure>
+<h1 id="2-My-Thought-About-This-Problem"><a href="#2-My-Thought-About-This-Problem" class="headerlink" title="2. My Thought About This Problem:"></a>2. My Thought About This Problem:</h1><p>Tree data structure itself is recursive, Hence, Many problems regarding to tree can be solved recursively. In this problem, we could think that in order to find the path of the label of a node, how about <strong>finding the label of its parent node in the first place</strong>.  If we can do that, the problem can be solved recursively, until the root node which has label of 1. </p>
+<h1 id="3-Difficulty-find-the-label-of-its-parent-node"><a href="#3-Difficulty-find-the-label-of-its-parent-node" class="headerlink" title="3. Difficulty: find the label of its parent node"></a>3. Difficulty: find the label of its parent node</h1><p>The tough thing here is to find the label of its parent node. What conditions we have not used yet? Well, the binary tree is complete, and the trees label is in ZigZag Order. </p>
+<p>The tree is binary and complete:</p>
 <ol>
-<li>It allows us to iterate different absurb data structure uniformly, making the iteration trivial. That is the traversal operation is defined for an aggregate object <strong>without chaning its interface</strong>.</li>
-<li>It enables the traversal of data structure <strong>without knowing the detailed representation of that data structure</strong>. That is <strong>encapsulation benefit</strong>.</li>
-<li>Since it is a kind of <strong>lazy evaluation</strong>, i.e. we ask one and it gives us one at a time, therefore our collection can also be <strong>infinite</strong>, and at the same time we can <strong>pause at any where</strong> we want.</li>
+<li><p>Given the label, we could compute the depth of the tree by taking the logrithm of two. Let us say the result is k. Then, we also know the range of that level, which is<br>[$2^k$, $2^{k+1}$-1].</p>
+</li>
+<li><p>According to ZigZag property, we know that <strong>the largest element in the previous layer follows by the smallest element of the current layer</strong>.Therefore, we know that the smallest element in the previous layer is $2^k$ - 1. </p>
+</li>
 </ol>
-<h1 id="2-General-UML-of-Iterator-Pattern"><a href="#2-General-UML-of-Iterator-Pattern" class="headerlink" title="2. General UML of Iterator Pattern"></a>2. General UML of Iterator Pattern</h1><p>Then, let us look the General UML of Iterator Pattern.</p>
-<div>
-  <img src="/images/iterator_1.jpg" alt="Smiley face" width="50%" height="50%">
-  <div class="text" style="text-align:center;font-size:10px"> UML for iterator pattern</div>
-</div>
-
-<p>We have two interfaces, Iterable and iterator. Once a concreate class implements Iterable interface, it must override the iterator() method. It create a concreate Iterator by passing itself to the constructor of concreate Iterator. This means that given a concrete iterable ,it produces a concreate iterator. The concreate iterator may also have the private access to its related iterable reference so that it can access the field or methods defined in iterable. Iterator Pattern allows designer to decouple the enumerate functionality with others and unify by the interface.</p>
-<h1 id="3-Example"><a href="#3-Example" class="headerlink" title="3. Example"></a>3. Example</h1><p>Suppose We have a collection of labels (of Type String) on one Node and we want to enumerate them. The codes are as follows:</p>
-<p>Iterable Interface:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterable</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">Iterator&lt;T&gt;  <span class="title">getIterator</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Iterator Interface:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">T <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Concreate Class which implements the iterable interface.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NodeLabels</span> <span class="keyword">implements</span>  <span class="title">Iterable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String[] labels;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NodeLabels</span><span class="params">(String[] labels)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.labels = labels;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String[] getLabels() &#123;</span><br><span class="line">        <span class="keyword">return</span> labels;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLabels</span><span class="params">(String[] labels)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.labels = labels;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Iterator&lt;String&gt; <span class="title">getIterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> NodeLabelsIterator(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Concreate Class which implements the iterator interface.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NodeLabelsIterator</span> <span class="keyword">implements</span>  <span class="title">Iterator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> NodeLabels nodeLabels;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pointer;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NodeLabelsIterator</span><span class="params">(NodeLabels nodeLabels)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nodeLabels = nodeLabels;</span><br><span class="line">        <span class="keyword">this</span>.pointer = -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.pointer &lt; nodeLabels.getLabels().length-<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.nodeLabels.getLabels()[++pointer];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Test Function(Client)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String[] labels = <span class="keyword">new</span> String[] &#123;<span class="string">"Person"</span>,<span class="string">"Movie"</span>,<span class="string">"CAT"</span>,<span class="string">"DOG"</span>&#125;;</span><br><span class="line">        Iterable&lt;String&gt; iterable = <span class="keyword">new</span> NodeLabels(labels);</span><br><span class="line">        Iterator&lt;String&gt; iterator = iterable.getIterator();</span><br><span class="line">        <span class="keyword">while</span>(iterator.hasNext())&#123;</span><br><span class="line">            System.out.println(iterator.next());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>OutPut:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person</span><br><span class="line">Movie</span><br><span class="line">CAT</span><br><span class="line">DOG</span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure>
-<p>Explain:</p>
+<p>3.If we could know the difference between  the smallest element in the previous  and its parent, then we can derive its parent label ! </p>
 <ol>
-<li>In the interface, we usually use generic T to represent any possible Object Type.In the concreate class implementation, we should specify the types.</li>
-<li>In the concreate iterator class, we should have a pointer pointing to where we have traversed.</li>
-<li>Concreate iterable is responsible for create its concreate iterator by passing itself to the iterator constructor. Client has no aware of that.</li>
-<li>Client can only have the access to the iterable interface and iterator interface.</li>
+<li>Now we only have one condition haven’t applied, which is the tree is <strong>complete</strong>. Recall that, <strong>Heap</strong> itseulf is a complete binary tree but it can be stored in an array. The parent of a node with index <em>i</em> in heap is array[i/2]. The offset of current node divides two is the difference we want.</li>
 </ol>
-<p>UML diagram</p>
-<div>
-  <img src="/images/iterator_2.jpg" alt="Smiley face" width="30%" height="20%">
-</div>
+<p>By previous analysis, the code is relatively easy to write.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  List&lt;Integer&gt; <span class="title">pathInZigZagTree</span><span class="params">(<span class="keyword">int</span> label)</span></span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        bottom2upTraverse(list, label);</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bottom2upTraverse</span><span class="params">(List&lt;Integer&gt; list, <span class="keyword">int</span> label)</span></span>&#123;</span><br><span class="line">        list.add(<span class="number">0</span>,label);</span><br><span class="line">        <span class="keyword">if</span>(label == <span class="number">1</span>) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="comment">// get the level of the label in the tree;</span></span><br><span class="line">        <span class="keyword">int</span> level = log2(label);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// get the index of the label on its level</span></span><br><span class="line">        <span class="keyword">int</span> idx = label - (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>,level);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// according to ZigZag Tree property, find the previous label to traverse;</span></span><br><span class="line">        <span class="keyword">int</span> nextLabel = (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>,level) - <span class="number">1</span> - idx/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// traverse recursively.</span></span><br><span class="line">        bottom2upTraverse(list,nextLabel);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">log2</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)(Math.log(n) / Math.log(<span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -494,15 +489,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/OOD/" rel="tag"># OOD</a>
+            <a href="/tags/Data-Structure-and-Algorithm/" rel="tag"># Data Structure and Algorithm</a>
           
-            <a href="/tags/Design-Pattern/" rel="tag"># Design Pattern</a>
+            <a href="/tags/Recursion/" rel="tag"># Recursion</a>
           
-            <a href="/tags/Iterator-Pattern/" rel="tag"># Iterator Pattern</a>
+            <a href="/tags/Complete-Binary-Tree/" rel="tag"># Complete Binary Tree</a>
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
+            <a href="/tags/ZigZag/" rel="tag"># ZigZag</a>
           
-            <a href="/tags/Java-Generic/" rel="tag"># Java Generic</a>
+            <a href="/tags/Math/" rel="tag"># Math</a>
           
         </div>
       
@@ -515,8 +510,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/neo4j-java-introduction" rel="next" title="Introduction - how to use neo4j in java">
-                <i class="fa fa-chevron-left"></i> Introduction - how to use neo4j in java
+              <a href="/filling-bookcase-shelves/" rel="next" title="Leetcode problem 1105 filling-bookcase-shelves">
+                <i class="fa fa-chevron-left"></i> Leetcode problem 1105 filling-bookcase-shelves
               </a>
             
           </div>
@@ -524,10 +519,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/OGM-in-Neo4j" rel="prev" title="OGM in Neo4j">
-                OGM in Neo4j <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -818,7 +809,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Definition"><span class="nav-number">1.</span> <span class="nav-text">1. Definition:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-General-UML-of-Iterator-Pattern"><span class="nav-number">2.</span> <span class="nav-text">2. General UML of Iterator Pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Example"><span class="nav-number">3.</span> <span class="nav-text">3. Example</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Problem-Description"><span class="nav-number">1.</span> <span class="nav-text">1. Problem Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-My-Thought-About-This-Problem"><span class="nav-number">2.</span> <span class="nav-text">2. My Thought About This Problem:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Difficulty-find-the-label-of-its-parent-node"><span class="nav-number">3.</span> <span class="nav-text">3. Difficulty: find the label of its parent node</span></a></li></ol></div>
             
 
           </div>
@@ -1045,6 +1036,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 

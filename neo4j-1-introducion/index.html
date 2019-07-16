@@ -96,20 +96,27 @@
 
 
 
-  <meta name="description" content="Problem DescriptionWe have a sequence of books: the i-th book has thickness books[i][0] and height books[i][1]. We want to place these books in order onto bookcase shelves that have total width shelf_">
-<meta name="keywords" content="Dynamic programming,Data Structure and Algorithm,backtracking,Depth-first Search (DFS),memorization">
+  <meta name="description" content="1. Download and installationNeo4j is a very popular, widely-used No-SQL graph database. Let us first try to download and install neo4j on our own laptop. Go to their official webpages, and try to down">
+<meta name="keywords" content="Graph Database,NoSQL,dynamic schema,Cypher Query Language,introduction">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode problem 1105 filling-bookcase-shelves">
-<meta property="og:url" content="http://yoursite.com/filling-bookcase-shelves">
+<meta property="og:title" content="neo4j_1_introducion">
+<meta property="og:url" content="http://yoursite.com/neo4j-1-introducion/index.html">
 <meta property="og:site_name" content="Liang Tan&#39;s Blog">
-<meta property="og:description" content="Problem DescriptionWe have a sequence of books: the i-th book has thickness books[i][0] and height books[i][1]. We want to place these books in order onto bookcase shelves that have total width shelf_">
+<meta property="og:description" content="1. Download and installationNeo4j is a very popular, widely-used No-SQL graph database. Let us first try to download and install neo4j on our own laptop. Go to their official webpages, and try to down">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/images/shelves.png">
-<meta property="og:updated_time" content="2019-07-02T22:59:18.130Z">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_1.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_2.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_3.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_4.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_5.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_6.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_7.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_8.png">
+<meta property="og:updated_time" content="2019-05-09T23:35:23.769Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode problem 1105 filling-bookcase-shelves">
-<meta name="twitter:description" content="Problem DescriptionWe have a sequence of books: the i-th book has thickness books[i][0] and height books[i][1]. We want to place these books in order onto bookcase shelves that have total width shelf_">
-<meta name="twitter:image" content="http://yoursite.com/images/shelves.png">
+<meta name="twitter:title" content="neo4j_1_introducion">
+<meta name="twitter:description" content="1. Download and installationNeo4j is a very popular, widely-used No-SQL graph database. Let us first try to download and install neo4j on our own laptop. Go to their official webpages, and try to down">
+<meta name="twitter:image" content="http://yoursite.com/images/neo4j_intro_1.png">
 
 
 
@@ -119,7 +126,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/filling-bookcase-shelves">
+  <link rel="canonical" href="http://yoursite.com/neo4j-1-introducion/">
 
 
 
@@ -129,7 +136,7 @@
   };
 </script>
 
-  <title>Leetcode problem 1105 filling-bookcase-shelves | Liang Tan's Blog</title>
+  <title>neo4j_1_introducion | Liang Tan's Blog</title>
   
 
 
@@ -339,7 +346,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/filling-bookcase-shelves">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/neo4j-1-introducion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang Tan">
@@ -356,7 +363,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Leetcode problem 1105 filling-bookcase-shelves
+          <h1 class="post-title" itemprop="name headline">neo4j_1_introducion
 
               
             
@@ -382,7 +389,7 @@
                 
               
 
-              <time title="Created: 2019-07-02 15:22:26 / Modified: 16:59:18" itemprop="dateCreated datePublished" datetime="2019-07-02T15:22:26-06:00">2019-07-02</time>
+              <time title="Created: 2019-05-09 09:43:20 / Modified: 17:35:23" itemprop="dateCreated datePublished" datetime="2019-05-09T09:43:20-06:00">2019-05-09</time>
             
 
             
@@ -392,6 +399,24 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DB/" itemprop="url" rel="index"><span itemprop="name">DB</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -428,24 +453,72 @@
       
 
       
-        <h1 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h1><p>We have a sequence of books: the i-th book has thickness books[i][0] and height books[i][1].</p>
-<p>We want to place these books <strong>in order</strong> onto bookcase shelves that have total width shelf_width.</p>
-<p>We choose some of the books to place on this shelf (such that the sum of their thickness is &lt;= shelf_width), then build another level of shelf of the bookcase so that the total height of the bookcase has increased by the maximum height of the books we just put down.  We repeat this process until there are no more books to place.</p>
-<p>Note again that at each step of the above process, <strong><strong>the order of the books we place is the same order as the given sequence of books</strong></strong>. For example, if we have an ordered list of 5 books, we might place the first and second book onto the first shelf, the third book on the second shelf, and the fourth and fifth book on the last shelf.</p>
-<p>Return the minimum possible height that the total bookshelf can be after placing shelves in this manner.</p>
-<p>Example: </p>
-<p><div>
-  <img src="../images/shelves.png" alt="Smiley face" width="30%" height="30%">
-</div><br><br></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: books = [[1,1],[2,3],[2,3],[1,1],[1,1],[1,1],[1,2]], shelf_width = 4</span><br><span class="line">Output: 6</span><br><span class="line">Explanation:</span><br><span class="line">The sum of the heights of the 3 shelves are 1 + 3 + 2 = 6.</span><br><span class="line">Notice that book number 2 does not have to be on the first shelf.</span><br></pre></td></tr></table></figure>
-<p>The full description of this problem can be viewed on Leetcode platform <a href="https://leetcode.com/problems/filling-bookcase-shelves/" target="_blank" rel="noopener">filling book case shelves</a></p>
-<h1 id="How-to-solve-this-problem"><a href="#How-to-solve-this-problem" class="headerlink" title="How to solve this problem ?"></a>How to solve this problem ?</h1><p>The trival way to think this problem is explore all the combination of books and find the optimal solution(brute-fore way). That is going to be exponential time complexity which is not desirable.</p>
-<p>Notice there is one important constraint which is <strong><strong>the order of the books we place is the same order as the given sequence of books</strong></strong>. This means that what we can do is only to place books <strong>in order</strong>. Then, another solution may occur,we could use backtracking algorithm with branch and bound. To be specific,  we could treat all the combinations of placement of books as a recursion tree. We could memorize some previous states for later traverse. Traversing the recursion tree is going to be in the manner of depth-first search. </p>
-<p>The  codeo of backtracking way for solving this problem is as follows:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//using cache to memorize intermediate states</span></span><br><span class="line">    <span class="comment">//1st-dim : number of books + 1;</span></span><br><span class="line">    <span class="comment">//2ed-dim : number of shelf_width+1</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[][] cache;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minHeightShelves</span><span class="params">(<span class="keyword">int</span>[][] books, <span class="keyword">int</span> shelf_width)</span> </span>&#123;</span><br><span class="line">        cache = <span class="keyword">new</span> <span class="keyword">int</span>[books.length+<span class="number">1</span>][shelf_width+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> dfs(books, <span class="number">0</span>, shelf_width, <span class="number">0</span>, shelf_width);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * @parameters:</span></span><br><span class="line"><span class="comment">     * cur: cur bookIdx</span></span><br><span class="line"><span class="comment">     * widthLeft: left width for the level where cur book is </span></span><br><span class="line"><span class="comment">     * curHeight: current  height at the layer of cur book </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] books, <span class="keyword">int</span> cur, <span class="keyword">int</span> widthLeft, <span class="keyword">int</span> curHeight, <span class="keyword">int</span> shelf_width)</span></span>&#123;</span><br><span class="line">        <span class="comment">// if we have explore all books.</span></span><br><span class="line">        <span class="keyword">if</span>(cur==books.length)&#123;</span><br><span class="line">            <span class="keyword">return</span> curHeight;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if we have traversd the state before , just return. </span></span><br><span class="line">        <span class="keyword">if</span>(cache[cur][widthLeft]!=<span class="number">0</span>) <span class="keyword">return</span> cache[cur][widthLeft];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//Option one: </span></span><br><span class="line">        <span class="comment">// No matter whether the curretn layer if full,  we could place the current  book in the next layer , and explore </span></span><br><span class="line">        cache[cur][widthLeft] = curHeight + dfs(books,cur+<span class="number">1</span>,shelf_width-books[cur][<span class="number">0</span>],books[cur][<span class="number">1</span>],shelf_width); </span><br><span class="line"></span><br><span class="line">        <span class="comment">// Option two:</span></span><br><span class="line">        <span class="comment">// if the current layer can afford that book. explore with new widthLeft, and </span></span><br><span class="line">        <span class="comment">// update current height.</span></span><br><span class="line">        <span class="keyword">if</span>(widthLeft&gt;=books[cur][<span class="number">0</span>])&#123;</span><br><span class="line">            cache[cur][widthLeft] = Math.min(dfs(books,cur+<span class="number">1</span>,widthLeft-books[cur][<span class="number">0</span>],Math.max(curHeight,books[cur][<span class="number">1</span>]),shelf_width),cache[cur][widthLeft]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cache[cur][widthLeft];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>To make the code more simple, we could try to optimize the solution by dynamic programming ? How can we think about that? Using an array with length equals to the size of books plus one for storage of the current optimal(minimal) height of the first i-th books. The state function is going to be either it can be put in the new level or, it can <strong>merge with previous books One by One as a unit</strong> until no extra space left.These two options are the same as the DFS solution. </p>
-<p>Here is the code with full comments</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minHeightShelves</span><span class="params">(<span class="keyword">int</span>[][] books, <span class="keyword">int</span> shelf_width)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//for storage of the current optimal(minimal) height of the first i-th books</span></span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[books.length+<span class="number">1</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// init value: with no book, the optimal height is 0; </span></span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//iterate through all books</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> idx = <span class="number">1</span>; idx &lt; dp.length; idx++)&#123;</span><br><span class="line">            <span class="comment">// current book height and width</span></span><br><span class="line">            <span class="keyword">int</span> height = books[idx-<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> width = books[idx-<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Option 1: place book idx-th on a new shelve </span></span><br><span class="line">            dp[idx] = dp[idx-<span class="number">1</span>] + height;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//Option 2: try to place on the previous shelf with the constraint of width</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = idx-<span class="number">1</span>; j &gt;<span class="number">0</span> &amp;&amp;  width + books[j-<span class="number">1</span>][<span class="number">0</span>] &lt;= shelf_width; j--)&#123;</span><br><span class="line">                height = Math.max(height, books[j-<span class="number">1</span>][<span class="number">1</span>]);<span class="comment">// merge with previous book, height might change</span></span><br><span class="line">                width += books[j-<span class="number">1</span>][<span class="number">0</span>];<span class="comment">// update width</span></span><br><span class="line">                dp[idx] = Math.min(dp[idx],dp[j-<span class="number">1</span>] + height); <span class="comment">// update optimal solution if it is the optimal</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[books.length];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="1-Download-and-installation"><a href="#1-Download-and-installation" class="headerlink" title="1. Download and installation"></a>1. Download and installation</h2><p>Neo4j is a very popular, widely-used No-SQL graph database. Let us first try to download and install neo4j on our own laptop. Go to their official webpages, and try to download it on your own system.<a href="https://neo4j.com/download-center/" target="_blank" rel="noopener">Download Center</a> .(I am using Win10 and for learning usage, download Neo4j Community Edition 3.5.5). After download the starting file, let us try to start the server next.</p>
+<h3 id="1-1-start-the-server"><a href="#1-1-start-the-server" class="headerlink" title="1.1 start the server"></a>1.1 start the server</h3><p>open an console and cd to your the install directory of neo4j. run the following command<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$  <span class="built_in">cd</span> &lt;your the install directory of neo4j&gt;</span><br><span class="line">$  bin\neo4j console</span><br></pre></td></tr></table></figure></p>
+<p>you will get<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INFO  ======== Neo4j 3.5.5 ========</span><br><span class="line">INFO  Starting...</span><br><span class="line">INFO  Bolt enabled on 127.0.0.1:7687.</span><br><span class="line">INFO  Started.</span><br><span class="line">Remote interface available at http://localhost:7474/</span><br></pre></td></tr></table></figure></p>
+<p>then, goes to your browser and enter <a href="http://localhost:7474/" target="_blank" rel="noopener">http://localhost:7474/</a>. you will see the following web interface.</p>
+<div>
+  <img src="/images/neo4j_intro_1.png" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> Figure 1.1</div>
+</div>
+
+
+<h3 id="1-2-Authenticated-connection-to-the-database"><a href="#1-2-Authenticated-connection-to-the-database" class="headerlink" title="1.2 Authenticated connection to the database."></a>1.2 Authenticated connection to the database.</h3><p>Connect using the default username ‘neo4j’ with default password ‘neo4j’. It will leading to a instruction for you to set your own password for conection.</p>
+<p>Now we are done.</p>
+<div>
+  <img src="/images/neo4j_intro_2.png" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> Figure 1.2</div>
+</div>
+
+
+<h2 id="2-Neo4j-Data-Model-amp-Architecture"><a href="#2-Neo4j-Data-Model-amp-Architecture" class="headerlink" title="2. Neo4j: Data Model &amp; Architecture"></a>2. Neo4j: Data Model &amp; Architecture</h2><p>Neo4j uses Native Graph Processing Engineer(GPE) to store the graph. To be specific, data are stored in the form of <strong><em>Nodes</em></strong> and properties related to that data are stored as <strong><em>key-value pairs</em></strong>, where Key is the property name and value is property value. For example, if I have one worker named Kitty and has some properties like, Id, gender ,department etc. So the node looks like the following:</p>
+<div>
+  <img src="/images/neo4j_intro_3.png" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> Data in Neo4j</div>
+</div>
+
+<p>Here, the node has a <strong><em>label</em></strong> called worker. As we known, each work is employee of one company. So, an edge  describes the relationship between labels.</p>
+<div>
+  <img src="/images/neo4j_intro_4.png" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px">relationship between labels</div>
+</div>
+
+<p>In order to do some manipulations on the database, let us first know about the data type supported in  Cypher Query Language (CQL).</p>
+<h2 id="2-Cypher-Query-Language-CQL"><a href="#2-Cypher-Query-Language-CQL" class="headerlink" title="2. Cypher Query Language (CQL)."></a>2. Cypher Query Language (CQL).</h2><h3 id="2-1-Creating-Single-and-Multiple-Nodes-with-label"><a href="#2-1-Creating-Single-and-Multiple-Nodes-with-label" class="headerlink" title="2.1 Creating Single and Multiple Nodes with label"></a>2.1 Creating Single and Multiple Nodes with label</h3><p>Syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Node_Name_1),(Node_Name_2),...</span><br></pre></td></tr></table></figure></p>
+<p>Example<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Student),(School),(Subject)</span><br></pre></td></tr></table></figure></p>
+<p>When we creating a node, we could add labels to that node, the syntax is :<br>Syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Node_Name:Node_label)</span><br></pre></td></tr></table></figure></p>
+<p>Example<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Kitty:Worker)</span><br></pre></td></tr></table></figure></p>
+<p>To view all the nodes we have created before, using match clause without any conditions to get all results<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ MATCH (n) <span class="built_in">return</span> n</span><br></pre></td></tr></table></figure></p>
+<p>We can see all the nodes created before, notice that, each node in the graph has its own id, and neo4j automatically generated id for each node.</p>
+<div>
+  <img src="/images/neo4j_intro_5.png" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> Data in Neo4j</div>
+</div>
+
+<p>Each node can have not only one labels, but also have  multiple labels.</p>
+<p>Syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Node_Name:Node_label_1:Node_label_2:Node_label_3:...)</span><br></pre></td></tr></table></figure></p>
+<p>Example<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (John:Teacher:Student:Professor)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-2-Creating-Nodes-with-properties"><a href="#2-2-Creating-Nodes-with-properties" class="headerlink" title="2.2 Creating Nodes with properties"></a>2.2 Creating Nodes with properties</h3><p>As above discussion, nodes are actually key-value pairs,<br>Syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Node_Name:Node_label&#123;&lt;key&gt;:&lt;value&gt;, &lt;key&gt;:&lt;value&gt;, ...&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>Example<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Create (Kitty:Worker&#123;Gender:<span class="string">"Female"</span>, Department:<span class="string">"IT service"</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>After run the MATCH CLAUSE, we could see the result.</p>
+<div>
+  <img src="/images/neo4j_intro_6.png" alt="Smiley face" width="50%" height="50%">
+</div>
+
+<h3 id="2-3-Creating-Nodes-with-properties"><a href="#2-3-Creating-Nodes-with-properties" class="headerlink" title="2.3 Creating Nodes with properties"></a>2.3 Creating Nodes with properties</h3><p>Before we establishing relationship between different nodes, let’s look at how to use where clause.<br>Syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ MATCH(node:Node_label) WHERE node.property=<span class="string">"some_value"</span> RETURN node;</span><br></pre></td></tr></table></figure></p>
+<p>Example : find all the female employees.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ MATCH (worker:Worker) WHERE worker.Gender = <span class="string">"Female"</span> RETURN worker;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-4-Create-Relations-between-nodes"><a href="#2-4-Create-Relations-between-nodes" class="headerlink" title="2.4 Create Relations between nodes."></a>2.4 Create Relations between nodes.</h3><p>Syntax: Create nodes and creating relationships between them<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE (node1),(node2),(node3),(node1)-[r:Relation1]-&gt; (node2),(node2) -[r:Relation1]-&gt; (node3)</span><br></pre></td></tr></table></figure></p>
+<p>Syntax : Select existing nodes and creating relationships between them.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MATCH(a:Node_label),(b:Node_label) WHERE a.ID = ??? AND b.ID=??? CREATE (b)-[r:R] -&gt; (a)</span><br></pre></td></tr></table></figure></p>
+<p>Example:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE(Tony:Software_Engineer&#123;name: <span class="string">"Tony"</span>, Gender: <span class="string">"Male"</span>, Department: <span class="string">"IT Dev"</span>, Age: 35&#125;),</span><br><span class="line">(IBM:Company&#123;name:<span class="string">"IBM"</span>&#125;), (Tony)-[r:Is_Employee_Of]-&gt;(IBM)  RETURN Tony, IBM</span><br></pre></td></tr></table></figure></p>
+<div>
+  <img src="/images/neo4j_intro_7.png" alt="Smiley face" width="50%" height="50%">
+</div>
+
+<p>Example: Create relationships between existing nodes.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MATCH(software_eigneer:Software_Engineer),(company:Company) WHERE software_eigneer.name = <span class="string">"Tony"</span> AND company.name=<span class="string">"IBM"</span> CREATE (company)-[relation:Hires] -&gt; (software_eigneer) RETURN software_eigneer, company</span><br></pre></td></tr></table></figure></p>
+<p>Results:Java</p>
+<div>
+  <img src="/images/neo4j_intro_8.png" alt="Smiley face" width="50%" height="50%">
+</div>
 
       
     </div>
@@ -469,15 +542,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Dynamic-programming/" rel="tag"># Dynamic programming</a>
+            <a href="/tags/Graph-Database/" rel="tag"># Graph Database</a>
           
-            <a href="/tags/Data-Structure-and-Algorithm/" rel="tag"># Data Structure and Algorithm</a>
+            <a href="/tags/NoSQL/" rel="tag"># NoSQL</a>
           
-            <a href="/tags/backtracking/" rel="tag"># backtracking</a>
+            <a href="/tags/dynamic-schema/" rel="tag"># dynamic schema</a>
           
-            <a href="/tags/Depth-first-Search-DFS/" rel="tag"># Depth-first Search (DFS)</a>
+            <a href="/tags/Cypher-Query-Language/" rel="tag"># Cypher Query Language</a>
           
-            <a href="/tags/memorization/" rel="tag"># memorization</a>
+            <a href="/tags/introduction/" rel="tag"># introduction</a>
           
         </div>
       
@@ -490,8 +563,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/mini-spring-mvc" rel="next" title="Implements a mini Spring Framework">
-                <i class="fa fa-chevron-left"></i> Implements a mini Spring Framework
+              <a href="/DecoratorPattern/" rel="next" title="Design-Pattern -- Decorator Pattern">
+                <i class="fa fa-chevron-left"></i> Design-Pattern -- Decorator Pattern
               </a>
             
           </div>
@@ -500,8 +573,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/pathInZigZagLabelledBinaryTree" rel="prev" title="Leetcode 1104 Path in Zigzag Labelled Binary Tree">
-                Leetcode 1104 Path in Zigzag Labelled Binary Tree <i class="fa fa-chevron-right"></i>
+              <a href="/CRUD-neo4j/" rel="prev" title="Introduction to CRUD operations in Neo4j">
+                Introduction to CRUD operations in Neo4j <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -793,7 +866,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem-Description"><span class="nav-number">1.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-solve-this-problem"><span class="nav-number">2.</span> <span class="nav-text">How to solve this problem ?</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Download-and-installation"><span class="nav-number">1.</span> <span class="nav-text">1. Download and installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-start-the-server"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 start the server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Authenticated-connection-to-the-database"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Authenticated connection to the database.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Neo4j-Data-Model-amp-Architecture"><span class="nav-number">2.</span> <span class="nav-text">2. Neo4j: Data Model &amp; Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Cypher-Query-Language-CQL"><span class="nav-number">3.</span> <span class="nav-text">2. Cypher Query Language (CQL).</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Creating-Single-and-Multiple-Nodes-with-label"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Creating Single and Multiple Nodes with label</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Creating-Nodes-with-properties"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Creating Nodes with properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Creating-Nodes-with-properties"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Creating Nodes with properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Create-Relations-between-nodes"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Create Relations between nodes.</span></a></li></ol></li></ol></div>
             
 
           </div>

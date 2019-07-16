@@ -96,18 +96,21 @@
 
 
 
-  <meta name="description" content="Basically, for design an website, we mainly have 4 parts.  Front-End display: This part is mainly about how to display the data in MySQL database, like the index page, detailed products pages, shoppin">
-<meta name="keywords" content="Java,Javascript,JSP,Bootstrap,MySQL,Software Requirements Analysis,Front-end,Back-end,Database Design,Spring MVC">
+  <meta name="description" content="1. Definition:Let us first look at the strict definition of Decorator Pattern,  Iterator Pattern provides a way to access the elements of an aggregate object sequentially without knowing its underlyin">
+<meta name="keywords" content="OOD,Design Pattern,Iterator Pattern,Java,Java Generic">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to Design your Own Online Shopping Website like amazon -- Requirements Analysis">
-<meta property="og:url" content="http://yoursite.com/online-shopping-project-software-Requirment-Analysis">
+<meta property="og:title" content="DesignPattern -  Iterator Pattern">
+<meta property="og:url" content="http://yoursite.com/IteratorPattern/index.html">
 <meta property="og:site_name" content="Liang Tan&#39;s Blog">
-<meta property="og:description" content="Basically, for design an website, we mainly have 4 parts.  Front-End display: This part is mainly about how to display the data in MySQL database, like the index page, detailed products pages, shoppin">
+<meta property="og:description" content="1. Definition:Let us first look at the strict definition of Decorator Pattern,  Iterator Pattern provides a way to access the elements of an aggregate object sequentially without knowing its underlyin">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-05-14T16:58:58.675Z">
+<meta property="og:image" content="http://yoursite.com/images/iterator_1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/iterator_2.jpg">
+<meta property="og:updated_time" content="2019-05-16T23:17:22.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="How to Design your Own Online Shopping Website like amazon -- Requirements Analysis">
-<meta name="twitter:description" content="Basically, for design an website, we mainly have 4 parts.  Front-End display: This part is mainly about how to display the data in MySQL database, like the index page, detailed products pages, shoppin">
+<meta name="twitter:title" content="DesignPattern -  Iterator Pattern">
+<meta name="twitter:description" content="1. Definition:Let us first look at the strict definition of Decorator Pattern,  Iterator Pattern provides a way to access the elements of an aggregate object sequentially without knowing its underlyin">
+<meta name="twitter:image" content="http://yoursite.com/images/iterator_1.jpg">
 
 
 
@@ -117,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/online-shopping-project-software-Requirment-Analysis">
+  <link rel="canonical" href="http://yoursite.com/IteratorPattern/">
 
 
 
@@ -127,7 +130,7 @@
   };
 </script>
 
-  <title>How to Design your Own Online Shopping Website like amazon -- Requirements Analysis | Liang Tan's Blog</title>
+  <title>DesignPattern -  Iterator Pattern | Liang Tan's Blog</title>
   
 
 
@@ -337,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/online-shopping-project-software-Requirment-Analysis">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/IteratorPattern/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang Tan">
@@ -354,7 +357,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">How to Design your Own Online Shopping Website like amazon -- Requirements Analysis
+          <h1 class="post-title" itemprop="name headline">DesignPattern -  Iterator Pattern
 
               
             
@@ -380,60 +383,16 @@
                 
               
 
-              <time title="Created: 2019-05-13 16:54:45" itemprop="dateCreated datePublished" datetime="2019-05-13T16:54:45-06:00">2019-05-13</time>
+              <time title="Created: 2019-05-16 15:42:15 / Modified: 17:17:22" itemprop="dateCreated datePublished" datetime="2019-05-16T15:42:15-06:00">2019-05-16</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-14 10:58:58" itemprop="dateModified" datetime="2019-05-14T10:58:58-06:00">2019-05-14</time>
               
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/MySQL/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -470,62 +429,47 @@
       
 
       
-        <p>Basically, for design an website, we mainly have 4 parts.</p>
+        <h1 id="1-Definition"><a href="#1-Definition" class="headerlink" title="1. Definition:"></a>1. Definition:</h1><p>Let us first look at the strict definition of Decorator Pattern,</p>
+<blockquote>
+<p><strong>Iterator Pattern provides a way to access the elements of an aggregate object sequentially without knowing its underlying representation. (<a href="https://en.wikipedia.org/wiki/Iterator_pattern" target="_blank" rel="noopener">Wiki_Link_For_More_Info</a>)</strong></p>
+</blockquote>
+<p><br></p>
+<p>Iterator Patterns has multiple advantages.</p>
 <ol>
-<li><p>Front-End display: This part is mainly about how to display the data in MySQL database, like the index page, detailed products pages, shopping carts pages and shopping categories pages.</p>
-</li>
-<li><p>Interaction Between Front-End and Back-End: When the clients or the admin have a serial of actions like buying a product, add a product to their shopping carts, log in and log out to the web site. This part is how you design controllers and tiny URL BY Using HTTP protocol (e.g GET and POST Method).</p>
-</li>
-<li><p>Back-end Management : This part is to maintain the data used in the website, like the product managements, products picture managements, user managements ,order managements ,so on and so forth.</p>
-</li>
-<li><p>Databases and Entities Design. In this part, we will carefully design the schema of our MySQL database. We will create the schema for each table and establish the relationships between tables. Based on those tables, we will create the classes mapping to tables.</p>
-</li>
+<li>It allows us to iterate different absurb data structure uniformly, making the iteration trivial. That is the traversal operation is defined for an aggregate object <strong>without chaning its interface</strong>.</li>
+<li>It enables the traversal of data structure <strong>without knowing the detailed representation of that data structure</strong>. That is <strong>encapsulation benefit</strong>.</li>
+<li>Since it is a kind of <strong>lazy evaluation</strong>, i.e. we ask one and it gives us one at a time, therefore our collection can also be <strong>infinite</strong>, and at the same time we can <strong>pause at any where</strong> we want.</li>
 </ol>
-<p>I will go deep into requirements analysis for each part in another blog.</p>
-<p>Here, I will list all the tech stacks used in this project.</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Database</th>
-<th>MySQL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>server-side template engine</td>
-<td>Java Server Page(JSP)</td>
-</tr>
-<tr>
-<td>Front-End FrameWork</td>
-<td>Bootstrap, JQuery</td>
-</tr>
-<tr>
-<td>Communication between Front-end and Back-end</td>
-<td>AJAX(In JSON data type)</td>
-</tr>
-<tr>
-<td>Project Management Tool</td>
-<td>Maven</td>
-</tr>
-<tr>
-<td>Database Aceess</td>
-<td>Mybatis</td>
-</tr>
-<tr>
-<td>Web Container</td>
-<td>Tomcat</td>
-</tr>
-<tr>
-<td>Web Architecture</td>
-<td>Spring MVC</td>
-</tr>
-<tr>
-<td>Dev tools</td>
-<td>IntelliJ IDEA</td>
-</tr>
-</tbody>
-</table>
+<h1 id="2-General-UML-of-Iterator-Pattern"><a href="#2-General-UML-of-Iterator-Pattern" class="headerlink" title="2. General UML of Iterator Pattern"></a>2. General UML of Iterator Pattern</h1><p>Then, let us look the General UML of Iterator Pattern.</p>
+<div>
+  <img src="/images/iterator_1.jpg" alt="Smiley face" width="50%" height="50%">
+  <div class="text" style="text-align:center;font-size:10px"> UML for iterator pattern</div>
+</div>
+
+<p>We have two interfaces, Iterable and iterator. Once a concreate class implements Iterable interface, it must override the iterator() method. It create a concreate Iterator by passing itself to the constructor of concreate Iterator. This means that given a concrete iterable ,it produces a concreate iterator. The concreate iterator may also have the private access to its related iterable reference so that it can access the field or methods defined in iterable. Iterator Pattern allows designer to decouple the enumerate functionality with others and unify by the interface.</p>
+<h1 id="3-Example"><a href="#3-Example" class="headerlink" title="3. Example"></a>3. Example</h1><p>Suppose We have a collection of labels (of Type String) on one Node and we want to enumerate them. The codes are as follows:</p>
+<p>Iterable Interface:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterable</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">Iterator&lt;T&gt;  <span class="title">getIterator</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Iterator Interface:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">T <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Concreate Class which implements the iterable interface.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NodeLabels</span> <span class="keyword">implements</span>  <span class="title">Iterable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String[] labels;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NodeLabels</span><span class="params">(String[] labels)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.labels = labels;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String[] getLabels() &#123;</span><br><span class="line">        <span class="keyword">return</span> labels;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLabels</span><span class="params">(String[] labels)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.labels = labels;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Iterator&lt;String&gt; <span class="title">getIterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> NodeLabelsIterator(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Concreate Class which implements the iterator interface.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NodeLabelsIterator</span> <span class="keyword">implements</span>  <span class="title">Iterator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> NodeLabels nodeLabels;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pointer;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NodeLabelsIterator</span><span class="params">(NodeLabels nodeLabels)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nodeLabels = nodeLabels;</span><br><span class="line">        <span class="keyword">this</span>.pointer = -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.pointer &lt; nodeLabels.getLabels().length-<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.nodeLabels.getLabels()[++pointer];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Test Function(Client)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String[] labels = <span class="keyword">new</span> String[] &#123;<span class="string">"Person"</span>,<span class="string">"Movie"</span>,<span class="string">"CAT"</span>,<span class="string">"DOG"</span>&#125;;</span><br><span class="line">        Iterable&lt;String&gt; iterable = <span class="keyword">new</span> NodeLabels(labels);</span><br><span class="line">        Iterator&lt;String&gt; iterator = iterable.getIterator();</span><br><span class="line">        <span class="keyword">while</span>(iterator.hasNext())&#123;</span><br><span class="line">            System.out.println(iterator.next());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>OutPut:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person</span><br><span class="line">Movie</span><br><span class="line">CAT</span><br><span class="line">DOG</span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure>
+<p>Explain:</p>
+<ol>
+<li>In the interface, we usually use generic T to represent any possible Object Type.In the concreate class implementation, we should specify the types.</li>
+<li>In the concreate iterator class, we should have a pointer pointing to where we have traversed.</li>
+<li>Concreate iterable is responsible for create its concreate iterator by passing itself to the iterator constructor. Client has no aware of that.</li>
+<li>Client can only have the access to the iterable interface and iterator interface.</li>
+</ol>
+<p>UML diagram</p>
+<div>
+  <img src="/images/iterator_2.jpg" alt="Smiley face" width="30%" height="20%">
 </div>
 
       
@@ -550,25 +494,15 @@
       
         <div class="post-tags">
           
+            <a href="/tags/OOD/" rel="tag"># OOD</a>
+          
+            <a href="/tags/Design-Pattern/" rel="tag"># Design Pattern</a>
+          
+            <a href="/tags/Iterator-Pattern/" rel="tag"># Iterator Pattern</a>
+          
             <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
-          
-            <a href="/tags/JSP/" rel="tag"># JSP</a>
-          
-            <a href="/tags/Bootstrap/" rel="tag"># Bootstrap</a>
-          
-            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
-          
-            <a href="/tags/Software-Requirements-Analysis/" rel="tag"># Software Requirements Analysis</a>
-          
-            <a href="/tags/Front-end/" rel="tag"># Front-end</a>
-          
-            <a href="/tags/Back-end/" rel="tag"># Back-end</a>
-          
-            <a href="/tags/Database-Design/" rel="tag"># Database Design</a>
-          
-            <a href="/tags/Spring-MVC/" rel="tag"># Spring MVC</a>
+            <a href="/tags/Java-Generic/" rel="tag"># Java Generic</a>
           
         </div>
       
@@ -581,8 +515,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/CRUD-neo4j" rel="next" title="Introduction to CRUD operations in Neo4j">
-                <i class="fa fa-chevron-left"></i> Introduction to CRUD operations in Neo4j
+              <a href="/neo4j-java-introduction/" rel="next" title="Introduction - how to use neo4j in java">
+                <i class="fa fa-chevron-left"></i> Introduction - how to use neo4j in java
               </a>
             
           </div>
@@ -591,8 +525,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/online-shopping-project-db-design" rel="prev" title="How to Design your Own Online Shopping Website like amazon -- DB design">
-                How to Design your Own Online Shopping Website like amazon -- DB design <i class="fa fa-chevron-right"></i>
+              <a href="/OGM-in-Neo4j/" rel="prev" title="OGM in Neo4j">
+                OGM in Neo4j <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -644,8 +578,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -864,6 +807,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Definition"><span class="nav-number">1.</span> <span class="nav-text">1. Definition:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-General-UML-of-Iterator-Pattern"><span class="nav-number">2.</span> <span class="nav-text">2. General UML of Iterator Pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Example"><span class="nav-number">3.</span> <span class="nav-text">3. Example</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

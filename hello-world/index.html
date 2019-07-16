@@ -96,20 +96,17 @@
 
 
 
-  <meta name="description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
-<meta name="keywords" content="Data Structure and Algorithm,Recursion,Complete Binary Tree,ZigZag,Math">
+  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode 1104 Path in Zigzag Labelled Binary Tree">
-<meta property="og:url" content="http://yoursite.com/pathInZigZagLabelledBinaryTree">
+<meta property="og:title" content="Hello World">
+<meta property="og:url" content="http://yoursite.com/hello-world/index.html">
 <meta property="og:site_name" content="Liang Tan&#39;s Blog">
-<meta property="og:description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
+<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/images/tree.png">
-<meta property="og:updated_time" content="2019-07-15T21:18:47.407Z">
+<meta property="og:updated_time" content="2019-05-09T23:36:15.606Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode 1104 Path in Zigzag Labelled Binary Tree">
-<meta name="twitter:description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
-<meta name="twitter:image" content="http://yoursite.com/images/tree.png">
+<meta name="twitter:title" content="Hello World">
+<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 
 
 
@@ -119,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/pathInZigZagLabelledBinaryTree">
+  <link rel="canonical" href="http://yoursite.com/hello-world/">
 
 
 
@@ -129,7 +126,7 @@
   };
 </script>
 
-  <title>Leetcode 1104 Path in Zigzag Labelled Binary Tree | Liang Tan's Blog</title>
+  <title>Hello World | Liang Tan's Blog</title>
   
 
 
@@ -339,7 +336,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pathInZigZagLabelledBinaryTree">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang Tan">
@@ -356,7 +353,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Leetcode 1104 Path in Zigzag Labelled Binary Tree
+          <h1 class="post-title" itemprop="name headline">Hello World
 
               
             
@@ -382,7 +379,7 @@
                 
               
 
-              <time title="Created: 2019-07-02 19:26:51" itemprop="dateCreated datePublished" datetime="2019-07-02T19:26:51-06:00">2019-07-02</time>
+              <time title="Created: 2019-05-04 11:06:34" itemprop="dateCreated datePublished" datetime="2019-05-04T11:06:34-06:00">2019-05-04</time>
             
 
             
@@ -399,7 +396,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-15 15:18:47" itemprop="dateModified" datetime="2019-07-15T15:18:47-06:00">2019-07-15</time>
+                <time title="Modified: 2019-05-09 17:36:15" itemprop="dateModified" datetime="2019-05-09T17:36:15-06:00">2019-05-09</time>
               
             
           </span>
@@ -440,32 +437,15 @@
       
 
       
-        <h1 id="1-Problem-Description"><a href="#1-Problem-Description" class="headerlink" title="1. Problem Description"></a>1. Problem Description</h1><p>In an infinite <strong>binary tree</strong> where <strong>every node has two children</strong>, the nodes are labelled in row order.</p>
-<p>In the <strong>odd</strong> numbered rows (ie., the first, third, fifth,…), the labelling is <strong>left to right</strong>, while in the <strong>even</strong> numbered rows (second, fourth, sixth,…), the labelling is <strong>right to left</strong>.</p>
-<p><div>
-  <img src="../images/tree.png" alt="Smiley face" width="50%" height="50%">
-</div><br><br></p>
-<p><strong>Challenge:</strong> </p>
-<p>Given the label of a node in this tree, return the labels in the path from the root of the tree to the node with that label.</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: label = 14</span><br><span class="line">Output: [1,3,4,14]</span><br></pre></td></tr></table></figure>
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: label = 26</span><br><span class="line">Output: [1,2,6,10,26]</span><br></pre></td></tr></table></figure>
-<h1 id="2-My-Thought-About-This-Problem"><a href="#2-My-Thought-About-This-Problem" class="headerlink" title="2. My Thought About This Problem:"></a>2. My Thought About This Problem:</h1><p>Tree data structure itself is recursive, Hence, Many problems regarding to tree can be solved recursively. In this problem, we could think that in order to find the path of the label of a node, how about <strong>finding the label of its parent node in the first place</strong>.  If we can do that, the problem can be solved recursively, until the root node which has label of 1. </p>
-<h1 id="3-Difficulty-find-the-label-of-its-parent-node"><a href="#3-Difficulty-find-the-label-of-its-parent-node" class="headerlink" title="3. Difficulty: find the label of its parent node"></a>3. Difficulty: find the label of its parent node</h1><p>The tough thing here is to find the label of its parent node. What conditions we have not used yet? Well, the binary tree is complete, and the trees label is in ZigZag Order. </p>
-<p>The tree is binary and complete:</p>
-<ol>
-<li><p>Given the label, we could compute the depth of the tree by taking the logrithm of two. Let us say the result is k. Then, we also know the range of that level, which is<br>[$2^k$, $2^{k+1}$-1].</p>
-</li>
-<li><p>According to ZigZag property, we know that <strong>the largest element in the previous layer follows by the smallest element of the current layer</strong>.Therefore, we know that the smallest element in the previous layer is $2^k$ - 1. </p>
-</li>
-</ol>
-<p>3.If we could know the difference between  the smallest element in the previous  and its parent, then we can derive its parent label ! </p>
-<ol>
-<li>Now we only have one condition haven’t applied, which is the tree is <strong>complete</strong>. Recall that, <strong>Heap</strong> itseulf is a complete binary tree but it can be stored in an array. The parent of a node with index <em>i</em> in heap is array[i/2]. The offset of current node divides two is the difference we want.</li>
-</ol>
-<p>By previous analysis, the code is relatively easy to write.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  List&lt;Integer&gt; <span class="title">pathInZigZagTree</span><span class="params">(<span class="keyword">int</span> label)</span></span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        bottom2upTraverse(list, label);</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bottom2upTraverse</span><span class="params">(List&lt;Integer&gt; list, <span class="keyword">int</span> label)</span></span>&#123;</span><br><span class="line">        list.add(<span class="number">0</span>,label);</span><br><span class="line">        <span class="keyword">if</span>(label == <span class="number">1</span>) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="comment">// get the level of the label in the tree;</span></span><br><span class="line">        <span class="keyword">int</span> level = log2(label);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// get the index of the label on its level</span></span><br><span class="line">        <span class="keyword">int</span> idx = label - (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>,level);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// according to ZigZag Tree property, find the previous label to traverse;</span></span><br><span class="line">        <span class="keyword">int</span> nextLabel = (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>,level) - <span class="number">1</span> - idx/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// traverse recursively.</span></span><br><span class="line">        bottom2upTraverse(list,nextLabel);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">log2</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)(Math.log(n) / Math.log(<span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><p>DataBase</p>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
     </div>
@@ -487,20 +467,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Data-Structure-and-Algorithm/" rel="tag"># Data Structure and Algorithm</a>
-          
-            <a href="/tags/Recursion/" rel="tag"># Recursion</a>
-          
-            <a href="/tags/Complete-Binary-Tree/" rel="tag"># Complete Binary Tree</a>
-          
-            <a href="/tags/ZigZag/" rel="tag"># ZigZag</a>
-          
-            <a href="/tags/Math/" rel="tag"># Math</a>
-          
-        </div>
-      
 
       
       
@@ -510,15 +476,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/filling-bookcase-shelves" rel="next" title="Leetcode problem 1105 filling-bookcase-shelves">
-                <i class="fa fa-chevron-left"></i> Leetcode problem 1105 filling-bookcase-shelves
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/ObserverPattern/" rel="prev" title="Design-Pattern -- Observer Pattern">
+                Design-Pattern -- Observer Pattern <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -809,7 +775,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Problem-Description"><span class="nav-number">1.</span> <span class="nav-text">1. Problem Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-My-Thought-About-This-Problem"><span class="nav-number">2.</span> <span class="nav-text">2. My Thought About This Problem:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Difficulty-find-the-label-of-its-parent-node"><span class="nav-number">3.</span> <span class="nav-text">3. Difficulty: find the label of its parent node</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1036,46 +1002,6 @@
   
   
 
-  
-    
-      <script type="text/x-mathjax-config">
-  
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
-        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
-      }
-    });
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
-    }
-  });
-</script>
-<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-    
   
 
 
