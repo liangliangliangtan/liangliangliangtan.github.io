@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/all-nodes-distance-k-in-binary-tree/</loc>
+    
+    <lastmod>2019-07-16T19:22:47.570Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/pathInZigZagLabelledBinaryTree/</loc>
     
     <lastmod>2019-07-15T21:18:47.407Z</lastmod>

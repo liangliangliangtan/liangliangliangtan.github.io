@@ -333,6 +333,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/all-nodes-distance-k-in-binary-tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang Tan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile_photo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Liang Tan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/all-nodes-distance-k-in-binary-tree/" class="post-title-link" itemprop="url">LeetCode 863 All nodes distance k in binary tree</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-16 11:40:01 / Modified: 13:22:47" itemprop="dateCreated datePublished" datetime="2019-07-16T11:40:01-06:00">2019-07-16</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-Problem-Description"><a href="#1-Problem-Description" class="headerlink" title="1. Problem Description"></a>1. Problem Description</h1><p>We are given a binary tree (with root node root), a target node, and an integer value K.</p>
+<p>Return a list of the values of all nodes that have a distance K from the target node.  The answer can be returned in any order.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: root = [3,5,1,6,2,0,8,null,null,7,4], target = 5, K = 2</span><br><span class="line"></span><br><span class="line">Output: [7,4,1]</span><br><span class="line"></span><br><span class="line">Explanation: </span><br><span class="line">The nodes that are a distance 2 from the target node (with value 5)</span><br><span class="line">have values 7, 4, and 1.</span><br></pre></td></tr></table></figure>
+<p><div>
+  <img src="../images/leetcode_863.png" alt="Smiley face" width="35%" height="35%">
+</div><br><br></p>
+<h1 id="2-My-Thought-About-This-Problem"><a href="#2-My-Thought-About-This-Problem" class="headerlink" title="2. My Thought About This Problem:"></a>2. My Thought About This Problem:</h1><p>At first glance, this problem is a Tree Problem. However, think a little bit more, <strong> tree is a special kind of Undirected Graph</strong>. Each Node in tree has <strong>at most three edges</strong>, one for left child, one for right child, and other one for its parent. <strong>A small trick</strong> here is that the parent of root is root itself. The parent information can be stored in a Map when traversing the tree once. </p>
+<p>After building all the relationships, the rest of work is to find Distance K nodes from the target node. This can be traversed level by level. This type of search is typically breath-first search. To prevent traverse back to the nodes we have traversed in previous step. We need another additional data structure which is the set to keep track of those nodes which have been traversed before.</p>
+<p>You could pratice on Leetcode  online IDE <a href="https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/" target="_blank" rel="noopener">here</a>.</p>
+<p>Code</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">distanceK</span><span class="params">(TreeNode root, TreeNode target, <span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">        Map&lt;TreeNode, TreeNode&gt; parentsMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        buildMap(root, root,parentsMap);</span><br><span class="line">        <span class="keyword">return</span> findKdistanceNode(target, K, parentsMap);    </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Traverse the tree in DFS way and record every node's parent. </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">buildMap</span><span class="params">(TreeNode node, TreeNode parent, Map&lt;TreeNode, TreeNode&gt; parentsMap)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        parentsMap.put(node,parent);</span><br><span class="line">        <span class="keyword">if</span>(node.left != <span class="keyword">null</span>)  buildMap(node.left, node, parentsMap);</span><br><span class="line">        <span class="keyword">if</span>(node.right != <span class="keyword">null</span>) buildMap(node.right, node, parentsMap);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Given the target node and distance K, find the K distance Nodes. </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Integer&gt; <span class="title">findKdistanceNode</span><span class="params">(TreeNode target, <span class="keyword">int</span> K, Map&lt;TreeNode, TreeNode&gt; parentsMap)</span></span>&#123;</span><br><span class="line">        Set&lt;TreeNode&gt; traversed = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        Deque&lt;TreeNode&gt; queue  = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        queue.offer(target);</span><br><span class="line">        traversed.add(target);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> level = <span class="number">0</span>; level&lt; K; level++)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> queueSize = queue.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> idx =<span class="number">0</span> ; idx &lt; queueSize; idx++)&#123;</span><br><span class="line">                <span class="comment">// traverse all its parents. </span></span><br><span class="line">                TreeNode curNode = queue.poll();</span><br><span class="line">                traverseAndMark(curNode.left, traversed, queue);</span><br><span class="line">                traverseAndMark(curNode.right, traversed, queue);</span><br><span class="line">                TreeNode curNodeParent = parentsMap.get(curNode);</span><br><span class="line">                traverseAndMark(curNodeParent, traversed, queue);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//convert to the required result format.</span></span><br><span class="line">        List&lt;Integer&gt; resultList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        queue.forEach(node -&gt; &#123;</span><br><span class="line">            resultList.add(node.val);</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> resultList;        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Traverse those nodes which have not been visited and add to queue.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">traverseAndMark</span><span class="params">(TreeNode node, Set&lt;TreeNode&gt; traversed,Deque&lt;TreeNode&gt; queue)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node != <span class="keyword">null</span> &amp;&amp; !traversed.contains(node))&#123;</span><br><span class="line">            traversed.add(node);</span><br><span class="line">            queue.offer(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/pathInZigZagLabelledBinaryTree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2507,249 +2660,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/online-shopping-project-software-Requirment-Analysis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liang Tan">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/profile_photo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Liang Tan's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/online-shopping-project-software-Requirment-Analysis/" class="post-title-link" itemprop="url">How to Design your Own Online Shopping Website like amazon -- Requirements Analysis</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-13 16:54:45" itemprop="dateCreated datePublished" datetime="2019-05-13T16:54:45-06:00">2019-05-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-14 10:58:58" itemprop="dateModified" datetime="2019-05-14T10:58:58-06:00">2019-05-14</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/MySQL/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Basically, for design an website, we mainly have 4 parts.</p>
-<ol>
-<li><p>Front-End display: This part is mainly about how to display the data in MySQL database, like the index page, detailed products pages, shopping carts pages and shopping categories pages.</p>
-</li>
-<li><p>Interaction Between Front-End and Back-End: When the clients or the admin have a serial of actions like buying a product, add a product to their shopping carts, log in and log out to the web site. This part is how you design controllers and tiny URL BY Using HTTP protocol (e.g GET and POST Method).</p>
-</li>
-<li><p>Back-end Management : This part is to maintain the data used in the website, like the product managements, products picture managements, user managements ,order managements ,so on and so forth.</p>
-</li>
-<li><p>Databases and Entities Design. In this part, we will carefully design the schema of our MySQL database. We will create the schema for each table and establish the relationships between tables. Based on those tables, we will create the classes mapping to tables.</p>
-</li>
-</ol>
-<p>I will go deep into requirements analysis for each part in another blog.</p>
-<p>Here, I will list all the tech stacks used in this project.</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Database</th>
-<th>MySQL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>server-side template engine</td>
-<td>Java Server Page(JSP)</td>
-</tr>
-<tr>
-<td>Front-End FrameWork</td>
-<td>Bootstrap, JQuery</td>
-</tr>
-<tr>
-<td>Communication between Front-end and Back-end</td>
-<td>AJAX(In JSON data type)</td>
-</tr>
-<tr>
-<td>Project Management Tool</td>
-<td>Maven</td>
-</tr>
-<tr>
-<td>Database Aceess</td>
-<td>Mybatis</td>
-</tr>
-<tr>
-<td>Web Container</td>
-<td>Tomcat</td>
-</tr>
-<tr>
-<td>Web Architecture</td>
-<td>Spring MVC</td>
-</tr>
-<tr>
-<td>Dev tools</td>
-<td>IntelliJ IDEA</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2801,7 +2711,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2969,7 +2879,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">62</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -3191,9 +3109,9 @@
   
     
       
-        
-      
     
+      
+        
       
     
       

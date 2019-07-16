@@ -649,7 +649,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -817,7 +817,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">62</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -1064,9 +1072,9 @@
     repo: 'liangliangliangtan.github.io',
     owner: 'liangliangliangtan',
     admin: ['liangliangliangtan'],
-    id: md5(location.pathname),
+    id: window.location.pathname,
     
-      language: 'en',
+      language: window.navigator.language || window.navigator.userLanguage,
     
     distractionFreeMode: 'true'
   });
