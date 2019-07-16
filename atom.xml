@@ -35,9 +35,9 @@
     </summary>
     
     
-      <category term="Recursion" scheme="http://yoursite.com/tags/Recursion/"/>
-    
       <category term="Data Structure and Algorithm" scheme="http://yoursite.com/tags/Data-Structure-and-Algorithm/"/>
+    
+      <category term="Recursion" scheme="http://yoursite.com/tags/Recursion/"/>
     
       <category term="Tree" scheme="http://yoursite.com/tags/Tree/"/>
     
@@ -68,9 +68,9 @@
     </summary>
     
     
-      <category term="Recursion" scheme="http://yoursite.com/tags/Recursion/"/>
-    
       <category term="Data Structure and Algorithm" scheme="http://yoursite.com/tags/Data-Structure-and-Algorithm/"/>
+    
+      <category term="Recursion" scheme="http://yoursite.com/tags/Recursion/"/>
     
       <category term="Complete Binary Tree" scheme="http://yoursite.com/tags/Complete-Binary-Tree/"/>
     
@@ -99,9 +99,9 @@
     </summary>
     
     
-      <category term="Data Structure and Algorithm" scheme="http://yoursite.com/tags/Data-Structure-and-Algorithm/"/>
-    
       <category term="Dynamic programming" scheme="http://yoursite.com/tags/Dynamic-programming/"/>
+    
+      <category term="Data Structure and Algorithm" scheme="http://yoursite.com/tags/Data-Structure-and-Algorithm/"/>
     
       <category term="backtracking" scheme="http://yoursite.com/tags/backtracking/"/>
     

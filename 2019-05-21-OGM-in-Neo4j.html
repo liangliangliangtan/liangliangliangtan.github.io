@@ -1046,16 +1046,13 @@
     repo: 'liangliangliangtan.github.io',
     owner: 'liangliangliangtan',
     admin: ['tanliang9'],
-    id: md5(location.pathname),
+    id: 'window.location.pathname',
     
       language: window.navigator.language || window.navigator.userLanguage,
     
     distractionFreeMode: 'true'
   });
   gitalk.render('gitalk-container');
-  console.log(location.href);
-  console.log('*******');
-  console.log(location.pathname)
 </script>
   
 
