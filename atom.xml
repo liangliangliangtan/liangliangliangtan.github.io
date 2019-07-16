@@ -35,9 +35,9 @@
     </summary>
     
     
-      <category term="Data Structure and Algorithm" scheme="http://yoursite.com/tags/Data-Structure-and-Algorithm/"/>
-    
       <category term="Recursion" scheme="http://yoursite.com/tags/Recursion/"/>
+    
+      <category term="Data Structure and Algorithm" scheme="http://yoursite.com/tags/Data-Structure-and-Algorithm/"/>
     
       <category term="Tree" scheme="http://yoursite.com/tags/Tree/"/>
     
@@ -68,9 +68,9 @@
     </summary>
     
     
-      <category term="Data Structure and Algorithm" scheme="http://yoursite.com/tags/Data-Structure-and-Algorithm/"/>
-    
       <category term="Recursion" scheme="http://yoursite.com/tags/Recursion/"/>
+    
+      <category term="Data Structure and Algorithm" scheme="http://yoursite.com/tags/Data-Structure-and-Algorithm/"/>
     
       <category term="Complete Binary Tree" scheme="http://yoursite.com/tags/Complete-Binary-Tree/"/>
     
@@ -99,9 +99,9 @@
     </summary>
     
     
-      <category term="Dynamic programming" scheme="http://yoursite.com/tags/Dynamic-programming/"/>
-    
       <category term="Data Structure and Algorithm" scheme="http://yoursite.com/tags/Data-Structure-and-Algorithm/"/>
+    
+      <category term="Dynamic programming" scheme="http://yoursite.com/tags/Dynamic-programming/"/>
     
       <category term="backtracking" scheme="http://yoursite.com/tags/backtracking/"/>
     
@@ -374,6 +374,8 @@
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
+      <category term="Software Requirements Analysis" scheme="http://yoursite.com/tags/Software-Requirements-Analysis/"/>
+    
       <category term="Javascript" scheme="http://yoursite.com/tags/Javascript/"/>
     
       <category term="JSP" scheme="http://yoursite.com/tags/JSP/"/>
@@ -381,8 +383,6 @@
       <category term="Bootstrap" scheme="http://yoursite.com/tags/Bootstrap/"/>
     
       <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
-    
-      <category term="Software Requirements Analysis" scheme="http://yoursite.com/tags/Software-Requirements-Analysis/"/>
     
       <category term="Front-end" scheme="http://yoursite.com/tags/Front-end/"/>
     
