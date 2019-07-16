@@ -867,13 +867,16 @@
     repo: 'liangliangliangtan.github.io',
     owner: 'liangliangliangtan',
     admin: ['liangliangliangtan'],
-    id: md5(location.pathname),
+    id: md5(location.href),
     
       language: window.navigator.language || window.navigator.userLanguage,
     
     distractionFreeMode: 'true'
   });
   gitalk.render('gitalk-container');
+  console.log(location.href);
+  console.log('*******');
+  console.log(location.pathname)
 </script>
   
 
