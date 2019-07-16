@@ -96,17 +96,26 @@
 
 
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="1. Introduction:In this section, we are going to learn and summarize the most recent used CRUD operations in Neo4j.We are going to use SET, Remove, Delete and Merge(Create and MATCH) clause. 2 Merge C">
+<meta name="keywords" content="Graph Database,NoSQL,database,dynamic schema,Cypher Query Language,CRUD">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/hello-world/index.html">
+<meta property="og:title" content="Introduction to CRUD operations in Neo4j">
+<meta property="og:url" content="http://yoursite.com/CRUD-neo4j">
 <meta property="og:site_name" content="Liang Tan&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="1. Introduction:In this section, we are going to learn and summarize the most recent used CRUD operations in Neo4j.We are going to use SET, Remove, Delete and Merge(Create and MATCH) clause. 2 Merge C">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-05-09T23:36:15.606Z">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_crud1.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_crud2.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_crud3.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_crud4.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_crud5.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_crud6.png">
+<meta property="og:image" content="http://yoursite.com/images/neo4j_intro_crud7.png">
+<meta property="og:updated_time" content="2019-05-13T22:56:29.679Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Introduction to CRUD operations in Neo4j">
+<meta name="twitter:description" content="1. Introduction:In this section, we are going to learn and summarize the most recent used CRUD operations in Neo4j.We are going to use SET, Remove, Delete and Merge(Create and MATCH) clause. 2 Merge C">
+<meta name="twitter:image" content="http://yoursite.com/images/neo4j_intro_crud1.png">
 
 
 
@@ -116,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/CRUD-neo4j">
 
 
 
@@ -126,7 +135,7 @@
   };
 </script>
 
-  <title>Hello World | Liang Tan's Blog</title>
+  <title>Introduction to CRUD operations in Neo4j | Liang Tan's Blog</title>
   
 
 
@@ -336,7 +345,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/CRUD-neo4j">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang Tan">
@@ -353,7 +362,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">Introduction to CRUD operations in Neo4j
 
               
             
@@ -379,28 +388,34 @@
                 
               
 
-              <time title="Created: 2019-05-04 11:06:34" itemprop="dateCreated datePublished" datetime="2019-05-04T11:06:34-06:00">2019-05-04</time>
+              <time title="Created: 2019-05-13 10:20:32 / Modified: 16:56:29" itemprop="dateCreated datePublished" datetime="2019-05-13T10:20:32-06:00">2019-05-13</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-09 17:36:15" itemprop="dateModified" datetime="2019-05-09T17:36:15-06:00">2019-05-09</time>
               
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DB/" itemprop="url" rel="index"><span itemprop="name">DB</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -437,15 +452,62 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><p>DataBase</p>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction:"></a>1. Introduction:</h2><p>In this section, we are going to learn and summarize the most recent used CRUD operations in Neo4j.We are going to use SET, Remove, Delete and Merge(Create and MATCH) clause.</p>
+<h2 id="2-Merge-Command"><a href="#2-Merge-Command" class="headerlink" title="2 Merge Command"></a>2 Merge Command</h2><p>Merge commend is used to either create a node with labels or properties if the node does not exist in the database or select the nodes with particular conditions if the nodes are already presents in the database.</p>
+<h3 id="2-1-Using-Merge-command-with-labels-and-properties"><a href="#2-1-Using-Merge-command-with-labels-and-properties" class="headerlink" title="2.1 Using Merge command with labels and properties."></a>2.1 Using Merge command with labels and properties.</h3><p>Example<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Merge(Jeson:Man) <span class="built_in">return</span> Jeson, labels(Jeson)</span><br></pre></td></tr></table></figure></p>
+<p>Since it does not exists in the database, it will create a new node and a new label Man and return the node and labels of that specific node.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Merge(Jack:Man&#123;Name:<span class="string">"Jack"</span>,Gender:<span class="string">"male"</span>&#125;) <span class="built_in">return</span> Jack</span><br></pre></td></tr></table></figure>
+<p>When running this merge command, it will firstly look at if there exists a node jack with corresponding key-value pairs, if it does not exits, it will create a new node and return the node.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Merge(Jack:Man&#123;Name:<span class="string">"Jack"</span>,Age:<span class="string">"30"</span>&#125;) <span class="built_in">return</span> Jack</span><br></pre></td></tr></table></figure>
+<p>It will seperately create a node with the same name as before but differnt properties.<br>Then, if we run the following comand<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Merge(Man&#123;Name:<span class="string">"Jack"</span>&#125;) <span class="built_in">return</span> Man.Name, Man.Gender, Man.Age</span><br></pre></td></tr></table></figure></p>
+<p>It will find all the nodes with name Jack and label Man, and the properties related to jack</p>
+<div>
+  <img src="/images/neo4j_intro_crud1.png" alt="Smiley face" width="50%" height="50%">
+</div>
+
+<h3 id="2-2-Using-Merge-command-to-create-Node-with-existing-node-properties"><a href="#2-2-Using-Merge-command-to-create-Node-with-existing-node-properties" class="headerlink" title="2.2 Using Merge command to create Node with existing node properties."></a>2.2 Using Merge command to create Node with existing node properties.</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MATCH (n) WHERE EXISTS(n.Gender)</span><br><span class="line">Merge (gender:Gender&#123;Gender:n.Gender&#125;)</span><br><span class="line"><span class="built_in">return</span> gender</span><br></pre></td></tr></table></figure>
+<div>
+  <img src="/images/neo4j_intro_crud2.png" alt="Smiley face" width="50%" height="50%">
+</div>
+
+<p>We could see that we have created all gender with matching all the nodes with Gender properties.  </p>
+<h3 id="2-3-Merge-command-with-on-create-clause"><a href="#2-3-Merge-command-with-on-create-clause" class="headerlink" title="2.3 Merge command with on create clause."></a>2.3 Merge command with on create clause.</h3><p>When creating a new node, we would like to set the properties for this node at the same time, ON CREATE clause will allows the user to set properties at creation time.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Merge (Yuki:Person&#123;Name:<span class="string">"Yuki"</span>&#125;)</span><br><span class="line">ON CREATE SET Yuki.Gender = <span class="string">"Female"</span></span><br><span class="line">RETURN Yuki.Name,Yuki.Gender</span><br></pre></td></tr></table></figure>
+<div>
+  <img src="/images/neo4j_intro_crud3.png" alt="Smiley face" width="50%" height="50%">
+</div>
+
+<h3 id="2-4-Merge-command-with-on-match-clause"><a href="#2-4-Merge-command-with-on-match-clause" class="headerlink" title="2.4 Merge command with on match clause."></a>2.4 Merge command with on match clause.</h3><p>When traversing from the graph database to find some nodes with some conditions, we need to set some properties to those node at the same time for updating the information regarding to this node.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Merge (person:Person)</span><br><span class="line">ON MATCH SET person.Is_Person = TRUE</span><br><span class="line">RETURN person.Name, person.Is_Person</span><br></pre></td></tr></table></figure>
+<p>Using merge command we could find all the node with label Person and add a new property Is_Person to be true</p>
+<div>
+  <img src="/images/neo4j_intro_crud4.png" alt="Smiley face" width="50%" height="50%">
+</div>
+
+<h3 id="2-4-Merge-command-for-relationships"><a href="#2-4-Merge-command-for-relationships" class="headerlink" title="2.4 Merge command for relationships"></a>2.4 Merge command for relationships</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Merge (mika:Person&#123;Name:<span class="string">"mika"</span>&#125;)</span><br><span class="line">ON CREATE SET mika.Gender = <span class="string">"Male"</span></span><br><span class="line">RETURN mika.Name,mika.Gender</span><br></pre></td></tr></table></figure>
+<p>Suppose Yuki has a boyfriend mika. we want to create relationships between them.We could run the following commands<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MATCH (girl:Person),(boy:Person)</span><br><span class="line">WHERE girl.Name = <span class="string">"Yuki"</span> AND boy.Name = <span class="string">"mika"</span></span><br><span class="line">MERGE (girl)-[relationship:Has_A_Boy_Friend]-&gt;(boy)</span><br><span class="line">RETURN girl,boy</span><br></pre></td></tr></table></figure></p>
+<div>
+  <img src="/images/neo4j_intro_crud5.png" alt="Smiley face" width="50%" height="50%">
+</div>
+
+
+<h2 id="3-SET-Command"><a href="#3-SET-Command" class="headerlink" title="3 SET Command"></a>3 SET Command</h2><p>SET Clause is to set and remove properties of nodes. If Yuki goes to Tokyo University, we could run the following command. We could use set clause to add school properties to Yuki, and remove the Is_Person property we have set before.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MATCH (Yuki:Person)</span><br><span class="line">WHERE Yuki.Name = <span class="string">"Yuki"</span></span><br><span class="line">SET Yuki.School = <span class="string">"Tokyo University"</span></span><br><span class="line">SET Yuki.Is_Person = NULL</span><br><span class="line">RETURN Yuki</span><br></pre></td></tr></table></figure></p>
+<div>
+  <img src="/images/neo4j_intro_crud6.png" alt="Smiley face" width="50%" height="50%">
+</div>
+
+<p>We could also use SET Clause to set multiple labels for some nodes,e.g,add two labels to Yuki which are Student and Gril.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MATCH (Yuki:Person)</span><br><span class="line">WHERE Yuki.Name = <span class="string">"Yuki"</span></span><br><span class="line">SET Yuki:Student:Gril</span><br><span class="line">RETURN Yuki</span><br></pre></td></tr></table></figure></p>
+<div>
+  <img src="/images/neo4j_intro_crud7.png" alt="Smiley face" width="50%" height="50%">
+</div>
+
+
+<h2 id="4-DELETE-Command"><a href="#4-DELETE-Command" class="headerlink" title="4 DELETE Command"></a>4 DELETE Command</h2><p>DELETE command is to delete specific nodes or relationships between nodes. Here we will learn some of the basic usage of delete clause in CQL.</p>
+<h3 id="4-1-DELETE-ALL-NODES"><a href="#4-1-DELETE-ALL-NODES" class="headerlink" title="4.1 DELETE ALL NODES"></a>4.1 DELETE ALL NODES</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MATCH (node)</span><br><span class="line">DETACH DELETE node</span><br></pre></td></tr></table></figure>
+<p>DETACH is to firstly delete the relationships between the nodes that we are going to delete.</p>
+<h3 id="4-2-DELETE-GROUPS-OF-NODES-WITH-CONDITIONS"><a href="#4-2-DELETE-GROUPS-OF-NODES-WITH-CONDITIONS" class="headerlink" title="4.2 DELETE GROUPS OF NODES WITH CONDITIONS"></a>4.2 DELETE GROUPS OF NODES WITH CONDITIONS</h3><p>It is quite similar but still notice that when deleting a node, we should delete the relationships first.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MATCH (mika:Person)</span><br><span class="line">WHERE mika.Name = <span class="string">"mika"</span></span><br><span class="line">DETACH DELETE mika</span><br></pre></td></tr></table></figure></p>
+<p>Next,  I will go through an example to have a overall understanding of CRUD By SQL.</p>
+<p>TO BE CONTINUED</p>
 
       
     </div>
@@ -467,6 +529,22 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Graph-Database/" rel="tag"># Graph Database</a>
+          
+            <a href="/tags/NoSQL/" rel="tag"># NoSQL</a>
+          
+            <a href="/tags/database/" rel="tag"># database</a>
+          
+            <a href="/tags/dynamic-schema/" rel="tag"># dynamic schema</a>
+          
+            <a href="/tags/Cypher-Query-Language/" rel="tag"># Cypher Query Language</a>
+          
+            <a href="/tags/CRUD/" rel="tag"># CRUD</a>
+          
+        </div>
+      
 
       
       
@@ -476,14 +554,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/neo4j-1-introducion" rel="next" title="neo4j_1_introducion">
+                <i class="fa fa-chevron-left"></i> neo4j_1_introducion
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/ObserverPattern/" rel="prev" title="Design-Pattern -- Observer Pattern">
-                Design-Pattern -- Observer Pattern <i class="fa fa-chevron-right"></i>
+              <a href="/online-shopping-project-software-Requirment-Analysis" rel="prev" title="How to Design your Own Online Shopping Website like amazon -- Requirements Analysis">
+                How to Design your Own Online Shopping Website like amazon -- Requirements Analysis <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -775,7 +857,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">1. Introduction:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Merge-Command"><span class="nav-number">2.</span> <span class="nav-text">2 Merge Command</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Using-Merge-command-with-labels-and-properties"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Using Merge command with labels and properties.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Using-Merge-command-to-create-Node-with-existing-node-properties"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Using Merge command to create Node with existing node properties.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Merge-command-with-on-create-clause"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Merge command with on create clause.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Merge-command-with-on-match-clause"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 Merge command with on match clause.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Merge-command-for-relationships"><span class="nav-number">2.5.</span> <span class="nav-text">2.4 Merge command for relationships</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-SET-Command"><span class="nav-number">3.</span> <span class="nav-text">3 SET Command</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-DELETE-Command"><span class="nav-number">4.</span> <span class="nav-text">4 DELETE Command</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-DELETE-ALL-NODES"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 DELETE ALL NODES</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-DELETE-GROUPS-OF-NODES-WITH-CONDITIONS"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 DELETE GROUPS OF NODES WITH CONDITIONS</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -960,7 +1042,6 @@
   
     
 
-
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
 
@@ -973,8 +1054,8 @@
 
 <script>
   var gitalk = new Gitalk({
-    clientID: '07fa5037d079442c8c6e',
-    clientSecret: '5e7b212cf2542940ec8b71c0d8526f82804f1c89',
+    clientID: '42d0b83b57fd95e785f4',
+    clientSecret: 'f4c0e51fdb6b1409eb2e59e9d284e5b92f0dfd41',
     repo: 'liangliangliangtan.github.io',
     owner: 'liangliangliangtan',
     admin: ['liangliangliangtan'],
@@ -986,39 +1067,7 @@
   });
   gitalk.render('gitalk-container');
 </script>
-
   
-
-
-
-
-
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-
-
-<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
-
-<script>
-  var gitalk = new Gitalk({
-    clientID: '07fa5037d079442c8c6e',
-    clientSecret: '5e7b212cf2542940ec8b71c0d8526f82804f1c89',
-    repo: 'liangliangliangtan.github.io',
-    owner: 'liangliangliangtan',
-    admin: ['liangliangliangtan'],
-    id: md5(location.pathname),
-    
-      language: 'en',
-    
-    distractionFreeMode: 'true'
-  });
-  gitalk.render('gitalk-container');
-</script>
-
 
   
 

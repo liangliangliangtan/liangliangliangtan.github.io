@@ -18,8 +18,8 @@
   
   <entry>
     <title>Leetcode 1104 Path in Zigzag Labelled Binary Tree</title>
-    <link href="http://yoursite.com//pathInZigZagLabelledBinaryTree/"/>
-    <id>http://yoursite.com//pathInZigZagLabelledBinaryTree/</id>
+    <link href="http://yoursite.com//pathInZigZagLabelledBinaryTree"/>
+    <id>http://yoursite.com//pathInZigZagLabelledBinaryTree</id>
     <published>2019-07-03T01:26:51.000Z</published>
     <updated>2019-07-15T21:18:47.407Z</updated>
     
@@ -49,8 +49,8 @@
   
   <entry>
     <title>Leetcode problem 1105 filling-bookcase-shelves</title>
-    <link href="http://yoursite.com//filling-bookcase-shelves/"/>
-    <id>http://yoursite.com//filling-bookcase-shelves/</id>
+    <link href="http://yoursite.com//filling-bookcase-shelves"/>
+    <id>http://yoursite.com//filling-bookcase-shelves</id>
     <published>2019-07-02T21:22:26.000Z</published>
     <updated>2019-07-02T22:59:18.130Z</updated>
     
@@ -80,8 +80,8 @@
   
   <entry>
     <title>Implements a mini Spring Framework</title>
-    <link href="http://yoursite.com//mini-spring-mvc/"/>
-    <id>http://yoursite.com//mini-spring-mvc/</id>
+    <link href="http://yoursite.com//mini-spring-mvc"/>
+    <id>http://yoursite.com//mini-spring-mvc</id>
     <published>2019-06-26T15:44:00.000Z</published>
     <updated>2019-07-11T16:39:12.799Z</updated>
     
@@ -117,8 +117,8 @@
   
   <entry>
     <title>Design Pattern factory_pattern</title>
-    <link href="http://yoursite.com//design-pattern-factory-pattern/"/>
-    <id>http://yoursite.com//design-pattern-factory-pattern/</id>
+    <link href="http://yoursite.com//design-pattern-factory-pattern"/>
+    <id>http://yoursite.com//design-pattern-factory-pattern</id>
     <published>2019-06-20T01:05:07.000Z</published>
     <updated>2019-06-20T16:59:21.163Z</updated>
     
@@ -150,8 +150,8 @@
   
   <entry>
     <title>Import RDF files to Neo4j database</title>
-    <link href="http://yoursite.com//import_rdf_to_neo4j_db/"/>
-    <id>http://yoursite.com//import_rdf_to_neo4j_db/</id>
+    <link href="http://yoursite.com//import_rdf_to_neo4j_db"/>
+    <id>http://yoursite.com//import_rdf_to_neo4j_db</id>
     <published>2019-05-23T15:39:15.000Z</published>
     <updated>2019-07-02T15:57:57.741Z</updated>
     
@@ -183,8 +183,8 @@
   
   <entry>
     <title>OGM in Neo4j</title>
-    <link href="http://yoursite.com//OGM-in-Neo4j/"/>
-    <id>http://yoursite.com//OGM-in-Neo4j/</id>
+    <link href="http://yoursite.com//OGM-in-Neo4j"/>
+    <id>http://yoursite.com//OGM-in-Neo4j</id>
     <published>2019-05-21T15:55:35.000Z</published>
     <updated>2019-05-23T15:40:41.008Z</updated>
     
@@ -213,8 +213,8 @@
   
   <entry>
     <title>DesignPattern -  Iterator Pattern</title>
-    <link href="http://yoursite.com//IteratorPattern/"/>
-    <id>http://yoursite.com//IteratorPattern/</id>
+    <link href="http://yoursite.com//IteratorPattern"/>
+    <id>http://yoursite.com//IteratorPattern</id>
     <published>2019-05-16T21:42:15.000Z</published>
     <updated>2019-05-16T23:17:22.255Z</updated>
     
@@ -244,8 +244,8 @@
   
   <entry>
     <title>Introduction - how to use neo4j in java</title>
-    <link href="http://yoursite.com//neo4j-java-introduction/"/>
-    <id>http://yoursite.com//neo4j-java-introduction/</id>
+    <link href="http://yoursite.com//neo4j-java-introduction"/>
+    <id>http://yoursite.com//neo4j-java-introduction</id>
     <published>2019-05-14T19:14:38.000Z</published>
     <updated>2019-05-21T15:58:45.175Z</updated>
     
@@ -285,8 +285,8 @@
   
   <entry>
     <title>How to Design your Own Online Shopping Website like amazon -- DB design</title>
-    <link href="http://yoursite.com//online-shopping-project-db-design/"/>
-    <id>http://yoursite.com//online-shopping-project-db-design/</id>
+    <link href="http://yoursite.com//online-shopping-project-db-design"/>
+    <id>http://yoursite.com//online-shopping-project-db-design</id>
     <published>2019-05-14T01:40:19.000Z</published>
     <updated>2019-05-14T17:23:03.060Z</updated>
     
@@ -314,8 +314,8 @@
   
   <entry>
     <title>How to Design your Own Online Shopping Website like amazon -- Requirements Analysis</title>
-    <link href="http://yoursite.com//online-shopping-project-software-Requirment-Analysis/"/>
-    <id>http://yoursite.com//online-shopping-project-software-Requirment-Analysis/</id>
+    <link href="http://yoursite.com//online-shopping-project-software-Requirment-Analysis"/>
+    <id>http://yoursite.com//online-shopping-project-software-Requirment-Analysis</id>
     <published>2019-05-13T22:54:45.000Z</published>
     <updated>2019-05-14T16:58:58.675Z</updated>
     
@@ -341,8 +341,6 @@
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="Software Requirements Analysis" scheme="http://yoursite.com/tags/Software-Requirements-Analysis/"/>
-    
       <category term="Javascript" scheme="http://yoursite.com/tags/Javascript/"/>
     
       <category term="JSP" scheme="http://yoursite.com/tags/JSP/"/>
@@ -350,6 +348,8 @@
       <category term="Bootstrap" scheme="http://yoursite.com/tags/Bootstrap/"/>
     
       <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
+    
+      <category term="Software Requirements Analysis" scheme="http://yoursite.com/tags/Software-Requirements-Analysis/"/>
     
       <category term="Front-end" scheme="http://yoursite.com/tags/Front-end/"/>
     
@@ -363,8 +363,8 @@
   
   <entry>
     <title>Introduction to CRUD operations in Neo4j</title>
-    <link href="http://yoursite.com//CRUD-neo4j/"/>
-    <id>http://yoursite.com//CRUD-neo4j/</id>
+    <link href="http://yoursite.com//CRUD-neo4j"/>
+    <id>http://yoursite.com//CRUD-neo4j</id>
     <published>2019-05-13T16:20:32.000Z</published>
     <updated>2019-05-13T22:56:29.679Z</updated>
     
@@ -398,8 +398,8 @@
   
   <entry>
     <title>neo4j_1_introducion</title>
-    <link href="http://yoursite.com//neo4j-1-introducion/"/>
-    <id>http://yoursite.com//neo4j-1-introducion/</id>
+    <link href="http://yoursite.com//neo4j-1-introducion"/>
+    <id>http://yoursite.com//neo4j-1-introducion</id>
     <published>2019-05-09T15:43:20.000Z</published>
     <updated>2019-05-09T23:35:23.769Z</updated>
     
@@ -431,8 +431,8 @@
   
   <entry>
     <title>Design-Pattern -- Decorator Pattern</title>
-    <link href="http://yoursite.com//DecoratorPattern/"/>
-    <id>http://yoursite.com//DecoratorPattern/</id>
+    <link href="http://yoursite.com//DecoratorPattern"/>
+    <id>http://yoursite.com//DecoratorPattern</id>
     <published>2019-05-08T13:40:07.000Z</published>
     <updated>2019-05-22T17:28:31.668Z</updated>
     
@@ -466,8 +466,8 @@
   
   <entry>
     <title>Design-Pattern -- Observer Pattern</title>
-    <link href="http://yoursite.com//ObserverPattern/"/>
-    <id>http://yoursite.com//ObserverPattern/</id>
+    <link href="http://yoursite.com//ObserverPattern"/>
+    <id>http://yoursite.com//ObserverPattern</id>
     <published>2019-05-07T23:14:18.000Z</published>
     <updated>2019-05-09T23:36:13.922Z</updated>
     
@@ -499,8 +499,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com//hello-world/"/>
-    <id>http://yoursite.com//hello-world/</id>
+    <link href="http://yoursite.com//hello-world"/>
+    <id>http://yoursite.com//hello-world</id>
     <published>2019-05-04T17:06:34.876Z</published>
     <updated>2019-05-09T23:36:15.606Z</updated>
     

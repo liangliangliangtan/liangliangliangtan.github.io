@@ -96,20 +96,18 @@
 
 
 
-  <meta name="description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
-<meta name="keywords" content="Data Structure and Algorithm,Recursion,Complete Binary Tree,ZigZag,Math">
+  <meta name="description" content="Basically, for design an website, we mainly have 4 parts.  Front-End display: This part is mainly about how to display the data in MySQL database, like the index page, detailed products pages, shoppin">
+<meta name="keywords" content="Java,Javascript,JSP,Bootstrap,MySQL,Software Requirements Analysis,Front-end,Back-end,Database Design,Spring MVC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode 1104 Path in Zigzag Labelled Binary Tree">
-<meta property="og:url" content="http://yoursite.com/pathInZigZagLabelledBinaryTree/index.html">
+<meta property="og:title" content="How to Design your Own Online Shopping Website like amazon -- Requirements Analysis">
+<meta property="og:url" content="http://yoursite.com/online-shopping-project-software-Requirment-Analysis">
 <meta property="og:site_name" content="Liang Tan&#39;s Blog">
-<meta property="og:description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
+<meta property="og:description" content="Basically, for design an website, we mainly have 4 parts.  Front-End display: This part is mainly about how to display the data in MySQL database, like the index page, detailed products pages, shoppin">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/images/tree.png">
-<meta property="og:updated_time" content="2019-07-15T21:18:47.407Z">
+<meta property="og:updated_time" content="2019-05-14T16:58:58.675Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode 1104 Path in Zigzag Labelled Binary Tree">
-<meta name="twitter:description" content="1. Problem DescriptionIn an infinite binary tree where every node has two children, the nodes are labelled in row order. In the odd numbered rows (ie., the first, third, fifth,…), the labelling is lef">
-<meta name="twitter:image" content="http://yoursite.com/images/tree.png">
+<meta name="twitter:title" content="How to Design your Own Online Shopping Website like amazon -- Requirements Analysis">
+<meta name="twitter:description" content="Basically, for design an website, we mainly have 4 parts.  Front-End display: This part is mainly about how to display the data in MySQL database, like the index page, detailed products pages, shoppin">
 
 
 
@@ -119,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/pathInZigZagLabelledBinaryTree/">
+  <link rel="canonical" href="http://yoursite.com/online-shopping-project-software-Requirment-Analysis">
 
 
 
@@ -129,7 +127,7 @@
   };
 </script>
 
-  <title>Leetcode 1104 Path in Zigzag Labelled Binary Tree | Liang Tan's Blog</title>
+  <title>How to Design your Own Online Shopping Website like amazon -- Requirements Analysis | Liang Tan's Blog</title>
   
 
 
@@ -339,7 +337,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pathInZigZagLabelledBinaryTree/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/online-shopping-project-software-Requirment-Analysis">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang Tan">
@@ -356,7 +354,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Leetcode 1104 Path in Zigzag Labelled Binary Tree
+          <h1 class="post-title" itemprop="name headline">How to Design your Own Online Shopping Website like amazon -- Requirements Analysis
 
               
             
@@ -382,7 +380,7 @@
                 
               
 
-              <time title="Created: 2019-07-02 19:26:51" itemprop="dateCreated datePublished" datetime="2019-07-02T19:26:51-06:00">2019-07-02</time>
+              <time title="Created: 2019-05-13 16:54:45" itemprop="dateCreated datePublished" datetime="2019-05-13T16:54:45-06:00">2019-05-13</time>
             
 
             
@@ -399,11 +397,43 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-15 15:18:47" itemprop="dateModified" datetime="2019-07-15T15:18:47-06:00">2019-07-15</time>
+                <time title="Modified: 2019-05-14 10:58:58" itemprop="dateModified" datetime="2019-05-14T10:58:58-06:00">2019-05-14</time>
               
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/MySQL/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -440,32 +470,63 @@
       
 
       
-        <h1 id="1-Problem-Description"><a href="#1-Problem-Description" class="headerlink" title="1. Problem Description"></a>1. Problem Description</h1><p>In an infinite <strong>binary tree</strong> where <strong>every node has two children</strong>, the nodes are labelled in row order.</p>
-<p>In the <strong>odd</strong> numbered rows (ie., the first, third, fifth,…), the labelling is <strong>left to right</strong>, while in the <strong>even</strong> numbered rows (second, fourth, sixth,…), the labelling is <strong>right to left</strong>.</p>
-<p><div>
-  <img src="../images/tree.png" alt="Smiley face" width="50%" height="50%">
-</div><br><br></p>
-<p><strong>Challenge:</strong> </p>
-<p>Given the label of a node in this tree, return the labels in the path from the root of the tree to the node with that label.</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: label = 14</span><br><span class="line">Output: [1,3,4,14]</span><br></pre></td></tr></table></figure>
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: label = 26</span><br><span class="line">Output: [1,2,6,10,26]</span><br></pre></td></tr></table></figure>
-<h1 id="2-My-Thought-About-This-Problem"><a href="#2-My-Thought-About-This-Problem" class="headerlink" title="2. My Thought About This Problem:"></a>2. My Thought About This Problem:</h1><p>Tree data structure itself is recursive, Hence, Many problems regarding to tree can be solved recursively. In this problem, we could think that in order to find the path of the label of a node, how about <strong>finding the label of its parent node in the first place</strong>.  If we can do that, the problem can be solved recursively, until the root node which has label of 1. </p>
-<h1 id="3-Difficulty-find-the-label-of-its-parent-node"><a href="#3-Difficulty-find-the-label-of-its-parent-node" class="headerlink" title="3. Difficulty: find the label of its parent node"></a>3. Difficulty: find the label of its parent node</h1><p>The tough thing here is to find the label of its parent node. What conditions we have not used yet? Well, the binary tree is complete, and the trees label is in ZigZag Order. </p>
-<p>The tree is binary and complete:</p>
+        <p>Basically, for design an website, we mainly have 4 parts.</p>
 <ol>
-<li><p>Given the label, we could compute the depth of the tree by taking the logrithm of two. Let us say the result is k. Then, we also know the range of that level, which is<br>[$2^k$, $2^{k+1}$-1].</p>
+<li><p>Front-End display: This part is mainly about how to display the data in MySQL database, like the index page, detailed products pages, shopping carts pages and shopping categories pages.</p>
 </li>
-<li><p>According to ZigZag property, we know that <strong>the largest element in the previous layer follows by the smallest element of the current layer</strong>.Therefore, we know that the smallest element in the previous layer is $2^k$ - 1. </p>
+<li><p>Interaction Between Front-End and Back-End: When the clients or the admin have a serial of actions like buying a product, add a product to their shopping carts, log in and log out to the web site. This part is how you design controllers and tiny URL BY Using HTTP protocol (e.g GET and POST Method).</p>
+</li>
+<li><p>Back-end Management : This part is to maintain the data used in the website, like the product managements, products picture managements, user managements ,order managements ,so on and so forth.</p>
+</li>
+<li><p>Databases and Entities Design. In this part, we will carefully design the schema of our MySQL database. We will create the schema for each table and establish the relationships between tables. Based on those tables, we will create the classes mapping to tables.</p>
 </li>
 </ol>
-<p>3.If we could know the difference between  the smallest element in the previous  and its parent, then we can derive its parent label ! </p>
-<ol>
-<li>Now we only have one condition haven’t applied, which is the tree is <strong>complete</strong>. Recall that, <strong>Heap</strong> itseulf is a complete binary tree but it can be stored in an array. The parent of a node with index <em>i</em> in heap is array[i/2]. The offset of current node divides two is the difference we want.</li>
-</ol>
-<p>By previous analysis, the code is relatively easy to write.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  List&lt;Integer&gt; <span class="title">pathInZigZagTree</span><span class="params">(<span class="keyword">int</span> label)</span></span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        bottom2upTraverse(list, label);</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bottom2upTraverse</span><span class="params">(List&lt;Integer&gt; list, <span class="keyword">int</span> label)</span></span>&#123;</span><br><span class="line">        list.add(<span class="number">0</span>,label);</span><br><span class="line">        <span class="keyword">if</span>(label == <span class="number">1</span>) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="comment">// get the level of the label in the tree;</span></span><br><span class="line">        <span class="keyword">int</span> level = log2(label);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// get the index of the label on its level</span></span><br><span class="line">        <span class="keyword">int</span> idx = label - (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>,level);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// according to ZigZag Tree property, find the previous label to traverse;</span></span><br><span class="line">        <span class="keyword">int</span> nextLabel = (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>,level) - <span class="number">1</span> - idx/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// traverse recursively.</span></span><br><span class="line">        bottom2upTraverse(list,nextLabel);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">log2</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)(Math.log(n) / Math.log(<span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>I will go deep into requirements analysis for each part in another blog.</p>
+<p>Here, I will list all the tech stacks used in this project.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Database</th>
+<th>MySQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>server-side template engine</td>
+<td>Java Server Page(JSP)</td>
+</tr>
+<tr>
+<td>Front-End FrameWork</td>
+<td>Bootstrap, JQuery</td>
+</tr>
+<tr>
+<td>Communication between Front-end and Back-end</td>
+<td>AJAX(In JSON data type)</td>
+</tr>
+<tr>
+<td>Project Management Tool</td>
+<td>Maven</td>
+</tr>
+<tr>
+<td>Database Aceess</td>
+<td>Mybatis</td>
+</tr>
+<tr>
+<td>Web Container</td>
+<td>Tomcat</td>
+</tr>
+<tr>
+<td>Web Architecture</td>
+<td>Spring MVC</td>
+</tr>
+<tr>
+<td>Dev tools</td>
+<td>IntelliJ IDEA</td>
+</tr>
+</tbody>
+</table>
+</div>
 
       
     </div>
@@ -489,15 +550,25 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Data-Structure-and-Algorithm/" rel="tag"># Data Structure and Algorithm</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/Recursion/" rel="tag"># Recursion</a>
+            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
           
-            <a href="/tags/Complete-Binary-Tree/" rel="tag"># Complete Binary Tree</a>
+            <a href="/tags/JSP/" rel="tag"># JSP</a>
           
-            <a href="/tags/ZigZag/" rel="tag"># ZigZag</a>
+            <a href="/tags/Bootstrap/" rel="tag"># Bootstrap</a>
           
-            <a href="/tags/Math/" rel="tag"># Math</a>
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/Software-Requirements-Analysis/" rel="tag"># Software Requirements Analysis</a>
+          
+            <a href="/tags/Front-end/" rel="tag"># Front-end</a>
+          
+            <a href="/tags/Back-end/" rel="tag"># Back-end</a>
+          
+            <a href="/tags/Database-Design/" rel="tag"># Database Design</a>
+          
+            <a href="/tags/Spring-MVC/" rel="tag"># Spring MVC</a>
           
         </div>
       
@@ -510,8 +581,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/filling-bookcase-shelves/" rel="next" title="Leetcode problem 1105 filling-bookcase-shelves">
-                <i class="fa fa-chevron-left"></i> Leetcode problem 1105 filling-bookcase-shelves
+              <a href="/CRUD-neo4j" rel="next" title="Introduction to CRUD operations in Neo4j">
+                <i class="fa fa-chevron-left"></i> Introduction to CRUD operations in Neo4j
               </a>
             
           </div>
@@ -519,6 +590,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/online-shopping-project-db-design" rel="prev" title="How to Design your Own Online Shopping Website like amazon -- DB design">
+                How to Design your Own Online Shopping Website like amazon -- DB design <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -569,17 +644,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -799,23 +865,6 @@
       </div>
 
       
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Problem-Description"><span class="nav-number">1.</span> <span class="nav-text">1. Problem Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-My-Thought-About-This-Problem"><span class="nav-number">2.</span> <span class="nav-text">2. My Thought About This Problem:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Difficulty-find-the-label-of-its-parent-node"><span class="nav-number">3.</span> <span class="nav-text">3. Difficulty: find the label of its parent node</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
 
       
 
@@ -994,7 +1043,6 @@
   
     
 
-
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
 
@@ -1007,8 +1055,8 @@
 
 <script>
   var gitalk = new Gitalk({
-    clientID: '07fa5037d079442c8c6e',
-    clientSecret: '5e7b212cf2542940ec8b71c0d8526f82804f1c89',
+    clientID: '42d0b83b57fd95e785f4',
+    clientSecret: 'f4c0e51fdb6b1409eb2e59e9d284e5b92f0dfd41',
     repo: 'liangliangliangtan.github.io',
     owner: 'liangliangliangtan',
     admin: ['liangliangliangtan'],
@@ -1020,39 +1068,7 @@
   });
   gitalk.render('gitalk-container');
 </script>
-
   
-
-
-
-
-
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-
-
-<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
-
-<script>
-  var gitalk = new Gitalk({
-    clientID: '07fa5037d079442c8c6e',
-    clientSecret: '5e7b212cf2542940ec8b71c0d8526f82804f1c89',
-    repo: 'liangliangliangtan.github.io',
-    owner: 'liangliangliangtan',
-    admin: ['liangliangliangtan'],
-    id: md5(location.pathname),
-    
-      language: 'en',
-    
-    distractionFreeMode: 'true'
-  });
-  gitalk.render('gitalk-container');
-</script>
-
 
   
 
@@ -1069,46 +1085,6 @@
   
   
 
-  
-    
-      <script type="text/x-mathjax-config">
-  
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
-        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
-      }
-    });
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
-    }
-  });
-</script>
-<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-    
   
 
 

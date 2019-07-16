@@ -100,7 +100,7 @@
 <meta name="keywords" content="OOD,Design Pattern,Java,Decorator Pattern,IO,InputStream">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Design-Pattern -- Decorator Pattern">
-<meta property="og:url" content="http://yoursite.com/DecoratorPattern/index.html">
+<meta property="og:url" content="http://yoursite.com/DecoratorPattern">
 <meta property="og:site_name" content="Liang Tan&#39;s Blog">
 <meta property="og:description" content="1. Definition:Let us first look at the strict definition of Decorator Pattern,  Decorator Pattern attaches additional responsibilities to one Object dynamically, without affecting the behaviour of oth">
 <meta property="og:locale" content="en">
@@ -122,7 +122,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/DecoratorPattern/">
+  <link rel="canonical" href="http://yoursite.com/DecoratorPattern">
 
 
 
@@ -342,7 +342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/DecoratorPattern/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/DecoratorPattern">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang Tan">
@@ -574,7 +574,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/ObserverPattern/" rel="next" title="Design-Pattern -- Observer Pattern">
+              <a href="/ObserverPattern" rel="next" title="Design-Pattern -- Observer Pattern">
                 <i class="fa fa-chevron-left"></i> Design-Pattern -- Observer Pattern
               </a>
             
@@ -584,7 +584,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/neo4j-1-introducion/" rel="prev" title="neo4j_1_introducion">
+              <a href="/neo4j-1-introducion" rel="prev" title="neo4j_1_introducion">
                 neo4j_1_introducion <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1062,7 +1062,6 @@
   
     
 
-
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
 
@@ -1075,8 +1074,8 @@
 
 <script>
   var gitalk = new Gitalk({
-    clientID: '07fa5037d079442c8c6e',
-    clientSecret: '5e7b212cf2542940ec8b71c0d8526f82804f1c89',
+    clientID: '42d0b83b57fd95e785f4',
+    clientSecret: 'f4c0e51fdb6b1409eb2e59e9d284e5b92f0dfd41',
     repo: 'liangliangliangtan.github.io',
     owner: 'liangliangliangtan',
     admin: ['liangliangliangtan'],
@@ -1088,39 +1087,7 @@
   });
   gitalk.render('gitalk-container');
 </script>
-
   
-
-
-
-
-
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-
-
-<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
-
-<script>
-  var gitalk = new Gitalk({
-    clientID: '07fa5037d079442c8c6e',
-    clientSecret: '5e7b212cf2542940ec8b71c0d8526f82804f1c89',
-    repo: 'liangliangliangtan.github.io',
-    owner: 'liangliangliangtan',
-    admin: ['liangliangliangtan'],
-    id: md5(location.pathname),
-    
-      language: 'en',
-    
-    distractionFreeMode: 'true'
-  });
-  gitalk.render('gitalk-container');
-</script>
-
 
   
 

@@ -100,7 +100,7 @@
 <meta name="keywords" content="OOD,Design Pattern,Factory Method,Java Source Code,Abstract Factory,JDBC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Design Pattern factory_pattern">
-<meta property="og:url" content="http://yoursite.com/design-pattern-factory-pattern/index.html">
+<meta property="og:url" content="http://yoursite.com/design-pattern-factory-pattern">
 <meta property="og:site_name" content="Liang Tan&#39;s Blog">
 <meta property="og:description" content="Let’s first look at how java use the factory method.At beginning, in order to unify all the manipulations on different SQL type databases (i.e MySQL, SQL Server) in java, An unified interface need to">
 <meta property="og:locale" content="en">
@@ -117,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/design-pattern-factory-pattern/">
+  <link rel="canonical" href="http://yoursite.com/design-pattern-factory-pattern">
 
 
 
@@ -337,7 +337,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/design-pattern-factory-pattern/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/design-pattern-factory-pattern">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang Tan">
@@ -551,7 +551,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/import_rdf_to_neo4j_db/" rel="next" title="Import RDF files to Neo4j database">
+              <a href="/import_rdf_to_neo4j_db" rel="next" title="Import RDF files to Neo4j database">
                 <i class="fa fa-chevron-left"></i> Import RDF files to Neo4j database
               </a>
             
@@ -561,7 +561,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/mini-spring-mvc/" rel="prev" title="Implements a mini Spring Framework">
+              <a href="/mini-spring-mvc" rel="prev" title="Implements a mini Spring Framework">
                 Implements a mini Spring Framework <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1039,7 +1039,6 @@
   
     
 
-
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
 
@@ -1052,8 +1051,8 @@
 
 <script>
   var gitalk = new Gitalk({
-    clientID: '07fa5037d079442c8c6e',
-    clientSecret: '5e7b212cf2542940ec8b71c0d8526f82804f1c89',
+    clientID: '42d0b83b57fd95e785f4',
+    clientSecret: 'f4c0e51fdb6b1409eb2e59e9d284e5b92f0dfd41',
     repo: 'liangliangliangtan.github.io',
     owner: 'liangliangliangtan',
     admin: ['liangliangliangtan'],
@@ -1065,39 +1064,7 @@
   });
   gitalk.render('gitalk-container');
 </script>
-
   
-
-
-
-
-
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-
-
-<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
-
-<script>
-  var gitalk = new Gitalk({
-    clientID: '07fa5037d079442c8c6e',
-    clientSecret: '5e7b212cf2542940ec8b71c0d8526f82804f1c89',
-    repo: 'liangliangliangtan.github.io',
-    owner: 'liangliangliangtan',
-    admin: ['liangliangliangtan'],
-    id: md5(location.pathname),
-    
-      language: 'en',
-    
-    distractionFreeMode: 'true'
-  });
-  gitalk.render('gitalk-container');
-</script>
-
 
   
 
