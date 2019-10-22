@@ -512,17 +512,19 @@ Suppose, You want to boil some water. Suppose you are Process A,
             
             
             
+ 
 
             
-            
-            <span id="busuanzi_container_site_pv">
-                |&nbsp;<i class="fa fa-eye"></i>&nbsp;Totoal Views:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;Times
+            <span id="busuanzi_container_site_pv" style="display:none">
+                <i class="fa fa-heart-o"></i>
+                Total Views <span id="busuanzi_value_site_pv" class="white-color"></span>
             </span>
             
             
-            <span id="busuanzi_container_site_uv">
-                |&nbsp;<i class="fa fa-users"></i>&nbsp;Total Visitors:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;Person
+            <span id="busuanzi_container_site_uv" style="display:none">
+                Times,&nbsp;Total Visitors <span id="busuanzi_value_site_uv" class="white-color"></span> person.
             </span>
+            
             
             <br>
             
@@ -606,6 +608,28 @@ Suppose, You want to boil some water. Suppose you are Process A,
 </footer>
 
 <div class="progress-bar"></div>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+        var pvcountOffset = 80000;  // 初始化首次数据
+        var uvcountOffset = 20000;
+
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int); // 停止检测
+            }
+        }
+    });
+</script>
 
 
     <!-- 搜索遮罩框 -->
