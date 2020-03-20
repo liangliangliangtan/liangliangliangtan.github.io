@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://liangliangliangtan.github.io/2020-03-17-Create-time-series-spatial-databases-With-TimeScaleDB-and-PostGIS.html</loc>
+    
+    <lastmod>2020-03-19T23:52:05.040Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://liangliangliangtan.github.io/2020-03-10-rating.html</loc>
     
-    <lastmod>2020-03-11T03:00:57.601Z</lastmod>
+    <lastmod>2020-03-11T16:36:18.755Z</lastmod>
     
   </url>
   
