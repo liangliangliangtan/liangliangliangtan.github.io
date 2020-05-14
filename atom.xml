@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://liangliangliangtan.github.io/"/>
-  <updated>2020-03-19T23:52:05.040Z</updated>
+  <updated>2020-05-14T22:57:58.751Z</updated>
   <id>https://liangliangliangtan.github.io/</id>
   
   <author>
@@ -15,6 +15,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Reservoir Sampling</title>
+    <link href="https://liangliangliangtan.github.io/2020-05-14-reservoir-sampling.html"/>
+    <id>https://liangliangliangtan.github.io/2020-05-14-reservoir-sampling.html</id>
+    <published>2020-05-14T22:01:19.000Z</published>
+    <updated>2020-05-14T22:57:58.751Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction."></a>1.Introduction.</h2><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="https://liangliangliangtan.github.io/tags/Python/"/>
+    
+      <category term="Big Data" scheme="https://liangliangliangtan.github.io/tags/Big-Data/"/>
+    
+      <category term="sampling algorithm" scheme="https://liangliangliangtan.github.io/tags/sampling-algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nearest point search in PostGIS</title>
+    <link href="https://liangliangliangtan.github.io/2020-05-14-nearest-point-search-in-PostGIS.html"/>
+    <id>https://liangliangliangtan.github.io/2020-05-14-nearest-point-search-in-PostGIS.html</id>
+    <published>2020-05-14T20:47:30.000Z</published>
+    <updated>2020-05-14T22:05:46.454Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>A frequently retrieving task is to find the nearest candidate to the target candidate based on speific feature.</p><h2 id="1-Naive-Solution"><a href="#1-Naive-Solution" class="headerlink" title="1. Naive Solution:"></a>1. Naive Solution:</h2><p>The naive way to carry out the query task is to compute all distance pairs for all candidates and order them in ascending order and pick up the smallest one as the result. </p><pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- Closest poitn to the target geometry with (-116.733:longitude, 54.828: latitude)</span><span class="token keyword">SELECT</span> forecast_longitude <span class="token keyword">as</span> lon<span class="token punctuation">,</span>forecast_latitude <span class="token keyword">as</span> lat<span class="token punctuation">,</span>centroid_point <span class="token keyword">as</span> <span class="token keyword">point</span><span class="token punctuation">,</span> boundary_geo <span class="token keyword">as</span> area<span class="token punctuation">,</span>ST_Distance<span class="token punctuation">(</span>    ST_Transform<span class="token punctuation">(</span><span class="token string">'SRID=4326;POINT(-116.733 54.828)'</span>::<span class="token keyword">geometry</span><span class="token punctuation">,</span> <span class="token number">2163</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    ST_Transform<span class="token punctuation">(</span>centroid_point<span class="token punctuation">,</span> <span class="token number">2163</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> distance<span class="token keyword">FROM</span> services_areas<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> distance <span class="token keyword">ASC</span><span class="token keyword">LIMIT</span> <span class="token number">1</span><span class="token punctuation">;</span></code></pre><p>This native approach takes line time to traverse the whole database. For a larget database and complex feature computation , it is not a reasonable approach.</p><p>Let us look at the time taken to execute the query.</p><pre class=" language-bash"><code class="language-bash">For a large table of candidate features, it is not a reasonable approach.QUERY PLAN-------------------------------------------------------------------------------------------------------------------------------------Limit <span class="token punctuation">(</span>cost<span class="token operator">=</span>3008.20<span class="token punctuation">..</span>3008.20 rows<span class="token operator">=</span>1 width<span class="token operator">=</span>184<span class="token punctuation">)</span> <span class="token punctuation">(</span>actual time<span class="token operator">=</span>53.044<span class="token punctuation">..</span>53.044 rows<span class="token operator">=</span>1 loops<span class="token operator">=</span>1<span class="token punctuation">)</span>    -<span class="token operator">></span> Sort <span class="token punctuation">(</span>cost<span class="token operator">=</span>3008.20<span class="token punctuation">..</span>3076.36 rows<span class="token operator">=</span>27265 width<span class="token operator">=</span>184<span class="token punctuation">)</span> <span class="token punctuation">(</span>actual time<span class="token operator">=</span>53.043<span class="token punctuation">..</span>53.043 rows<span class="token operator">=</span>1 loops<span class="token operator">=</span>1<span class="token punctuation">)</span>        Sort Key: <span class="token punctuation">(</span>st_distance<span class="token punctuation">(</span><span class="token string">'010100002073080000FF1FDF9BB84030C19FAD11C8F06A3241'</span>::geometry, st_transform<span class="token punctuation">(</span>centroid_point, 2163<span class="token punctuation">))</span><span class="token punctuation">)</span>        Sort Method: top-N heapsort Memory: 25kB    -<span class="token operator">></span> Seq Scan on services_areas <span class="token punctuation">(</span>cost<span class="token operator">=</span>0.00<span class="token punctuation">..</span>2871.88 rows<span class="token operator">=</span>27265 width<span class="token operator">=</span>184<span class="token punctuation">)</span> <span class="token punctuation">(</span>actual time<span class="token operator">=</span>0.306<span class="token punctuation">..</span>43.524 rows<span class="token operator">=</span>27265 loops<span class="token operator">=</span>1<span class="token punctuation">)</span>Planning Time: 0.476 msExecution Time: 53.069 ms<span class="token punctuation">(</span>7 rows<span class="token punctuation">)</span></code></pre><h2 id="2-Index-based-KNN"><a href="#2-Index-based-KNN" class="headerlink" title="2.Index-based KNN"></a>2.Index-based KNN</h2><p>KNN algorithm is to find the k nearest point to the target, where k is an arbitary positive integer.</p><p>This index-based kNN system works by evaluating distance bweteen bounding box in PostGIS R-index tree.<br>Since the index is built with the bounding box of any geometry, so the distances between any geometries are actually somehow inexact.</p><p>There are two types of index-based operators measuring the distance of two bounding boxes.</p><ul><li><p>&lt;-&gt; means “distance between box centers”</p></li><li><p>&lt;#&gt; means “distance between box edges”</p></li></ul><p>The bounding box of one <strong>geometry points</strong> is just the point itself, so there is no approximation there. But if the bounding boxes of <strong>polygons</strong> aren’t the same as points. </p><p>The right way to get the nearest point with high-performance yet accurate approach is to pull up top-k<br>number (k could be a really small number if you are confident that the data is in homogeneous distribution)</p><pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- "Closest" 100 points to target point,</span><span class="token keyword">EXPLAIN</span> ANALYSE<span class="token keyword">WITH</span> closest_candidates <span class="token keyword">AS</span> <span class="token punctuation">(</span>    <span class="token keyword">SELECT</span>    forecast_longitude <span class="token keyword">as</span> lon<span class="token punctuation">,</span>    forecast_latitude <span class="token keyword">as</span> lat<span class="token punctuation">,</span>    centroid_point <span class="token keyword">as</span> <span class="token keyword">point</span><span class="token punctuation">,</span>    boundary_geo <span class="token keyword">as</span> area    <span class="token keyword">FROM</span>    services_areas    <span class="token keyword">ORDER</span> <span class="token keyword">BY</span>    centroid_point <span class="token operator">&lt;</span><span class="token operator">-</span><span class="token operator">></span>    ST_Transform<span class="token punctuation">(</span><span class="token string">'SRID=4326;POINT(-116.733 54.828)'</span>::<span class="token keyword">geometry</span><span class="token punctuation">,</span> <span class="token number">3401</span><span class="token punctuation">)</span>    <span class="token keyword">LIMIT</span> <span class="token number">100</span>    <span class="token punctuation">)</span><span class="token keyword">SELECT</span> lon<span class="token punctuation">,</span>lat<span class="token punctuation">,</span><span class="token keyword">point</span><span class="token punctuation">,</span>area<span class="token punctuation">,</span>    ST_Distance<span class="token punctuation">(</span>    ST_Transform<span class="token punctuation">(</span>        <span class="token string">'SRID=4326;POINT(-116.733 54.828)'</span>::<span class="token keyword">geometry</span><span class="token punctuation">,</span>        <span class="token keyword">point</span>    <span class="token punctuation">)</span> <span class="token keyword">AS</span> distance<span class="token keyword">FROM</span> closest_candidates<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> distance <span class="token keyword">ASC</span><span class="token keyword">LIMIT</span> <span class="token number">1</span><span class="token punctuation">;</span></code></pre><p>The execution time is as follows:</p><pre class=" language-bash"><code class="language-bash"> QUERY PLAN----------------------------------------------------------------------------------------------------------------------------------------------------------------------- Limit  <span class="token punctuation">(</span>cost<span class="token operator">=</span>15.38<span class="token punctuation">..</span>15.39 rows<span class="token operator">=</span>1 width<span class="token operator">=</span>136<span class="token punctuation">)</span> <span class="token punctuation">(</span>actual time<span class="token operator">=</span>3.150<span class="token punctuation">..</span>3.150 rows<span class="token operator">=</span>1 loops<span class="token operator">=</span>1<span class="token punctuation">)</span>   CTE closest_candidates     -<span class="token operator">></span>  Limit  <span class="token punctuation">(</span>cost<span class="token operator">=</span>0.28<span class="token punctuation">..</span>6.38 rows<span class="token operator">=</span>100 width<span class="token operator">=</span>184<span class="token punctuation">)</span> <span class="token punctuation">(</span>actual time<span class="token operator">=</span>0.446<span class="token punctuation">..</span>1.730 rows<span class="token operator">=</span>100 loops<span class="token operator">=</span>1<span class="token punctuation">)</span>           -<span class="token operator">></span>  Index Scan using services_areas_centroid_p_idx on services_areas  <span class="token punctuation">(</span>cost<span class="token operator">=</span>0.28<span class="token punctuation">..</span>1665.38 rows<span class="token operator">=</span>27265 width<span class="token operator">=</span>184<span class="token punctuation">)</span> <span class="token punctuation">(</span>actual time<span class="token operator">=</span>0.445<span class="token punctuation">..</span>1.683 rows<span class="token operator">=</span>100 loops<span class="token operator">=</span>1<span class="token punctuation">)</span>                 Order By: <span class="token punctuation">(</span>centroid_point <span class="token operator">&lt;</span>-<span class="token operator">></span> <span class="token string">'0101000020490D00004D804FF20E2BFBC013EF8614392C5741'</span>::geometry<span class="token punctuation">)</span>   -<span class="token operator">></span>  Sort  <span class="token punctuation">(</span>cost<span class="token operator">=</span>9.00<span class="token punctuation">..</span>9.25 rows<span class="token operator">=</span>100 width<span class="token operator">=</span>136<span class="token punctuation">)</span> <span class="token punctuation">(</span>actual time<span class="token operator">=</span>3.149<span class="token punctuation">..</span>3.149 rows<span class="token operator">=</span>1 loops<span class="token operator">=</span>1<span class="token punctuation">)</span>         Sort Key: <span class="token punctuation">(</span>st_distance<span class="token punctuation">(</span><span class="token string">'010100002073080000FF1FDF9BB84030C19FAD11C8F06A3241'</span>::geometry, st_transform<span class="token punctuation">(</span>closest_candidates.point, 2163<span class="token punctuation">))</span><span class="token punctuation">)</span>         Sort Method: top-N heapsort  Memory: 25kB         -<span class="token operator">></span>  CTE Scan on closest_candidates  <span class="token punctuation">(</span>cost<span class="token operator">=</span>0.00<span class="token punctuation">..</span>8.50 rows<span class="token operator">=</span>100 width<span class="token operator">=</span>136<span class="token punctuation">)</span> <span class="token punctuation">(</span>actual time<span class="token operator">=</span>0.926<span class="token punctuation">..</span>2.997 rows<span class="token operator">=</span>100 loops<span class="token operator">=</span>1<span class="token punctuation">)</span> Planning Time: 1.225 ms Execution Time: 3.221 ms<span class="token punctuation">(</span>11 rows<span class="token punctuation">)</span></code></pre><p>This will saves a lot of time because traversing the R-tree and heap sort for top-K is at most <strong>logarithmic</strong> time.It’s much faster compared wtih <strong>linear</strong> time.</p><p>For the details of how R-Tree works, I recommend the <a href="http://www.mathcs.emory.edu/~cheung/Courses/554/Syllabus/3-index/R-tree.html" target="_blank" rel="noopener">pdf</a>, which shows how R-tree data structrue in detail, and how insert/search algorithm performed in R-tree. </p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="PostGIS" scheme="https://liangliangliangtan.github.io/tags/PostGIS/"/>
+    
+      <category term="PostgreSQL" scheme="https://liangliangliangtan.github.io/tags/PostgreSQL/"/>
+    
+      <category term="R-tree" scheme="https://liangliangliangtan.github.io/tags/R-tree/"/>
+    
+      <category term="SQL" scheme="https://liangliangliangtan.github.io/tags/SQL/"/>
+    
+      <category term="Data Structure and algorithm" scheme="https://liangliangliangtan.github.io/tags/Data-Structure-and-algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>Create time-series spatial databases  With TimeScaleDB and PostGIS</title>
@@ -438,6 +496,8 @@
     
       <category term="Java" scheme="https://liangliangliangtan.github.io/tags/Java/"/>
     
+      <category term="Software Requirements Analysis" scheme="https://liangliangliangtan.github.io/tags/Software-Requirements-Analysis/"/>
+    
       <category term="Javascript" scheme="https://liangliangliangtan.github.io/tags/Javascript/"/>
     
       <category term="JSP" scheme="https://liangliangliangtan.github.io/tags/JSP/"/>
@@ -445,8 +505,6 @@
       <category term="Bootstrap" scheme="https://liangliangliangtan.github.io/tags/Bootstrap/"/>
     
       <category term="MySQL" scheme="https://liangliangliangtan.github.io/tags/MySQL/"/>
-    
-      <category term="Software Requirements Analysis" scheme="https://liangliangliangtan.github.io/tags/Software-Requirements-Analysis/"/>
     
       <category term="Front-end" scheme="https://liangliangliangtan.github.io/tags/Front-end/"/>
     
@@ -591,27 +649,6 @@
       <category term="Observer Pattern" scheme="https://liangliangliangtan.github.io/tags/Observer-Pattern/"/>
     
       <category term="IntelliJ IDEA" scheme="https://liangliangliangtan.github.io/tags/IntelliJ-IDEA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://liangliangliangtan.github.io/2019-05-04-hello-world.html"/>
-    <id>https://liangliangliangtan.github.io/2019-05-04-hello-world.html</id>
-    <published>2019-05-04T17:06:34.876Z</published>
-    <updated>2019-05-09T23:36:15.606Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><p>DataBase</p><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
     
   </entry>
   
