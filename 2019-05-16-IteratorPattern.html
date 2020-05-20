@@ -461,7 +461,7 @@ Iterator Pattern provides a way to acces">
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        557
+                        563
                     </div>
                     
 
@@ -505,12 +505,12 @@ Iterator Pattern provides a way to acces">
 <p>We have two interfaces, Iterable and iterator. Once a concreate class implements Iterable interface, it must override the iterator() method. It create a concreate Iterator by passing itself to the constructor of concreate Iterator. This means that given a concrete iterable ,it produces a concreate iterator. The concreate iterator may also have the private access to its related iterable reference so that it can access the field or methods defined in iterable. Iterator Pattern allows designer to decouple the enumerate functionality with others and unify by the interface.</p>
 <h1 id="3-Example"><a href="#3-Example" class="headerlink" title="3. Example"></a>3. Example</h1><p>Suppose We have a collection of labels (of Type String) on one Node and we want to enumerate them. The codes are as follows:</p>
 <p>Iterable Interface:</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Iterable</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Iterable</span><span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
 
-    Iterator<span class="token operator">&lt;</span>T<span class="token operator">></span>  <span class="token function">getIterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span>  <span class="token function">getIterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <p>Iterator Interface:</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Iterator</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Iterator</span><span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
     <span class="token keyword">boolean</span> <span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     T <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
@@ -531,7 +531,7 @@ Iterator Pattern provides a way to acces">
     <span class="token punctuation">}</span>
 
     <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> Iterator<span class="token operator">&lt;</span>String<span class="token operator">></span> <span class="token function">getIterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> Iterator<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> <span class="token function">getIterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">NodeLabelsIterator</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
@@ -562,8 +562,8 @@ Iterator Pattern provides a way to acces">
 
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         String<span class="token punctuation">[</span><span class="token punctuation">]</span> labels <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token string">"Person"</span><span class="token punctuation">,</span><span class="token string">"Movie"</span><span class="token punctuation">,</span><span class="token string">"CAT"</span><span class="token punctuation">,</span><span class="token string">"DOG"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-        Iterable<span class="token operator">&lt;</span>String<span class="token operator">></span> iterable <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NodeLabels</span><span class="token punctuation">(</span>labels<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Iterator<span class="token operator">&lt;</span>String<span class="token operator">></span> iterator <span class="token operator">=</span> iterable<span class="token punctuation">.</span><span class="token function">getIterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Iterable<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> iterable <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NodeLabels</span><span class="token punctuation">(</span>labels<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Iterator<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> iterator <span class="token operator">=</span> iterable<span class="token punctuation">.</span><span class="token function">getIterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">while</span><span class="token punctuation">(</span>iterator<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>iterator<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
@@ -1006,7 +1006,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total Word Count:&nbsp;<span class="white-color">23k</span>&nbsp;Characters
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total Word Count:&nbsp;<span class="white-color">23.6k</span>&nbsp;Characters
             
             
             

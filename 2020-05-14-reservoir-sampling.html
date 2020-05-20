@@ -5,10 +5,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Reservoir Sampling, Liang Tan&#39;s Blog">
-    <meta name="description" content="1.Introduction.
-        document.querySelectorAll(&#39;.github-emoji&#39;)
-          .forEach(el =&gt; {
-            if (!el.datase">
+    <meta name="description" content="1.Introduction.Reservoir Sampling is an online algorithm designed for picking up small amount of sample with uniform pro">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -449,19 +446,24 @@
                 </div>
                 
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-05-19
+                </div>
+                
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        54
+                        366
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        1 Min
+                        2 Min
                     </div>
                     
                 
@@ -477,7 +479,72 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction."></a>1.Introduction.</h2><script>
+                <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction."></a>1.Introduction.</h2><p>Reservoir Sampling is an online algorithm designed for picking up small amount of sample with uniform probability. To be specific, given a sample of size K with N items processed so far, the chance for any item to be selected is K/N. When the next item comes in, current sample has a chance to survive K/N*N/(N+1)=K/(N+1) while the new item has chance K/(N+1) to be selected.</p>
+<p>The mathematical prove is as follows:</p>
+<div>
+  <img src="../images/rev_sample_1.png" alt="Figure 1" width="100%" height="100%">
+</div>
+<br>
+
+
+<p>Reservoir sample algorithm works as follows: </p>
+<ul>
+<li><ol>
+<li>Create an array samples[0..k-1] and copy first k items of stream[] to it.</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>When a new data comes in (with index greater than k - 1), generate a random number from 0 to i where i is index of current item in stream[].</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>Generated another random number j with in range 0 to k-1, replace samples[j] with the new data.</li>
+</ol>
+</li>
+</ul>
+<p>The code for this aglroithm is also straightforward.</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> random  
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> List<span class="token punctuation">,</span>Generator  
+<span class="token keyword">class</span> <span class="token class-name">ReservoirSampling</span><span class="token punctuation">:</span>  
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> capacity<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>  
+        self<span class="token punctuation">.</span>_capacity<span class="token punctuation">:</span>int <span class="token operator">=</span> capacity  
+        self<span class="token punctuation">.</span>_samples<span class="token punctuation">:</span>List<span class="token punctuation">[</span>int<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>  
+        self<span class="token punctuation">.</span>_pointer<span class="token punctuation">:</span>int <span class="token operator">=</span> <span class="token number">0</span>  
+
+    <span class="token keyword">def</span> <span class="token function">reservoir_sampling</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> Generator<span class="token punctuation">[</span>List<span class="token punctuation">[</span>int<span class="token punctuation">]</span><span class="token punctuation">,</span> int<span class="token punctuation">,</span> None<span class="token punctuation">]</span><span class="token punctuation">:</span>  
+        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>  
+            next_val<span class="token punctuation">:</span>int <span class="token operator">=</span> <span class="token keyword">yield</span> self<span class="token punctuation">.</span>_samples  
+
+            <span class="token keyword">if</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>_samples<span class="token punctuation">)</span> <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>_capacity<span class="token punctuation">:</span>  
+                self<span class="token punctuation">.</span>_samples<span class="token punctuation">.</span>append<span class="token punctuation">(</span>next_val<span class="token punctuation">)</span>  
+            <span class="token keyword">else</span><span class="token punctuation">:</span>  
+                rand_pos<span class="token punctuation">:</span> int <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>self<span class="token punctuation">.</span>_pointer<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># [0, M - 1]  </span>
+                <span class="token comment" spellcheck="true"># probability = K / M  </span>
+                <span class="token keyword">if</span> rand_pos <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>_capacity<span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># belonging to [0, K - 1]  </span>
+                    self<span class="token punctuation">.</span>_samples<span class="token punctuation">[</span>rand_pos<span class="token punctuation">]</span> <span class="token operator">=</span> next_val  
+
+            self<span class="token punctuation">.</span>_pointer <span class="token operator">+=</span> <span class="token number">1</span>   
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    rs<span class="token punctuation">:</span>ReservoirSampling <span class="token operator">=</span> ReservoirSampling<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>  
+    rs_generator <span class="token operator">=</span> rs<span class="token punctuation">.</span>reservoir_sampling<span class="token punctuation">(</span><span class="token punctuation">)</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"init list:{}"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>next<span class="token punctuation">(</span>rs_generator<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  
+    <span class="token keyword">for</span> x <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        <span class="token keyword">print</span><span class="token punctuation">(</span>rs_generator<span class="token punctuation">.</span>send<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span> </code></pre>
+<p>Result: </p>
+<pre class=" language-bash"><code class="language-bash">init list:<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span>0<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>0, 1<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>0, 1, 2<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>0, 1, 2, 3<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>0, 1, 2, 3, 4<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>0, 1, 5, 3, 4<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>6, 1, 5, 3, 4<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>6, 7, 5, 3, 4<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>6, 7, 5, 3, 8<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>6, 7, 9, 3, 8<span class="token punctuation">]</span></code></pre>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -625,10 +692,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1.Introduction.
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.datase
+                            1.Introduction.Reservoir Sampling is an online algorithm designed for picking up small amount of sample with uniform pro
                         
                     </div>
                     <div class="publish-info">
@@ -871,7 +935,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total Word Count:&nbsp;<span class="white-color">23k</span>&nbsp;Characters
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total Word Count:&nbsp;<span class="white-color">23.6k</span>&nbsp;Characters
             
             
             

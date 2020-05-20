@@ -420,12 +420,12 @@ We want ">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Data-Structure-and-Algorithm/">
-                                <span class="chip bg-color">Data Structure and Algorithm</span>
-                            </a>
-                        
                             <a href="/tags/Dynamic-programming/">
                                 <span class="chip bg-color">Dynamic programming</span>
+                            </a>
+                        
+                            <a href="/tags/Data-Structure-and-Algorithm/">
+                                <span class="chip bg-color">Data Structure and Algorithm</span>
                             </a>
                         
                             <a href="/tags/backtracking/">
@@ -460,7 +460,7 @@ We want ">
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        910
+                        912
                     </div>
                     
 
@@ -537,7 +537,7 @@ Notice that book number 2 does not have to be on the first shelf.</code></pre><p
         <span class="token comment" spellcheck="true">// Option two:</span>
         <span class="token comment" spellcheck="true">// if the current layer can afford that book. explore with new widthLeft, and </span>
         <span class="token comment" spellcheck="true">// update current height.</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>widthLeft<span class="token operator">>=</span>books<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>widthLeft<span class="token operator">&gt;=</span>books<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             cache<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">[</span>widthLeft<span class="token punctuation">]</span> <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span><span class="token function">dfs</span><span class="token punctuation">(</span>books<span class="token punctuation">,</span>cur<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>widthLeft<span class="token operator">-</span>books<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>curHeight<span class="token punctuation">,</span>books<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>shelf_width<span class="token punctuation">)</span><span class="token punctuation">,</span>cache<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">[</span>widthLeft<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
         <span class="token keyword">return</span> cache<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">[</span>widthLeft<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -564,7 +564,7 @@ Notice that book number 2 does not have to be on the first shelf.</code></pre><p
             dp<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>idx<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> height<span class="token punctuation">;</span>
 
             <span class="token comment" spellcheck="true">//Option 2: try to place on the previous shelf with the constraint of width</span>
-            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> idx<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">></span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span>  width <span class="token operator">+</span> books<span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;=</span> shelf_width<span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> idx<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&gt;</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span>  width <span class="token operator">+</span> books<span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;=</span> shelf_width<span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
                 height <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>height<span class="token punctuation">,</span> books<span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// merge with previous book, height might change</span>
                 width <span class="token operator">+=</span> books<span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// update width</span>
                 dp<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">,</span>dp<span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> height<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// update optimal solution if it is the optimal</span>
@@ -656,12 +656,12 @@ Notice that book number 2 does not have to be on the first shelf.</code></pre><p
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Data-Structure-and-Algorithm/">
-                                    <span class="chip bg-color">Data Structure and Algorithm</span>
-                                </a>
-                            
                                 <a href="/tags/Dynamic-programming/">
                                     <span class="chip bg-color">Dynamic programming</span>
+                                </a>
+                            
+                                <a href="/tags/Data-Structure-and-Algorithm/">
+                                    <span class="chip bg-color">Data Structure and Algorithm</span>
                                 </a>
                             
                                 <a href="/tags/backtracking/">
@@ -748,12 +748,12 @@ Notice that book number 2 does not have to be on the first shelf.</code></pre><p
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Recursion/">
-                        <span class="chip bg-color">Recursion</span>
-                    </a>
-                    
                     <a href="/tags/Data-Structure-and-Algorithm/">
                         <span class="chip bg-color">Data Structure and Algorithm</span>
+                    </a>
+                    
+                    <a href="/tags/Recursion/">
+                        <span class="chip bg-color">Recursion</span>
                     </a>
                     
                     <a href="/tags/Complete-Binary-Tree/">
@@ -991,7 +991,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total Word Count:&nbsp;<span class="white-color">23k</span>&nbsp;Characters
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total Word Count:&nbsp;<span class="white-color">23.6k</span>&nbsp;Characters
             
             
             
