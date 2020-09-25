@@ -614,7 +614,7 @@ psql -U postgres -h localhost</code></pre>
 <li>Rate type (e.g, standard, airport, etc.)</li>
 <li>Payment type (Cash, credit card, etc.)</li>
 </ul>
-<h2 id="Convert-to-hypertable"><a href="#Convert-to-hypertable" class="headerlink" title="Convert to hypertable"></a>Convert to hypertable</h2><pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> create_hypertable<span class="token punctuation">(</span><span class="token string">'rides'</span><span class="token punctuation">,</span> <span class="token string">'pickup_datetime'</span><span class="token punctuation">,</span> <span class="token string">'payment_type'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> create_default_indexes<span class="token operator">=</span><span class="token operator">&gt;</span><span class="token boolean">FALSE</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<h2 id="Convert-to-hypertable"><a href="#Convert-to-hypertable" class="headerlink" title="Convert to hypertable"></a>Convert to hypertable</h2><pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> create_hypertable<span class="token punctuation">(</span><span class="token string">'rides'</span><span class="token punctuation">,</span> <span class="token string">'pickup_datetime'</span><span class="token punctuation">,</span> <span class="token string">'payment_type'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> create_default_indexes<span class="token operator">=</span><span class="token operator">></span><span class="token boolean">FALSE</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> <span class="token keyword">ON</span> rides <span class="token punctuation">(</span>vendor_id<span class="token punctuation">,</span> pickup_datetime <span class="token keyword">desc</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> <span class="token keyword">ON</span> rides <span class="token punctuation">(</span>pickup_datetime <span class="token keyword">desc</span><span class="token punctuation">,</span> vendor_id<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> <span class="token keyword">ON</span> rides <span class="token punctuation">(</span>rate_code<span class="token punctuation">,</span> pickup_datetime <span class="token keyword">DESC</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1177,7 +1177,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total Word Count:&nbsp;<span class="white-color">23.6k</span>&nbsp;Characters
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total Word Count:&nbsp;<span class="white-color">23.3k</span>&nbsp;Characters
             
             
             

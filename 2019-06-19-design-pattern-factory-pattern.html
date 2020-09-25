@@ -499,25 +499,25 @@
 
 <span class="token comment" spellcheck="true">/**
  * The interface that every driver class must implement.
- * &lt;P&gt;The Java SQL framework allows for multiple database drivers.
+ * &lt;P>The Java SQL framework allows for multiple database drivers.
  *
- * &lt;P&gt;Each driver should supply a class that implements
+ * &lt;P>Each driver should supply a class that implements
  * the Driver interface.
  *
- * &lt;P&gt;The DriverManager will try to load as many drivers as it can
+ * &lt;P>The DriverManager will try to load as many drivers as it can
  * find and then for any given connection request, it will ask each
  * driver in turn to try to connect to the target URL.
  *
- * &lt;P&gt;It is strongly recommended that each Driver class should be
+ * &lt;P>It is strongly recommended that each Driver class should be
  * small and standalone so that the Driver class can be loaded and
  * queried without bringing in vast quantities of supporting code.
  *
- * &lt;P&gt;When a Driver class is loaded, it should create an instance of
+ * &lt;P>When a Driver class is loaded, it should create an instance of
  * itself and register it with the DriverManager. This means that a
  * user can load and register a driver by calling:
- * &lt;p&gt;
+ * &lt;p>
  * {@code Class.forName("foo.bah.Driver")}
- * &lt;p&gt;
+ * &lt;p>
  * A JDBC driver may create a {@linkplain DriverAction} implementation in order
  * to receive notifications when {@linkplain DriverManager#deregisterDriver} has
  * been called.
@@ -534,16 +534,16 @@
      * the JDBC driver manager is asked to connect to a given URL it passes
      * the URL to each loaded driver in turn.
      *
-     * &lt;P&gt;The driver should throw an &lt;code&gt;SQLException&lt;/code&gt; if it is the right
+     * &lt;P>The driver should throw an &lt;code>SQLException&lt;/code> if it is the right
      * driver to connect to the given URL but has trouble connecting to
      * the database.
      *
-     * &lt;P&gt;The {@code Properties} argument can be used to pass
+     * &lt;P>The {@code Properties} argument can be used to pass
      * arbitrary string tag/value pairs as connection arguments.
      * Normally at least "user" and "password" properties should be
      * included in the {@code Properties} object.
-     * &lt;p&gt;
-     * &lt;B&gt;Note:&lt;/B&gt; If a property is specified as part of the {@code url} and
+     * &lt;p>
+     * &lt;B>Note:&lt;/B> If a property is specified as part of the {@code url} and
      * is also specified in the {@code Properties} object, it is
      * implementation-defined as to which value will take precedence. For
      * maximum portability, an application should only specify a property once.
@@ -551,7 +551,7 @@
      * @param info a list of arbitrary string tag/value pairs as
      * connection arguments. Normally at least a "user" and
      * "password" property should be included.
-     * @return a &lt;code&gt;Connection&lt;/code&gt; object that represents a
+     * @return a &lt;code>Connection&lt;/code> object that represents a
      *         connection to the URL
      * @exception SQLException if a database access error occurs or the url is
      * {@code null}
@@ -570,10 +570,10 @@
 <span class="token keyword">import</span> java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span>SQLException<span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">/**
- * &lt;P&gt;A connection (session) with a specific
+ * &lt;P>A connection (session) with a specific
  * database. SQL statements are executed and results are returned
  * within the context of a connection.
- * &lt;P&gt;
+ * &lt;P>
  */</span>
 <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Connection</span>  <span class="token keyword">extends</span> <span class="token class-name">Wrapper</span> <span class="token punctuation">{</span>
 
@@ -1237,7 +1237,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total Word Count:&nbsp;<span class="white-color">23.6k</span>&nbsp;Characters
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total Word Count:&nbsp;<span class="white-color">23.3k</span>&nbsp;Characters
             
             
             
